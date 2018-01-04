@@ -59,6 +59,7 @@ const (
 	CertificateUnavailable   ErrCodeType = 4007 //证书不可用
 	NoSuchTypeOfUser         ErrCodeType = 4008 //无此类型用户
 	InvalidAccessOrSecret    ErrCodeType = 4009 //无效的用户名或密码
+	UserNotExist             ErrCodeType = 4010 //无此用户
 )
 
 //tomago
@@ -124,4 +125,6 @@ const (
 	ChaincodeNotExist     ErrCodeType = 9009 // chaincode记录不存在
 	CCSandBoxFailed       ErrCodeType = 9010 // chaincode沙箱测试失败
 	CCNotDeployed         ErrCodeType = 9011 // chaincode没有部署,不允许upgrade
+	CCAlreadyDeployed     ErrCodeType = 9012 // chaincode已经部署过,不允许部署
+	CCUpgradeNoResource   ErrCodeType = 9013 // 无更新的chaincode资源去更新
 )
