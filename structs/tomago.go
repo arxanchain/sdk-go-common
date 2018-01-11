@@ -1,5 +1,5 @@
 /*
-Copyright ArxanFintech Technology Ltd. 2017 All Rights Reserved.
+Copyright ArxanFintech Technology Ltd. 2018 All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ type ITomagoClient interface {
 	GetEntityClient() IEntityClient
 	GetAssetClient() IAssetClient
 	GetCCoinClient() ICCoinClient
+	GetBlockchainClient() IBlockchainClient
 }
 
 //EntityClient Interface
@@ -56,4 +57,11 @@ type ICCoinClient interface {
 	Rollback(http.Header, *RollbackBody) (*TomagoResponse, error)
 	Interest(http.Header, *InterestBody) (*TomagoResponse, error)
 	Withdraw(http.Header, *WithdrawBody) (*TomagoResponse, error)
+}
+
+//Blockchain Interface
+type IBlockchainClient interface {
+	Invoke(http.Header, *PayloadWithTags) (*ChaincodeResponse, error)
+	Query(http.Header, *PayloadWithTags) (*ChaincodeResponse, error)
+	QueryTxn(http.Header, string) (*TransactionResponse, error)
 }
