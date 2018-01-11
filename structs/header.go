@@ -33,6 +33,7 @@ const (
 	AuthEmailHeader       = "Auth-Email"
 	FileAuthTokenHeader   = "Auth-Token"
 	FabioRouteTagHeader   = "Host"
+	CallbackUrlHeader     = "Callback-Url"
 )
 
 // User role Header value list
