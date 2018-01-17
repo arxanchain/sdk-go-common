@@ -68,18 +68,6 @@ type WalletBalance struct {
 	DigitalAssets map[string]*DigitalAsset `json:"digital_assets"` //钱包中的数字资产
 }
 
-type (
-	Identifier  string
-	DidEndpoint string
-	DidType     string
-	DidStatus   string
-)
-
-const (
-	DSValid   DidStatus = "Valid"
-	DSInvalid DidStatus = "Invalid"
-)
-
 type WalletInfo struct {
 	Id       Identifier                 `json:"id"`
 	Type     DidType                    `json:"type"`
