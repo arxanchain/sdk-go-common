@@ -16,10 +16,6 @@ limitations under the License.
 
 package structs
 
-import (
-	google_protobuf "github.com/golang/protobuf/ptypes/timestamp"
-)
-
 // PayloadWithTags Defines Invoke and Query API Request Struct
 type PayloadWithTags struct {
 	Payload    *ChaincodeRequest `json:"payload"`
@@ -43,14 +39,20 @@ type ChaincodeResponse struct {
 
 // TransactionResponse Defines QueryTxn API Response Struct
 type TransactionResponse struct {
-	Code          int64                      `json:"Code"`
-	Message       string                     `json:"Message"`
-	ChannelID     string                     `json:"channel_id"`
-	ChaincodeID   string                     `json:"chaincode_id"`
-	TransactionID string                     `json:"transaction_id"`
-	Timestamp     *google_protobuf.Timestamp `json:"timestamp"`
-	CreatorID     []byte                     `json:"creator_id"`
-	PayloadSize   uint64                     `json:"payload_size"`
-	IsInvalID     bool                       `json:"is_invalid"`
-	Payload       string                     `json:"payload"`
+	Code          int64     `json:"Code"`
+	Message       string    `json:"Message"`
+	ChannelID     string    `json:"channel_id"`
+	ChaincodeID   string    `json:"chaincode_id"`
+	TransactionID string    `json:"transaction_id"`
+	Timestamp     Timestamp `json:"timestamp"`
+	CreatorID     []byte    `json:"creator_id"`
+	PayloadSize   uint64    `json:"payload_size"`
+	IsInvalID     bool      `json:"is_invalid"`
+	Payload       string    `json:"payload"`
+}
+
+// Timestamp Struct Defines
+type Timestamp struct {
+	Seconds int64 `json:"seconds"`
+	Nanos   int32 `json:"nanos"`
 }
