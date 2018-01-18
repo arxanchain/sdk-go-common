@@ -503,7 +503,8 @@ func (c *Client) NewRequest(method, path string) *Request {
 	if c.config.CallbackUrl != "" {
 		r.header.Set(structs.CallbackUrlHeader, r.config.CallbackUrl)
 	}
-
+	// Prevent data being compressed by gzip
+	r.header.Set("Accept-Encoding", "*")
 	return r
 }
 
