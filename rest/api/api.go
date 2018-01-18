@@ -493,6 +493,10 @@ func (c *Client) NewRequest(method, path string) *Request {
 	if c.config.RouteTag != "" {
 		r.header.Set(structs.FabioRouteTagHeader, r.config.RouteTag)
 	}
+	if c.config.ApiKey != "" {
+		r.header.Set(structs.APIKeyHeader, r.config.ApiKey)
+	}
+
 	return r
 }
 
