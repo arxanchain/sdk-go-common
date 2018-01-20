@@ -49,7 +49,7 @@ func DefaultVersion(progName string, buildNumber string) *Version {
 		ProgramName: progName,
 		BuildNumber: buildNumber,
 		Release:     1,
-		Fixpack:     3,
+		Fixpack:     5,
 		Hotfix:      0,
 	}
 }

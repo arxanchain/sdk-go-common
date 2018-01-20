@@ -83,6 +83,10 @@ type Config struct {
 	// ApiKey is the access key for ACL access api
 	ApiKey string
 
+	// CallbackUrl is used to receive asynchronous event notification
+	// which will notify if the request succeeded or failed
+	CallbackUrl string
+
 	// TLS config
 	TLSConfig TLSConfig
 
@@ -493,6 +497,14 @@ func (c *Client) NewRequest(method, path string) *Request {
 	if c.config.RouteTag != "" {
 		r.header.Set(structs.FabioRouteTagHeader, r.config.RouteTag)
 	}
+	if c.config.ApiKey != "" {
+		r.header.Set(structs.APIKeyHeader, r.config.ApiKey)
+	}
+	if c.config.CallbackUrl != "" {
+		r.header.Set(structs.CallbackUrlHeader, r.config.CallbackUrl)
+	}
+	// Prevent data being compressed by gzip
+	r.header.Set("Accept-Encoding", "*")
 	return r
 }
 
