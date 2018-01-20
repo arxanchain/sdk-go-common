@@ -31,6 +31,7 @@ type SignatureBody struct {
 type SignatureHeader struct {
 	SignType string     `json:"sign_type,omitempty"`
 	Creator  Identifier `json:"creator,omitempty"`
+	Created  int64      `json:"created,omitempty"`
 	Nonce    []byte     `json:"nonce,omitempty"`
 }
 

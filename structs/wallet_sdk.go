@@ -94,27 +94,27 @@ type IWalletClient interface {
 
 // POE请求Body结构定义
 type POEBody struct {
-	Id         Identifier  `json:"id"`
-	Name       string      `json:"name"`
-	Hash       string      `json:"hash"`
-	ParentId   Identifier  `json:"parent_id"`
-	Owner      Identifier  `json:"owner"`
-	ExpireTime int64       `json:"expire_time"`
-	Metadata   interface{} `json:"metadata"`
+	Id         Identifier `json:"id"`
+	Name       string     `json:"name"`
+	ParentId   Identifier `json:"parent_id"`
+	Owner      Identifier `json:"owner"`
+	ExpireTime int64      `json:"expire_time"`
+	Hash       string     `json:"hash"`
+	Metadata   []byte     `json:"metadata"`
 }
 
 // POEPayload POE查询返回结构定义
 type POEPayload struct {
-	Id         Identifier  `json:"id"`
-	Name       string      `json:"name"`
-	Hash       string      `json:"hash"`
-	ParentId   Identifier  `json:"parent_id"`
-	Owner      Identifier  `json:"owner"`
-	ExpireTime int64       `json:"expire_time"`
-	Metadata   interface{} `json:"metadata"`
-	Created    int64       `json:"create_time"`
-	Updated    int64       `json:"update_time"`
-	Status     DidStatus   `json:"status"`
+	Id         Identifier `json:"id"`
+	Name       string     `json:"name"`
+	ParentId   Identifier `json:"parent_id"`
+	Owner      Identifier `json:"owner"`
+	ExpireTime int64      `json:"expire_time"`
+	Hash       string     `json:"hash"`
+	Metadata   []byte     `json:"metadata"`
+	Created    int64      `json:"create_time"`
+	Updated    int64      `json:"update_time"`
+	Status     DidStatus  `json:"status"`
 }
 
 // OffchainMetadata offchain storage metadata
