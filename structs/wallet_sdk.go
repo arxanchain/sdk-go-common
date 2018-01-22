@@ -64,7 +64,7 @@ type KeyPair struct {
 }
 
 type WalletBalance struct {
-	UtilityTokens map[string]*ColoredCoin  `json:"utility_tokens"` //钱包中的所有通证
+	ColoredTokens map[string]*ColoredCoin  `json:"colored_tokens"` //钱包中的所有通证
 	DigitalAssets map[string]*DigitalAsset `json:"digital_assets"` //钱包中的数字资产
 }
 
@@ -82,7 +82,7 @@ type WalletInfo struct {
 type IWalletClient interface {
 	Register(http.Header, *RegisterWalletBody) (*WalletResponse, error)
 	RegisterSubWallet(http.Header, *RegisterSubWalletBody) (*WalletResponse, error)
-	TransferToken(http.Header, *TransferBody, *SignatureBody) (*WalletResponse, error)
+	TransferCToken(http.Header, *TransferBody, *SignatureBody) (*WalletResponse, error)
 	TransferAsset(http.Header, *TransferAssetBody, *SignatureBody) (*WalletResponse, error)
 	GetWalletBalance(http.Header, Identifier) (*WalletBalance, error)
 	GetWalletInfo(http.Header, Identifier) (*WalletInfo, error)
