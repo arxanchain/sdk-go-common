@@ -91,6 +91,14 @@ func ArraytoString(data []string) string {
 	return result
 }
 
+// CalculateBCHash returns the Bitcoin hash (double sha256) of
+// the given transaction
+func CalculateBCHash(txData []byte) [32]byte {
+	firstHash := sha256.Sum256(txData)
+	txHash := sha256.Sum256(firstHash[:])
+	return txHash
+}
+
 // ComputeCryptoHash should be used in openchain code so that we can change the actual algo used for crypto-hash at one place
 func ComputeCryptoHash(data []byte) (hash []byte) {
 	hash = make([]byte, 64)
