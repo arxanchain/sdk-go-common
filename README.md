@@ -5,4 +5,7 @@
 [![GoDoc](https://godoc.org/github.com/arxanchain/sdk-go-common?status.svg)](https://godoc.org/github.com/arxanchain/sdk-go-common)
 
 # sdk-go-common
-Common code and Utilities for Golang SDK
+Common code and utilities for Golang SDK
+
+# Crypto tools
+Common tools to generate ECC encryption and ED25519 signatures adapted to your OS. For more details please refer to [Crypto tools document](crypto/tools/README.md)
