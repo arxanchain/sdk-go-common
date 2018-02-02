@@ -495,3 +495,70 @@ type Timestamp struct {
 	Seconds int64 `json:"seconds"`
 	Nanos   int32 `json:"nanos"`
 }
+type TransactionLogs map[string]*TransactionLog // key is endpoint
+
+type TransactionLog struct {
+	Utxo []*UTXO       `json:"utxo"` // unspent transaction output
+	Stxo []*SpentTxOUT `json:"stxo"` // spent transaction output
+}
+
+type UTXO struct {
+	// SourceTxDataHash the Bitcoin hash (double sha256) of
+	// the given transaction
+	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
+	// Ix index of output array in the transaction
+	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	// ColoredToken ID
+	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
+	// ColorType
+	CType int32 `protobuf:"varint,4,opt,name=cType" json:"cType,omitempty"`
+	// token amount
+	Value int64 `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	// who will receive this txout
+	Addr string `protobuf:"bytes,5,opt,name=addr" json:"addr,omitempty" `
+	// until xx timestamp, any one cant spend the txout
+	// -1 means no check
+	Until int64 `protobuf:"varint,6,opt,name=until" json:"until,omitempty"`
+	// script
+	Script []byte `protobuf:"bytes,7,opt,name=script,proto3" json:"script,omitempty"`
+	// CreatedAt
+	CreatedAt *Timestamp `protobuf:"bytes,8,opt,name=createdAt" json:"createdAt,omitempty"`
+	// Founder who created this tx
+	Founder string `protobuf:"bytes,9,opt,name=founder" json:"founder,omitempty" `
+	TxType  int32  `protobuf:"varint,10,opt,name=txType" json:"txType,omitempty"`
+	// BCTxID blockchain transaction id
+	BCTxID string `protobuf:"bytes,11,opt,name=bcTxID" json:"bcTxID,omitempty"`
+}
+
+// SpentTxOUT
+type SpentTxOUT struct {
+	// SourceTxDataHash the Bitcoin hash (double sha256) of
+	// the given transaction
+	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
+	// Ix index of output array in the transaction
+	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	// ColoredToken ID
+	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
+	// ColorType
+	CType int32 `protobuf:"varint,4,opt,name=cType" json:"cType,omitempty"`
+	// token amount
+	Value int64 `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	// who will receive this txout
+	Addr string `protobuf:"bytes,5,opt,name=addr" json:"addr,omitempty" `
+	// until xx timestamp, any one cant spend the txout
+	// -1 means no check
+	Until int64 `protobuf:"varint,6,opt,name=until" json:"until,omitempty"`
+	// script
+	Script []byte `protobuf:"bytes,7,opt,name=script,proto3" json:"script,omitempty"`
+	// CreatedAt
+	CreatedAt *Timestamp `protobuf:"bytes,8,opt,name=createdAt" json:"createdAt,omitempty"`
+	// SpentTxDataHash
+	SpentTxDataHash string `protobuf:"bytes,9,opt,name=spentTxDataHash" json:"spentTxDataHash,omitempty" `
+	// SpentAt ...
+	SpentAt *Timestamp `protobuf:"bytes,10,opt,name=spentAt" json:"spentAt,omitempty"`
+	// Founder who created this tx
+	Founder string `protobuf:"bytes,11,opt,name=founder" json:"founder,omitempty"`
+	TxType  int32  `protobuf:"varint,12,opt,name=txType" json:"txType,omitempty"`
+	// BCTxID blockchain transaction id
+	BCTxID string `protobuf:"bytes,13,opt,name=bcTxID" json:"bcTxID,omitempty"`
+}
