@@ -50,6 +50,6 @@ func DefaultVersion(progName string, buildNumber string) *Version {
 		BuildNumber: buildNumber,
 		Release:     1,
 		Fixpack:     5,
-		Hotfix:      0,
+		Hotfix:      1,
 	}
 }
