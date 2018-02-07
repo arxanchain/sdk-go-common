@@ -76,3 +76,11 @@ type TransferAssetPayload struct {
 	Fees       *Fees    `json:"fees"`        //交易的手续费
 	UpdateTime int64    `json:"update_time"` //当前时间
 }
+
+// 发行资产的请求Body结构定义
+type IssueAssetBody struct {
+	Issuer  string `json:"issuer"`
+	Owner   string `json:"owner"`
+	AssetId string `json:"asset_id"`
+	Fees    *Fees  `json:"fees"`
+}
