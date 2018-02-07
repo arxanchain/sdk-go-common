@@ -64,9 +64,23 @@ type KeyPair struct {
 	PublicKey  string `json:"public_key"`
 }
 
+// TokenBalance ...
+type CTokenBalance struct {
+	Id     string `json:"id"`     //ctoken id
+	Amount int64  `json:"amount"` //ctoken amount
+}
+
+// AssetBalance ...
+type AssetBalance struct {
+	Id     string `json:"id"`     //asset id
+	Amount int64  `json:"amount"` //asset amount
+	Name   string `json:"name"`   //asset name
+	Status int    `json:"status"` //asset status
+}
+
 type WalletBalance struct {
-	ColoredTokens map[string]*ColoredCoin  `json:"colored_tokens"` //钱包中的所有通证
-	DigitalAssets map[string]*DigitalAsset `json:"digital_assets"` //钱包中的数字资产
+	ColoredTokens map[string]*CTokenBalance `json:"colored_tokens"` //钱包中的所有通证
+	DigitalAssets map[string]*AssetBalance  `json:"digital_assets"` //钱包中的数字资产
 }
 
 type WalletInfo struct {
