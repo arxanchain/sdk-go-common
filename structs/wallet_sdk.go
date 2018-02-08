@@ -64,9 +64,23 @@ type KeyPair struct {
 	PublicKey  string `json:"public_key"`
 }
 
+// TokenBalance ...
+type CTokenBalance struct {
+	Id     string `json:"id"`     //ctoken id
+	Amount int64  `json:"amount"` //ctoken amount
+}
+
+// AssetBalance ...
+type AssetBalance struct {
+	Id     string `json:"id"`     //asset id
+	Amount int64  `json:"amount"` //asset amount
+	Name   string `json:"name"`   //asset name
+	Status int    `json:"status"` //asset status
+}
+
 type WalletBalance struct {
-	ColoredTokens map[string]*ColoredCoin  `json:"colored_tokens"` //钱包中的所有通证
-	DigitalAssets map[string]*DigitalAsset `json:"digital_assets"` //钱包中的数字资产
+	ColoredTokens map[string]*CTokenBalance `json:"colored_tokens"` //钱包中的所有通证
+	DigitalAssets map[string]*AssetBalance  `json:"digital_assets"` //钱包中的数字资产
 }
 
 type WalletInfo struct {
@@ -94,27 +108,27 @@ type IWalletClient interface {
 
 // POE请求Body结构定义
 type POEBody struct {
-	Id         Identifier  `json:"id"`
-	Name       string      `json:"name"`
-	Hash       string      `json:"hash"`
-	ParentId   Identifier  `json:"parent_id"`
-	Owner      Identifier  `json:"owner"`
-	ExpireTime int64       `json:"expire_time"`
-	Metadata   interface{} `json:"metadata"`
+	Id         Identifier `json:"id"`
+	Name       string     `json:"name"`
+	ParentId   Identifier `json:"parent_id"`
+	Owner      Identifier `json:"owner"`
+	ExpireTime int64      `json:"expire_time"`
+	Hash       string     `json:"hash"`
+	Metadata   []byte     `json:"metadata"`
 }
 
 // POEPayload POE查询返回结构定义
 type POEPayload struct {
-	Id         Identifier  `json:"id"`
-	Name       string      `json:"name"`
-	Hash       string      `json:"hash"`
-	ParentId   Identifier  `json:"parent_id"`
-	Owner      Identifier  `json:"owner"`
-	ExpireTime int64       `json:"expire_time"`
-	Metadata   interface{} `json:"metadata"`
-	Created    int64       `json:"create_time"`
-	Updated    int64       `json:"update_time"`
-	Status     DidStatus   `json:"status"`
+	Id         Identifier `json:"id"`
+	Name       string     `json:"name"`
+	ParentId   Identifier `json:"parent_id"`
+	Owner      Identifier `json:"owner"`
+	ExpireTime int64      `json:"expire_time"`
+	Hash       string     `json:"hash"`
+	Metadata   []byte     `json:"metadata"`
+	Created    int64      `json:"create_time"`
+	Updated    int64      `json:"update_time"`
+	Status     DidStatus  `json:"status"`
 }
 
 // OffchainMetadata offchain storage metadata
@@ -152,4 +166,71 @@ type IPOEClient interface {
 	IssuePOE(http.Header, *IssueBody, *SignatureBody) (*WalletResponse, error)
 	WithdrawPOE(http.Header, *TransferBody, *SignatureBody) (*WalletResponse, error)
 	QueryPOE(http.Header, Identifier) (*POEPayload, error)
+}
+type TransactionLogs map[string]*TransactionLog // key is endpoint
+
+type TransactionLog struct {
+	Utxo []*UTXO       `json:"utxo"` // unspent transaction output
+	Stxo []*SpentTxOUT `json:"stxo"` // spent transaction output
+}
+
+type UTXO struct {
+	// SourceTxDataHash the Bitcoin hash (double sha256) of
+	// the given transaction
+	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
+	// Ix index of output array in the transaction
+	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	// ColoredToken ID
+	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
+	// ColorType
+	CType int32 `protobuf:"varint,4,opt,name=cType" json:"cType,omitempty"`
+	// token amount
+	Value int64 `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	// who will receive this txout
+	Addr string `protobuf:"bytes,5,opt,name=addr" json:"addr,omitempty" `
+	// until xx timestamp, any one cant spend the txout
+	// -1 means no check
+	Until int64 `protobuf:"varint,6,opt,name=until" json:"until,omitempty"`
+	// script
+	Script []byte `protobuf:"bytes,7,opt,name=script,proto3" json:"script,omitempty"`
+	// CreatedAt
+	CreatedAt *Timestamp `protobuf:"bytes,8,opt,name=createdAt" json:"createdAt,omitempty"`
+	// Founder who created this tx
+	Founder string `protobuf:"bytes,9,opt,name=founder" json:"founder,omitempty" `
+	TxType  int32  `protobuf:"varint,10,opt,name=txType" json:"txType,omitempty"`
+	// BCTxID blockchain transaction id
+	BCTxID string `protobuf:"bytes,11,opt,name=bcTxID" json:"bcTxID,omitempty"`
+}
+
+// SpentTxOUT
+type SpentTxOUT struct {
+	// SourceTxDataHash the Bitcoin hash (double sha256) of
+	// the given transaction
+	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
+	// Ix index of output array in the transaction
+	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	// ColoredToken ID
+	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
+	// ColorType
+	CType int32 `protobuf:"varint,4,opt,name=cType" json:"cType,omitempty"`
+	// token amount
+	Value int64 `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	// who will receive this txout
+	Addr string `protobuf:"bytes,5,opt,name=addr" json:"addr,omitempty" `
+	// until xx timestamp, any one cant spend the txout
+	// -1 means no check
+	Until int64 `protobuf:"varint,6,opt,name=until" json:"until,omitempty"`
+	// script
+	Script []byte `protobuf:"bytes,7,opt,name=script,proto3" json:"script,omitempty"`
+	// CreatedAt
+	CreatedAt *Timestamp `protobuf:"bytes,8,opt,name=createdAt" json:"createdAt,omitempty"`
+	// SpentTxDataHash
+	SpentTxDataHash string `protobuf:"bytes,9,opt,name=spentTxDataHash" json:"spentTxDataHash,omitempty" `
+	// SpentAt ...
+	SpentAt *Timestamp `protobuf:"bytes,10,opt,name=spentAt" json:"spentAt,omitempty"`
+	// Founder who created this tx
+	Founder string `protobuf:"bytes,11,opt,name=founder" json:"founder,omitempty"`
+	TxType  int32  `protobuf:"varint,12,opt,name=txType" json:"txType,omitempty"`
+	// BCTxID blockchain transaction id
+	BCTxID string `protobuf:"bytes,13,opt,name=bcTxID" json:"bcTxID,omitempty"`
 }
