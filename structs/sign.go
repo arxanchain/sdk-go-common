@@ -24,7 +24,7 @@ type SignatureBody struct {
 	Creator        string `json:"creator"`
 	Created        string `json:"created"`
 	Nonce          string `json:"nonce"`
-	SignatureValue []byte `json:"signature_value"`
+	SignatureValue string `json:"signature_value"` // base64 encoded
 }
 
 // SignatureHeader ...

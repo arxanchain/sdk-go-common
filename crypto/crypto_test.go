@@ -28,7 +28,7 @@ func TestVerifySignatureED25519(t *testing.T) {
 		Creator:        "did:ara:8uQhQMGzWxR8vw5P3UWH1j",
 		Created:        "ssss",
 		Nonce:          "nonce",
-		SignatureValue: []byte{144, 110, 161, 2, 122, 117, 218, 88, 94, 172, 199, 101, 32, 25, 130, 245, 116, 221, 51, 25, 14, 41, 123, 219, 134, 10, 32, 113, 127, 155, 62, 225, 139, 85, 105, 182, 86, 177, 35, 222, 116, 254, 252, 44, 100, 194, 97, 182, 215, 55, 184, 233, 120, 12, 34, 74, 218, 52, 225, 212, 165, 149, 43, 0},
+		SignatureValue: "kG6hAnp12lherMdlIBmC9XTdMxkOKXvbhgogcX+bPuGLVWm2VrEj3nT+/CxkwmG21ze46XgMIkraNOHUpZUrAA==",
 	}
 
 	wr := &structs.WalletRequest{
