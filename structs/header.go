@@ -35,6 +35,7 @@ const (
 	FabioRouteTagHeader   = "Host"
 	CallbackUrlHeader     = "Callback-Url"
 	RouteTagHeader        = "Route-Tag"
+	InvokeModeHeader      = "BC-Invoke-Mode"
 )
 
 // User role Header value list
@@ -43,4 +44,10 @@ const (
 	UserRoleAdmin      = "admin"
 	UserRoleNormal     = "normal"
 	UserRoleDid        = "did"
+)
+
+// Blockchain Invoke Mode header value list
+const (
+	InvokeModeSync  = "sync"
+	InvokeModeAsync = "async"
 )
