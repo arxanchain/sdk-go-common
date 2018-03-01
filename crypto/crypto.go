@@ -226,10 +226,15 @@ func VerifySignatureED25519(wr *structs.WalletRequest, ipk structs.IPublicKey) e
 		Nonce:   []byte(wr.Signature.Nonce),
 	}
 
+	signed, err := utils.DecodeBase64(wr.Signature.SignatureValue)
+	if err != nil {
+		logger.Error(err)
+		return err
+	}
 	var sd = &structs.SignedData{
 		Data:   []byte(wr.Payload),
 		Header: header,
-		Sign:   wr.Signature.SignatureValue,
+		Sign:   signed,
 	}
 	return sd.Verify(ipk)
 }

@@ -17,7 +17,6 @@ limitations under the License.
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 
@@ -79,12 +78,8 @@ func main() {
 		fmt.Printf("[ERROR]: DoSign failed: %s\n", err)
 		return
 	}
-	result, err := json.Marshal(signData)
-	if err != nil {
-		fmt.Printf("[ERROR]: Unmarshal signed data failed: %s\n", err)
-		return
-	}
-	resultB64 := utils.EncodeBase64(result)
+
+	resultB64 := utils.EncodeBase64(signData.Sign)
 	fmt.Printf("%s\n", resultB64)
 
 	return

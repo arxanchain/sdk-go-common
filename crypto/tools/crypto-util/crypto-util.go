@@ -68,7 +68,7 @@ func main() {
 		}
 		result, err := crypto.SignAndEncrypt(message, *apiKey)
 		if err != nil {
-			fmt.Printf("SignAndEncrypt fail: %v\n", err)
+			fmt.Printf("[ERROR]: SignAndEncrypt fail: %v\n", err)
 			return
 		}
 		fmt.Printf("%s\n", result)
