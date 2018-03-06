@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -362,32 +363,78 @@ type Request struct {
 	ctx    context.Context
 }
 
-// SetBody is used to set Request body obj
-// when function is success, it will be return nil
-// in other ways, it will be return the error
+// SetBody is used to set Request body.
+//
+// The input 'obj' arg can be '[]byte' type binary data,
+// also it can be structure object. When it is the structure
+// object, it will be converted to binary data as JSON using
+// json.Marshal.
+//
+// Once the crypto mode enabled, the binary data will
+// be signed and encrypted using crypto libary, then the
+// final result set to the request body.
+//
 func (r *Request) SetBody(obj interface{}) error {
-	if !r.config.CryptoCfg.Enable {
-		r.obj = obj
+	if r.body != nil {
 		return nil
 	}
-
-	// crypto communication
-	enrollmentId := r.header.Get(structs.APIKeyHeader)
-	if enrollmentId == "" {
-		return fmt.Errorf("When crypto communication, the API-Key must be set")
+	if obj == nil {
+		log.Println("Body object is nil")
+		return fmt.Errorf("body object is nil")
 	}
 
-	objJson, err := json.Marshal(obj)
-	if err != nil {
-		return fmt.Errorf("Request SetBody: %s", err)
+	// Check if we should encode the body
+	var b io.Reader
+	var objData []byte
+	var err error
+	var ok bool
+	if r.config.CryptoCfg.Enable {
+		log.Println("Encryption transmission mode enabled")
+
+		apiKey := r.header.Get(structs.APIKeyHeader)
+		if apiKey == "" {
+			log.Println("API-Key header must be set when enable crypto mode")
+			return fmt.Errorf("API-Key header must be set when enable crypto mode")
+		}
+
+		log.Printf("API-Key in header is: %s", apiKey)
+
+		objData, ok = obj.([]byte)
+		if !ok {
+			log.Println("Data asserted to binary data failed, serialized with the JSON struct")
+			objData, err = json.Marshal(obj)
+			if err != nil {
+				log.Printf("json.Marshal input object fail: %v", err)
+				return err
+			}
+		}
+
+		var cipherObjData string
+		cipherObjData, err = crypto.SignAndEncrypt(objData, apiKey)
+		if err != nil {
+			log.Printf("SignAndEncrypt body data fail: %v", err)
+			return err
+		}
+
+		b = bytes.NewBufferString(cipherObjData)
+	} else {
+		log.Println("Woking on plaintext transmission mode")
+
+		objData, ok = obj.([]byte)
+		if ok && objData != nil {
+			b = bytes.NewBuffer(objData)
+		} else {
+			log.Println("Data asserted to binary data failed, serialized with the JSON struct")
+			b, err = EncodeBody(obj)
+			if err != nil {
+				log.Printf("EncodeBody fail: %v", err)
+				return err
+			}
+		}
 	}
 
-	result, err := crypto.SignAndEncrypt(objJson, enrollmentId)
-	if err != nil {
-		return err
-	}
+	r.body = b
 
-	r.obj = result
 	return nil
 }
 
@@ -429,33 +476,16 @@ func (r *Request) GetParam(k string) string {
 	return r.params.Get(k)
 }
 
-// ToHTTP converts the Request to an HTTP request
+// ToHTTP is used to convert the Request object to an standard HTTP request object.
+//
 func (r *Request) ToHTTP() (*http.Request, error) {
 	// Encode the query parameters
 	r.url.RawQuery = r.params.Encode()
 
-	// Check if we should encode the body
-	if r.config.CryptoCfg.Enable {
-		if r.body == nil && r.obj != nil {
-			s, ok := r.obj.(string)
-			if !ok {
-				return nil, fmt.Errorf("Request obj type is error")
-			}
-			r.body = bytes.NewBuffer([]byte(s))
-		}
-	} else {
-		if r.body == nil && r.obj != nil {
-			b, err := EncodeBody(r.obj)
-			if err != nil {
-				return nil, err
-			}
-			r.body = b
-		}
-	}
-
 	// Create the HTTP request
 	req, err := http.NewRequest(r.method, r.url.RequestURI(), r.body)
 	if err != nil {
+		log.Printf("New http request fail: %v", err)
 		return nil, err
 	}
 
@@ -509,7 +539,12 @@ func (c *Client) NewRequest(method, path string) *Request {
 	return r
 }
 
-// DoRequest runs a request with our client
+// DoRequest does an HTTP request.
+//
+// Once the crypto mode enabled, the response result will
+// be decrypted and verified signature using crypto libary,
+// then the final result will be return to end client.
+//
 func (c *Client) DoRequest(r *Request) (time.Duration, *http.Response, error) {
 	req, err := r.ToHTTP()
 	if err != nil {
@@ -531,9 +566,10 @@ func (c *Client) DoRequest(r *Request) (time.Duration, *http.Response, error) {
 	if resp == nil {
 		return diff, nil, fmt.Errorf("DoRequest http.Response is nil")
 	}
-	enrollmentId := r.header.Get(structs.APIKeyHeader)
-	if enrollmentId == "" {
-		return diff, resp, fmt.Errorf("When crypto communication, the API-Key must be set")
+	apiKey := r.header.Get(structs.APIKeyHeader)
+	if apiKey == "" {
+		log.Println("API-Key header must be set when enable crypto mode")
+		return diff, resp, fmt.Errorf("API-Key header must be set when enable crypto mode")
 	}
 
 	buf, err := ioutil.ReadAll(resp.Body)
@@ -541,8 +577,9 @@ func (c *Client) DoRequest(r *Request) (time.Duration, *http.Response, error) {
 		return diff, resp, err
 	}
 
-	result, err := crypto.DecryptAndVerify(buf, enrollmentId)
+	result, err := crypto.DecryptAndVerify(buf, apiKey)
 	if err != nil {
+		log.Printf("DecryptAndVerify fail: %v", err)
 		return diff, resp, err
 	}
 
