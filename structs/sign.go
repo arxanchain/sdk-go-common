@@ -21,18 +21,18 @@ import (
 
 // SignatureParam is used to pass signature params to SDK
 type SignatureParam struct {
-	Creator    string `json:"creator"`     // signature creator
-	Created    string `json:"created"`     // signature created timestamp
-	Nonce      string `json:"nonce"`       // signature random string
-	PrivateKey string `json:"private_key"` // user ed25519 private key using for signing, base64 encoded
+	Creator    Identifier `json:"creator"`     // signature creator
+	Created    string     `json:"created"`     // signature created timestamp
+	Nonce      string     `json:"nonce"`       // signature random string
+	PrivateKey string     `json:"private_key"` // user ed25519 private key using for signing, base64 encoded
 }
 
 // SignatureBody is used to pass the signature value to SDK
 type SignatureBody struct {
-	Creator        string `json:"creator"`         // signature creator
-	Created        string `json:"created"`         // signature created timestamp
-	Nonce          string `json:"nonce"`           // signature random string
-	SignatureValue string `json:"signature_value"` // ed25519 signature value of the request payload, base64 encoded
+	Creator        Identifier `json:"creator"`         // signature creator
+	Created        string     `json:"created"`         // signature created timestamp
+	Nonce          string     `json:"nonce"`           // signature random string
+	SignatureValue string     `json:"signature_value"` // ed25519 signature value of the request payload, base64 encoded
 }
 
 // SignatureHeader ...

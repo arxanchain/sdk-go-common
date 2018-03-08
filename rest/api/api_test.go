@@ -17,6 +17,7 @@ limitations under the License.
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -94,9 +95,42 @@ func TestSetParams(t *testing.T) {
 	}
 }
 
-func TestSetBody(t *testing.T) {
+func TestSetBodyBytes(t *testing.T) {
 	// Initialize clien
-	c, err := NewClient(&Config{CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}})
+	c, err := NewClient(&Config{
+		ApiKey: "alice",
+	})
+	if err != nil {
+		t.Errorf("NewClient error: %s", err)
+	}
+
+	// Set body
+	body := []byte("test body #@!234123ssssssssss test body")
+	r := c.NewRequest("", "")
+	err = r.SetBody(body)
+	if err != nil {
+		t.Errorf("SetBody error: %s", err)
+	}
+	req, err := r.ToHTTP()
+	if err != nil {
+		t.Errorf("ToHttp error: %s", err)
+	}
+
+	result, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		t.Errorf("Get requst.Body error: %s", err)
+	}
+
+	if !bytes.Equal(body, result) {
+		t.Errorf("Verify error: %s", string(result))
+	}
+}
+
+func TestSetBodyJson(t *testing.T) {
+	// Initialize clien
+	c, err := NewClient(&Config{
+		ApiKey: "alice",
+	})
 	if err != nil {
 		t.Errorf("NewClient error: %s", err)
 	}
@@ -104,7 +138,89 @@ func TestSetBody(t *testing.T) {
 	// Set body
 	body := "test body #@!234123ssssssssss test body"
 	r := c.NewRequest("", "")
-	r.SetHeader(structs.APIKeyHeader, "alice")
+	err = r.SetBody(body)
+	if err != nil {
+		t.Errorf("SetBody error: %s", err)
+	}
+	req, err := r.ToHTTP()
+	if err != nil {
+		t.Errorf("ToHttp error: %s", err)
+	}
+
+	result, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		t.Errorf("Get requst.Body error: %s", err)
+	}
+
+	var bodyRes string
+	err = json.Unmarshal(result, &bodyRes)
+	if err != nil {
+		t.Errorf("UnMarshal error: %s", err)
+	}
+
+	if body != bodyRes {
+		t.Errorf("Verify error: %s", string(result))
+	}
+}
+
+func TestSetBodyBytesCrypoMode(t *testing.T) {
+	// Initialize clien
+	c, err := NewClient(&Config{
+		ApiKey:    "alice",
+		CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}},
+	)
+	if err != nil {
+		t.Errorf("NewClient error: %s", err)
+	}
+
+	// Set body
+	body := []byte("test body #@!234123ssssssssss test body")
+	r := c.NewRequest("", "")
+	err = r.SetBody(body)
+	if err != nil {
+		t.Errorf("SetBody error: %s", err)
+	}
+	req, err := r.ToHTTP()
+	if err != nil {
+		t.Errorf("ToHttp error: %s", err)
+	}
+
+	// Initialize server
+	crypto.SetServerClientMode(crypto.ServerClientMode(crypto.SERVER_MODE))
+	_, err = crypto.NewCertsStore("./server_certs/")
+	if err != nil {
+		t.Errorf("Initialize server certs store: %s", err)
+	}
+
+	chiper, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		t.Errorf("Get requst.Body error: %s", err)
+	}
+
+	// Verify body
+	result, err := crypto.DecryptAndVerify(chiper, "alice")
+	if err != nil {
+		t.Errorf("DecryptoAndVerify error: %s", err)
+	}
+
+	if !bytes.Equal(body, result) {
+		t.Errorf("Verify error: %s", string(result))
+	}
+}
+
+func TestSetBodyJsonCrypoMode(t *testing.T) {
+	// Initialize clien
+	c, err := NewClient(&Config{
+		ApiKey:    "alice",
+		CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}},
+	)
+	if err != nil {
+		t.Errorf("NewClient error: %s", err)
+	}
+
+	// Set body
+	body := "test body #@!234123ssssssssss test body"
+	r := c.NewRequest("", "")
 	err = r.SetBody(body)
 	if err != nil {
 		t.Errorf("SetBody error: %s", err)
@@ -144,7 +260,10 @@ func TestSetBody(t *testing.T) {
 
 func TestDoRequest(t *testing.T) {
 	// create client
-	c, err := NewClient(&Config{CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}})
+	c, err := NewClient(&Config{
+		ApiKey:    "alice",
+		CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}},
+	)
 	if err != nil {
 		t.Errorf("NewClient error: %s", err)
 	}
@@ -152,7 +271,6 @@ func TestDoRequest(t *testing.T) {
 	// set body
 	body := "test body #@!234123ssssssssss test body"
 	r := c.NewRequest("", "")
-	r.SetHeader(structs.APIKeyHeader, "alice")
 	err = r.SetBody(body)
 	if err != nil {
 		t.Errorf("SetBody error: %s", err)
@@ -202,7 +320,10 @@ func TestDoRequest(t *testing.T) {
 
 func TestDoRequestError(t *testing.T) {
 	// create client
-	c, err := NewClient(&Config{CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}})
+	c, err := NewClient(&Config{
+		ApiKey:    "alice",
+		CryptoCfg: &CryptoConfig{Enable: true, CertsStorePath: "./client_certs/"}},
+	)
 	if err != nil {
 		t.Errorf("NewClient error: %s", err)
 	}
@@ -210,7 +331,6 @@ func TestDoRequestError(t *testing.T) {
 	// set body
 	body := "test body #@!234123ssssssssss test body"
 	r := c.NewRequest("", "")
-	r.SetHeader(structs.APIKeyHeader, "alice")
 	err = r.SetBody(body)
 	if err != nil {
 		t.Errorf("SetBody error: %s", err)

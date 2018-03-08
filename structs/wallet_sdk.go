@@ -49,14 +49,14 @@ type WalletRequest struct {
 
 // WalletResponse common struct for wallet API response
 type WalletResponse struct {
-	Code           int      `json:"code"`
-	Message        string   `json:"message"`
-	Id             string   `json:"id"`
-	Endpoint       string   `json:"endpoint"`
-	KeyPair        *KeyPair `json:"key_pair"`
-	Created        int64    `json:"created"`
-	CoinId         string   `json:"coin_id"`
-	TransactionIds []string `json:"transaction_ids"`
+	Code           int        `json:"code"`
+	Message        string     `json:"message"`
+	Id             Identifier `json:"id"`
+	Endpoint       string     `json:"endpoint"`
+	KeyPair        *KeyPair   `json:"key_pair"`
+	Created        int64      `json:"created"`
+	CoinId         string     `json:"coin_id"`
+	TransactionIds []string   `json:"transaction_ids"`
 }
 
 type KeyPair struct {
@@ -182,6 +182,14 @@ type IWalletClient interface {
 	// QueryPOE is used to query POE digital asset.
 	//
 	QueryPOE(http.Header, Identifier) (*POEPayload, error)
+
+	// UploadPOEFile is used to upload file for specified POE digital asset
+	//
+	// poeID parameter is the POE digital asset ID pre-created using CreatePOE API.
+	//
+	// poeFile parameter is the path to file to be uploaded.
+	//
+	UploadPOEFile(header http.Header, poeID string, poeFile string) (*WalletResponse, error)
 
 	// IssueCToken is used to issue colored token.
 	//
