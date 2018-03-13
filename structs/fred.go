@@ -93,9 +93,12 @@ type RegisterBody struct {
 }
 
 type User struct {
-	Identifier string `json:"identifier"`
-	Access     string `json:"access"` // username
-	Secret     string `json:"secret"` // password
+	Access     string      `json:"access"` // username
+	Phone      string      `json:"phone"`
+	Email      string      `json:"email"`
+	Secret     string      `json:"secret"` // password
+	Identifier string      `json:"identifier"`
+	Metadata   interface{} `json:"meta_data"`
 }
 
 type UserInfo struct {
@@ -109,6 +112,8 @@ type UserInfo struct {
 
 type LoginAccessSecret struct {
 	Access string `json:"access"`
+	Phone  string `json:"phone"`
+	Email  string `json:"email"`
 	Secret string `json:"secret"`
 }
 
@@ -210,7 +215,10 @@ type GetTokenResponse struct {
 type TokenInfo struct {
 	CredentialId string `json:"credential_id"`
 	Access       string `json:"access"`
+	Phone        string `json:"phone"`
+	Email        string `json:"email"`
 	Roles        string `json:"roles"`
+	Identifier   string `json:"identifier"`
 }
 
 type ResponseStruct struct {
