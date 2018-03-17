@@ -35,7 +35,7 @@ const (
 	FabioRouteTagHeader   = "Host"
 	CallbackUrlHeader     = "Callback-Url"
 	RouteTagHeader        = "Route-Tag"
-	InvokeModeHeader      = "BC-Invoke-Mode"
+	InvokeModeHeader      = "Bc-Invoke-Mode"
 )
 
 // User role Header value list
