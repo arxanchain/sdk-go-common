@@ -92,8 +92,13 @@ const (
 
 //wallet-webserver
 const (
-	FailedToGenerateQRCode    = 6000 //生成二维码失败
-	ImgFormatConversionFailed = 6001 //图片转码失败
+	FailedToGenerateQRCode    ErrCodeType = 6000 //生成二维码失败
+	ImgFormatConversionFailed ErrCodeType = 6001 //图片转码失败
+	InvalidAssetPassword      ErrCodeType = 6002 //无效的资产密码
+	ErrorMatchRulesEngine     ErrCodeType = 6003 //匹配资产规则失败
+	NoMatchRulesEngine        ErrCodeType = 6004 //没有匹配资产规则
+	InvalidPrivateKey         ErrCodeType = 6005 //无效的私钥
+	InvalidSecurityCode       ErrCodeType = 6006 //无效的安全码
 )
 
 // wallet-ng error code and message defined
