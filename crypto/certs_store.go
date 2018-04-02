@@ -139,10 +139,12 @@ func (this *CertsStore) Reload() error {
 				}
 
 				if _, err = os.Stat(privateKeyFile); err != nil {
-					return err
+					logger.Warning("Stat %s error: %v", privateKeyFile, err)
+					continue
 				}
 				if _, err = os.Stat(peerCertFile); err != nil {
-					return err
+					logger.Warning("Stat %s error: %v", peerCertFile, err)
+					continue
 				}
 
 				certGroup := new(CertGroup)
@@ -159,7 +161,8 @@ func (this *CertsStore) Reload() error {
 				}
 				if err != nil {
 					logger.Errorf("Failed to create crypto lib[%d - %d]: %v", g_ServerClientMode, g_EncryptType, err)
-					return err
+					os.RemoveAll(filepath.Join(usersPath, enrollmentID))
+					continue
 				}
 
 				this.certsMap[enrollmentID] = certGroup
