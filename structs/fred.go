@@ -121,9 +121,11 @@ type UpdatePasswordRequest struct {
 }
 
 type UpdatePasswordBody struct {
-	OriginalSecret string `json:"origin_secret"`
+	OriginalSecret string `json:"original_secret"`
 	NewSecret      string `json:"new_secret"`
 	Access         string `json:"access"`
+	Email          string `json:"email"`
+	Phone          string `json:"phone"`
 }
 
 // LoginRequest is token request
