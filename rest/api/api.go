@@ -45,6 +45,12 @@ type HttpBasicAuth struct {
 	Password string
 }
 
+type ICacheClient interface {
+	HGet(key, field string) ([]byte, error)
+	HSet(key, field string, data []byte) error
+	HDel(key string, fields ...string) error
+}
+
 // Config is used to configure the creation of a client
 type Config struct {
 	// Address is the address of the Rest server
@@ -88,6 +94,9 @@ type Config struct {
 
 	// CryptoCfg is used to crypto transation between wasabi and client
 	CryptoCfg *CryptoConfig
+
+	// CacheClient is used to cache auth token
+	CacheClient ICacheClient
 }
 
 // TLSConfig is used to generate a TLSClientConfig that's useful for talking to
