@@ -58,7 +58,7 @@ type WalletResponse struct {
 	Endpoint       string     `json:"endpoint"`
 	KeyPair        *KeyPair   `json:"key_pair"`
 	Created        int64      `json:"created"`
-	CoinId         string     `json:"coin_id"`
+	TokenId        string     `json:"token_id"`
 	TransactionIds []string   `json:"transaction_ids"`
 }
 
@@ -433,4 +433,58 @@ type SpentTxOUT struct {
 	TxType  int32  `protobuf:"varint,12,opt,name=txType" json:"txType,omitempty"`
 	// BCTxID blockchain transaction id
 	BCTxID string `protobuf:"bytes,13,opt,name=bcTxID" json:"bcTxID,omitempty"`
+}
+
+// Transaction Structs
+
+// Colored Token Amount Structure
+type TokenAmount struct {
+	TokenId string `json:"token_id"`
+	Amount  int64  `json:"amount"`
+}
+
+// Transaction Fees
+type Fees struct {
+	Accounts []string       `json:"accounts"`
+	Tokens   []*TokenAmount `json:"tokens"`
+}
+
+// Issue Asset Request Structure
+type IssueAssetBody struct {
+	Issuer  string `json:"issuer"`
+	Owner   string `json:"owner"`
+	AssetId string `json:"asset_id"`
+	Fees    *Fees  `json:"fees"`
+}
+
+// Issue Colored Token Request Structure
+type IssueBody struct {
+	Issuer  string `json:"issuer"`
+	Owner   string `json:"owner"`
+	AssetId string `json:"asset_id"`
+	Amount  int64  `json:"amount"`
+	Fees    *Fees  `json:"fees"`
+}
+
+// Transfer Colored Token Request Structure
+type TransferBody struct {
+	From    string         `json:"from"`
+	To      string         `json:"to"`
+	AssetId string         `json:"asset_id"`
+	Tokens  []*TokenAmount `json:"tokens"`
+	Fees    *Fees          `json:"fees"`
+}
+
+// Transfer Asset Request Structure
+type TransferAssetBody struct {
+	From   string   `json:"from"`
+	To     string   `json:"to"`
+	Assets []string `json:"assets"`
+	Fees   *Fees    `json:"fees"`
+}
+
+// Timestamp Struct Defines
+type Timestamp struct {
+	Seconds int64 `json:"seconds"`
+	Nanos   int32 `json:"nanos"`
 }
