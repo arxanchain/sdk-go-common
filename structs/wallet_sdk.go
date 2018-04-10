@@ -437,16 +437,23 @@ type SpentTxOUT struct {
 
 // Transaction Structs
 
+type AXTUnit int64
+
+const (
+	ATOM     AXTUnit = 1
+	MicroAXT         = 1000 * ATOM
+	AXT              = 1000 * MicroAXT
+)
+
 // Colored Token Amount Structure
 type TokenAmount struct {
 	TokenId string `json:"token_id"`
 	Amount  int64  `json:"amount"`
 }
 
-// Transaction Fees
-type Fees struct {
-	Accounts []string       `json:"accounts"`
-	Tokens   []*TokenAmount `json:"tokens"`
+// Transaction Fee Structure
+type Fee struct {
+	Amount AXTUnit `json:"amount"`
 }
 
 // Issue Asset Request Structure
@@ -454,7 +461,7 @@ type IssueAssetBody struct {
 	Issuer  string `json:"issuer"`
 	Owner   string `json:"owner"`
 	AssetId string `json:"asset_id"`
-	Fees    *Fees  `json:"fees"`
+	Fee     *Fee   `json:"fee"`
 }
 
 // Issue Colored Token Request Structure
@@ -463,7 +470,7 @@ type IssueBody struct {
 	Owner   string `json:"owner"`
 	AssetId string `json:"asset_id"`
 	Amount  int64  `json:"amount"`
-	Fees    *Fees  `json:"fees"`
+	Fee     *Fee   `json:"fee"`
 }
 
 // Transfer Colored Token Request Structure
@@ -472,7 +479,7 @@ type TransferBody struct {
 	To      string         `json:"to"`
 	AssetId string         `json:"asset_id"`
 	Tokens  []*TokenAmount `json:"tokens"`
-	Fees    *Fees          `json:"fees"`
+	Fee     *Fee           `json:"fee"`
 }
 
 // Transfer Asset Request Structure
@@ -480,10 +487,10 @@ type TransferAssetBody struct {
 	From   string   `json:"from"`
 	To     string   `json:"to"`
 	Assets []string `json:"assets"`
-	Fees   *Fees    `json:"fees"`
+	Fee    *Fee     `json:"fee"`
 }
 
-// Timestamp Struct Defines
+// Timestamp Structure
 type Timestamp struct {
 	Seconds int64 `json:"seconds"`
 	Nanos   int32 `json:"nanos"`
