@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package tomago
+package structs
 
 // 染色币状态定义
 const (
