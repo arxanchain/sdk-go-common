@@ -133,3 +133,9 @@ const (
 	CCAlreadyDeployed     ErrCodeType = 9012 // chaincode已经部署过,不允许部署
 	CCUpgradeNoResource   ErrCodeType = 9013 // 无更新的chaincode资源去更新
 )
+
+// SDK error code
+const (
+	SDKServerResponseInvalid  ErrCodeType = 10000 // 服务端响应数据无效
+	SDKDecryptAndVerifyFailed ErrCodeType = 10001 // SDK解密验签失败
+)
