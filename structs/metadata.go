@@ -48,8 +48,8 @@ func DefaultVersion(progName string, buildNumber string) *Version {
 	return &Version{
 		ProgramName: progName,
 		BuildNumber: buildNumber,
-		Release:     1,
-		Fixpack:     5,
-		Hotfix:      1,
+		Release:     2,
+		Fixpack:     0,
+		Hotfix:      0,
 	}
 }

@@ -3,11 +3,13 @@ Common tools to generate ECC encryption and ED25519 signatures tool adapted to y
 
 ## Build
 
-The following command will build crypto-util and sign-util executables.
+After successfully installed **sdk-go-common**, you should've configured your **GOPAH** environment variable, use the following command to build crypto-util and sign-util executables.
 
 ```sh
+$ cd $GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools
 $ make
 ```
+The executables will be built in path `$GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools/build/bin`
 
 ## Usage
 
@@ -16,6 +18,7 @@ $ make
 Crypto-util is used to implement signing, encryption, decryption and verification process.
 
 ```sh
+$ cd build/bin
 $ ./crypto-util -help
 Usage of ./crypto-util:
   -apikey string
