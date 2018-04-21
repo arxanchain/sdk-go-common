@@ -22,6 +22,12 @@ import (
 	reststructs "github.com/arxanchain/sdk-go-common/rest/structs"
 )
 
+const (
+	FredAPIParam_APIKey     = "api_key"
+	FredAPIParam_Type       = "type"
+	FredAPIParam_Identifier = "identifier"
+)
+
 type IFredClient interface {
 	GetUserClient() IUserClient
 	GetEdkeyClient() IEdkeyClient
