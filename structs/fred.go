@@ -41,8 +41,10 @@ type IUserClient interface {
 	Revoke(*RevokeRequest, http.Header) error
 	// login
 	Login(*LoginRequest) (*GetTokenResponse, error)
-	// get access info
-	GetAccessInfo(string, http.Header) (interface{}, error)
+	// get user info with api key
+	GetUserInfoWithAPIKey(string, http.Header) (*UserInfo, error)
+	// get user info with DID
+	GetUserInfoWithDID(string, http.Header) (*UserInfo, error)
 	// update user password
 	UpdateUserPassword(*UpdatePasswordRequest, http.Header) error
 	// revoke token
