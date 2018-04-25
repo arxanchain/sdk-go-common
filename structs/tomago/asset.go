@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package structs
+package tomago
 
 // 资产状态定义
 const (
@@ -75,12 +75,4 @@ type TransferAssetPayload struct {
 	Assets     []string `json:"assets"`      //交易的资产
 	Fees       *Fees    `json:"fees"`        //交易的手续费
 	UpdateTime int64    `json:"update_time"` //当前时间
-}
-
-// 发行资产的请求Body结构定义
-type IssueAssetBody struct {
-	Issuer  string `json:"issuer"`
-	Owner   string `json:"owner"`
-	AssetId string `json:"asset_id"`
-	Fees    *Fees  `json:"fees"`
 }
