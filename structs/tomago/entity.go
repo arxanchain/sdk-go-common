@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package structs
+package tomago
 
 //钱包的定义
 type Wallet struct {

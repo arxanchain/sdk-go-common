@@ -22,6 +22,12 @@ import (
 	reststructs "github.com/arxanchain/sdk-go-common/rest/structs"
 )
 
+const (
+	FredAPIParam_APIKey     = "api_key"
+	FredAPIParam_Type       = "type"
+	FredAPIParam_Identifier = "identifier"
+)
+
 type IFredClient interface {
 	GetUserClient() IUserClient
 	GetEdkeyClient() IEdkeyClient
@@ -35,8 +41,10 @@ type IUserClient interface {
 	Revoke(*RevokeRequest, http.Header) error
 	// login
 	Login(*LoginRequest) (*GetTokenResponse, error)
-	// get access info
-	GetAccessInfo(string, http.Header) (interface{}, error)
+	// get user info with api key
+	GetUserInfoWithAPIKey(string, http.Header) (*UserInfo, error)
+	// get user info with DID
+	GetUserInfoWithDID(string, http.Header) (*UserInfo, error)
 	// update user password
 	UpdateUserPassword(*UpdatePasswordRequest, http.Header) error
 	// revoke token
@@ -82,39 +90,42 @@ type IOauth2Client interface {
 }
 
 type RegisterRequest struct {
-	Credential RegisterBody `json:"credential"`
+	Credential RegisterBody `json:"credential,omitempty"`
 }
 
 type RegisterBody struct {
-	Role        string `json:"role"`
-	Description string `json:"description"`
-	ChannelId   string `json:"channel_id"`
-	Value       User   `json:"value"`
+	Role        string `json:"role,omitempty"`
+	Description string `json:"description,omitempty"`
+	ChannelId   string `json:"channel_id,omitempty"`
+	Value       User   `json:"value,omitempty"`
 }
 
 type User struct {
-	Access     string      `json:"access"` // username
-	Phone      string      `json:"phone"`
-	Email      string      `json:"email"`
-	Secret     string      `json:"secret"` // password
-	Identifier string      `json:"identifier"`
-	Metadata   interface{} `json:"meta_data"`
+	Access     string      `json:"access,omitempty"` // username
+	Phone      string      `json:"phone,omitempty"`
+	Email      string      `json:"email,omitempty"`
+	Secret     string      `json:"secret,omitempty"` // password
+	Identifier string      `json:"identifier,omitempty"`
+	Metadata   interface{} `json:"meta_data,omitempty"`
 }
 
 type UserInfo struct {
-	Id         string `json:"id"`
-	Access     string `json:"access"`
-	Status     string `json:"status"`
-	Roles      string `json:"roles"`
-	Issued_at  int64  `json:"issued_at"`
-	Channel_id string `json:"channel_id"`
+	Id         string `json:"id,omitempty"`
+	Access     string `json:"access,omitempty"`
+	Phone      string `json:"phone,omitempty"`
+	Email      string `json:"email,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
+	Status     string `json:"status,omitempty"`
+	Roles      string `json:"roles,omitempty"`
+	Issued_at  int64  `json:"issued_at,omitempty"`
+	Channel_id string `json:"channel_id,omitempty"`
 }
 
 type LoginAccessSecret struct {
-	Access string `json:"access"`
-	Phone  string `json:"phone"`
-	Email  string `json:"email"`
-	Secret string `json:"secret"`
+	Access string `json:"access,omitempty"`
+	Phone  string `json:"phone,omitempty"`
+	Email  string `json:"email,omitempty"`
+	Secret string `json:"secret,omitempty"`
 }
 
 type LoginAccess struct {
@@ -122,150 +133,154 @@ type LoginAccess struct {
 }
 
 type UpdatePasswordRequest struct {
-	Credential *UpdatePasswordBody `json:"credential"`
+	Credential *UpdatePasswordBody `json:"credential,omitempty"`
 }
 
 type UpdatePasswordBody struct {
-	OriginalSecret string `json:"original_secret"`
-	NewSecret      string `json:"new_secret"`
-	Access         string `json:"access"`
-	Email          string `json:"email"`
-	Phone          string `json:"phone"`
+	OriginalSecret string `json:"original_secret,omitempty"`
+	NewSecret      string `json:"new_secret,omitempty"`
+	Access         string `json:"access,omitempty"`
+	Email          string `json:"email,omitempty"`
+	Phone          string `json:"phone,omitempty"`
 }
 
 // LoginRequest is token request
 type LoginRequest struct {
-	Credential LoginAccess `json:"credential"`
+	Credential LoginAccess `json:"credential,omitempty"`
 }
 
 type RevokeRequest struct {
-	Credential *User `json:"credential"`
+	Credential *User `json:"credential,omitempty"`
 }
 
 type ChannelIDAccess struct {
-	ChannelID string `json:"channel_id"`
-	Access    string `json:"access"`
+	ChannelID  string `json:"channel_id,omitempty"`
+	Access     string `json:"access,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
 }
 
 type UpdateChannelIDRequest struct {
-	Credential *ChannelIDAccess `json:"credential"`
+	Credential *ChannelIDAccess `json:"credential,omitempty"`
 }
 
 type CertCreateReq struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Access      string `json:"access"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	ApiKey      string `json:"api_key,omitempty"`
 }
 
 type CertCreateReqBody struct {
-	Certificate CertCreateReq `json:"certificate"`
+	Certificate CertCreateReq `json:"certificate,omitempty"`
 }
 
 type Cert struct {
-	Key    string `json:"key"`
-	Cert   string `json:"cert"`
-	CACert string `json:"ca_cert"`
+	Key    string `json:"key,omitempty"`
+	Cert   string `json:"cert,omitempty"`
+	CACert string `json:"ca_cert,omitempty"`
 }
 
 // cert resp info
 type CertCreateResp struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Access      string `json:"access"`
-	IssuedAt    int64  `json:"issued_at"`
-	Hash        string `json:"hash"`
-	Status      string `json:"status"`
-	Value       *Cert  `json:"value"`
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	ApiKey      string `json:"api_key,omitempty"`
+	IssuedAt    int64  `json:"issued_at,omitempty"`
+	Hash        string `json:"hash,omitempty"`
+	Status      string `json:"status,omitempty"`
+	Value       *Cert  `json:"value,omitempty"`
 }
 
 // CertCreateRespBody is cert resp info
 type CertCreateRespBody struct {
-	Certificate *CertCreateResp `json:"certificate"`
+	Certificate *CertCreateResp `json:"certificate,omitempty"`
 }
 
 // GetCertStutasResp is cert resp status
 type GetCertStatusResp struct {
-	Certificate GetCertStatusRespInner `json:"certificate"`
+	Certificate GetCertStatusRespInner `json:"certificate,omitempty"`
 }
 
 // GetCertStutasRespInner is cert resp issued_at
 type GetCertStatusRespInner struct {
-	Isued_at int64 `json:"issued_at"`
+	Isued_at int64 `json:"issued_at,omitempty"`
 }
 
 type Oauth2AccessToken struct {
-	AccessToken string `json:"access_token"`
+	AccessToken string `json:"access_token,omitempty"`
 }
 
 // 获取token成功时返回的token详情
 type TokenDetail struct {
-	IssuedAt     int64  `json:"issue_at"`
-	ExpiresAt    int64  `json:"expires_at"`
-	Value        string `json:"value"`
-	CredentialId string `json:"credential_id"`
-	Roles        string `json:"roles"`
-	ChannelId    string `json:"channel_id"`
+	IssuedAt     int64  `json:"issue_at,omitempty"`
+	ExpiresAt    int64  `json:"expires_at,omitempty"`
+	Value        string `json:"value,omitempty"`
+	CredentialId string `json:"credential_id,omitempty"`
+	Roles        string `json:"roles,omitempty"`
+	Identifier   string `json:"identifier,omitempty"`
+	ChannelId    string `json:"channel_id,omitempty"`
 }
 
 // 获取token成功时返回的response
 type GetTokenResponse struct {
-	Token TokenDetail `json:"token"`
+	Token TokenDetail `json:"token,omitempty"`
 }
 
 // 通过token能获取的用户信息
 type TokenInfo struct {
-	CredentialId string `json:"credential_id"`
-	Access       string `json:"access"`
-	Phone        string `json:"phone"`
-	Email        string `json:"email"`
-	Roles        string `json:"roles"`
-	Identifier   string `json:"identifier"`
+	CredentialId string `json:"credential_id,omitempty"`
+	Access       string `json:"access,omitempty"`
+	Phone        string `json:"phone,omitempty"`
+	Email        string `json:"email,omitempty"`
+	Roles        string `json:"roles,omitempty"`
+	Identifier   string `json:"identifier,omitempty"`
 }
 
 type ResponseStruct struct {
-	Credentials CredentialsStruct `json:"credentials"`
+	Credentials CredentialsStruct `json:"credentials,omitempty"`
 }
 type CredentialsStruct struct {
-	Id          string      `json:"id"`
-	Role        string      `json:"role"`
-	Description string      `json:"description"`
-	Channel_id  string      `json:"channel_id"`
-	Issued_at   int64       `json:"issued_at"`
-	Value       ValueStruct `json:"value"`
+	Id          string      `json:"id,omitempty"`
+	Role        string      `json:"role,omitempty"`
+	Description string      `json:"description,omitempty"`
+	Channel_id  string      `json:"channel_id,omitempty"`
+	Issued_at   int64       `json:"issued_at,omitempty"`
+	Value       ValueStruct `json:"value,omitempty"`
 }
 
 type ValueStruct struct {
-	Access string `json:"access"`
+	Access     string `json:"access,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
 	//Secret string `json:"secret"`
 }
 
 type AccesskeyRequest struct {
-	Accesskey AccesskeyRequestInner `json:"accesskey"`
+	Accesskey AccesskeyRequestInner `json:"accesskey,omitempty"`
 }
 
 type AccesskeyRequestInner struct {
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 }
 
 type AccesskeyResponse struct {
-	Accesskey AccesskeyResponseInner `json:"accesskey"`
+	Accesskey AccesskeyResponseInner `json:"accesskey,omitempty"`
 }
 
 type AccesskeyResponseInner struct {
-	Id          string         `json:"id"`
-	Description string         `json:"description"`
-	Issued_at   int64          `json:"issued_at"`
-	Value       AccessKeyValue `json:"value"`
+	Id          string         `json:"id,omitempty"`
+	Description string         `json:"description,omitempty"`
+	Issued_at   int64          `json:"issued_at,omitempty"`
+	Value       AccessKeyValue `json:"value,omitempty"`
 }
 
 type AccessKeyValue struct {
-	Access    string `json:"access"`
-	Requester string `json:"requester"`
+	ApiKey     string `json:"api_key,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
 }
 
 type ACLResponse struct {
-	Access    string `json:"access"`
-	Roles     string `json:"roles"`
-	ChannelId string `json:"channel_id"`
+	Access     string `json:"access,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
+	Roles      string `json:"roles,omitempty"`
+	ChannelId  string `json:"channel_id,omitempty"`
 }
