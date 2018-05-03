@@ -73,12 +73,12 @@ const (
 	QueryAuditInfoFail      ErrCodeType = 5006 //查询审计信息失败
 	AuditReverseFail        ErrCodeType = 5007 //审计平账操作失败
 	ChargeInterestFail      ErrCodeType = 5008 //计息失败
-	IssueCTokenFail         ErrCodeType = 5009 //发行染色币失败
+	IssueCTokenFail         ErrCodeType = 5009 //发行Token失败
 	RollbackTransactionFail ErrCodeType = 5010 //回滚交易失败
 	TransferCTokenFail      ErrCodeType = 5011 //转账交易失败
 	TransferAssetFail       ErrCodeType = 5012 //转移资产失败
 	WithdrawFail            ErrCodeType = 5013 //取现失败
-	ColoredCoinNotFound     ErrCodeType = 5014 //染色币没有找到
+	ColoredCoinNotFound     ErrCodeType = 5014 //Token没有找到
 	BalancesNotSufficient   ErrCodeType = 5015 //余额不足
 	AssetHasNotOwner        ErrCodeType = 5016 //资产没有所属人
 	AssetHasBeenIssued      ErrCodeType = 5017 //资产已发行
@@ -86,8 +86,8 @@ const (
 	WalletStatusInvalid     ErrCodeType = 5019 //钱包状态异常
 	EntityNotFound          ErrCodeType = 5020 //组织实体找不到
 	AssetNotFound           ErrCodeType = 5021 //数字资产没有找到
-	CTokenStatusNotInUse    ErrCodeType = 5022 //染色币已回收
-	CTokenAmountInvalid     ErrCodeType = 5023 //染色币数额无效
+	CTokenStatusNotInUse    ErrCodeType = 5022 //Token已回收
+	CTokenAmountInvalid     ErrCodeType = 5023 //Token数额无效
 )
 
 //wallet-webserver
@@ -104,7 +104,7 @@ const (
 // wallet-ng error code and message defined
 const (
 	WalletNotFound             ErrCodeType = 8000 //钱包对象没有找到
-	WalletGetCTokensFail       ErrCodeType = 8001 //获取钱包染色币失败
+	WalletGetCTokensFail       ErrCodeType = 8001 //获取钱包Token失败
 	WalletGetAssetsFail        ErrCodeType = 8002 //获取钱包资产失败
 	WalletTransferCTokensFail  ErrCodeType = 8003 //钱包转账失败
 	WalletTransferAssetsFail   ErrCodeType = 8004 //钱包转移资产失败

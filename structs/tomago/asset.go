@@ -54,7 +54,7 @@ type AssetPayload struct {
 	Metadata   interface{}             `json:"metadata"`    //数字资产元数据
 	CreateTime int64                   `json:"create_time"` //创建时间
 	UpdateTime int64                   `json:"update_time"` //更新时间
-	IssueCoins map[string]*ColoredCoin `json:"issue_coins"` //发行的染色币
+	IssueCoins map[string]*ColoredCoin `json:"issue_coins"` //发行的Token
 	Status     int                     `json:"status"`      //数字资产状态
 }
 

@@ -16,7 +16,7 @@ limitations under the License.
 
 package tomago
 
-// 染色币状态定义
+// Token状态定义
 const (
 	CCOIN_STATUS_ISSUE   int = iota //发行
 	CCOIN_STATUS_INUSE              //流通
@@ -24,40 +24,40 @@ const (
 	CCOIN_STATUS_EXPIRED            //过期
 )
 
-// 染色币颜色结构定义
+// Token颜色结构定义
 type CoinColor struct {
-	Id         string `json:"id"`          //染色币的ID
-	Ancestor   string `json:"ancestor"`    //发行染色币的数字资产的ID
+	Id         string `json:"id"`          //Token的ID
+	Ancestor   string `json:"ancestor"`    //发行Token的数字资产的ID
 	Issuer     string `json:"issuer"`      //发行人
 	IssueTime  int64  `json:"issue_time"`  //发行时间
 	ExpireTime int64  `json:"expire_time"` //过期时间
 }
 
-// 染色币结构定义
+// Token结构定义
 type ColoredCoin struct {
-	Amount    int64      `json:"amount"`     //染色币的数量
-	Status    int        `json:"status"`     //染色币的状态
-	CoinColor *CoinColor `json:"coin_color"` //染色币的颜色属相
+	Amount    int64      `json:"amount"`     //Token的数量
+	Status    int        `json:"status"`     //Token的状态
+	CoinColor *CoinColor `json:"coin_color"` //Token的颜色属相
 }
 
-// 染色币币种和数量
+// Token种类和数量
 type CoinAmount struct {
-	CoinId string `json:"coin_id"` //染色币ID
-	Amount int64  `json:"amount"`  //染色币数量
+	CoinId string `json:"coin_id"` //Token ID
+	Amount int64  `json:"amount"`  //Token数量
 }
 
 //审计相关的账户差额定义
 type AuditAmount struct {
-	Amount int64 `json:"amount"` //审计出来的染色币差额
+	Amount int64 `json:"amount"` //审计出来的Token差额
 }
 
 // 手续费结构定义
 type Fees struct {
 	Accounts []string      `json:"accounts"` //收取手续费的账户列表
-	Coins    []*CoinAmount `json:"coins"`    //收取手续费的币种和数量
+	Coins    []*CoinAmount `json:"coins"`    //收取手续费的Token种类和数量
 }
 
-// 发行染色币的请求Body结构定义
+// 发行Token的请求Body结构定义
 type IssueBody struct {
 	EnrollmentId string `json:"enrollment_id"`
 	CallbackUrl  string `json:"callback_url"`
@@ -73,7 +73,7 @@ type IssuePayload struct {
 	Issuer     string                  `json:"issuer"`      //发行人ID
 	Owner      string                  `json:"owner"`       //发行的数字资产的所属人ID
 	AssetId    string                  `json:"asset_id"`    //发行的数字资产ID
-	Coins      map[string]*ColoredCoin `json:"coins"`       //发行的染色币和数量
+	Coins      map[string]*ColoredCoin `json:"coins"`       //发行的Token和数量
 	Fees       *Fees                   `json:"fees"`        //发行的手续费
 	UpdateTime int64                   `json:"update_time"` //更新时间
 }
@@ -94,7 +94,7 @@ type TransferPayload struct {
 	From       string        `json:"from"`        //转账交易的发起人ID
 	To         string        `json:"to"`          //转账交易接收人ID
 	AssetId    string        `json:"asset_id"`    //交易的数字资产的ID
-	Coins      []*CoinAmount `json:"coins"`       //转账交易的染色币及数量
+	Coins      []*CoinAmount `json:"coins"`       //转账交易的Token及数量
 	Fees       *Fees         `json:"fees"`        //转账交易的手续费
 	UpdateTime int64         `json:"update_time"` //更新时间
 }
@@ -114,9 +114,9 @@ type WithdrawBody struct {
 //提现的Payload结构定义
 type WithdrawPayload struct {
 	Funder      string        `json:"funder"`       //提现的资金方ID
-	FunderCoins []*CoinAmount `json:"funder_coins"` //用于兑现币种和数量
-	Holder      string        `json:"holder"`       //染色币的持有人ID
-	HolderCoins []*CoinAmount `json:"holder_coins"` //要兑现的染色币
+	FunderCoins []*CoinAmount `json:"funder_coins"` //用于兑现Token种类和数量
+	Holder      string        `json:"holder"`       //Token的持有人ID
+	HolderCoins []*CoinAmount `json:"holder_coins"` //要兑现的Token
 	Fees        *Fees         `json:"fees"`         //提现的手续费
 	IsDue       bool          `json:"is_due"`       //是否已到期
 	UpdateTime  int64         `json:"update_time"`  //更新时间
@@ -132,7 +132,7 @@ type ReverseBody struct {
 //平账的Payload结构定义
 type ReversePayload struct {
 	EntityId   string                  `json:"entity_id"`   //平账的账户ID
-	Audits     map[string]*AuditAmount `json:"audits"`      //要平账的染色币信息
+	Audits     map[string]*AuditAmount `json:"audits"`      //要平账的Token信息
 	UpdateTime int64                   `json:"update_time"` //更新时间
 }
 
