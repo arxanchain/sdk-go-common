@@ -53,3 +53,7 @@ linter: gotools
 	go vet ./utils/...
 	@echo "Running goimports"
 	@./scripts/goimports.sh
+
+.PHONY: protos
+protos: gotools
+	./scripts/compileProtos.sh

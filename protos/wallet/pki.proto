@@ -1,0 +1,51 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan ColoredToken UTXO proto messages
+ *
+**/
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "wallet/common.proto";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+package wallet;
+
+message PublicKey {
+  string usage = 1;
+  string type = 2;
+  bytes rawData = 3;
+}
+
+message PrivateKey {
+  string usage = 1;
+  string type = 2;
+  bytes rawData = 3;
+}
+
+message SignatureHeader {
+  string signType = 1;
+  string creator = 2;
+  google.protobuf.Timestamp created = 3;
+  bytes nonce = 4;
+}
+
+message Signature {
+  SignatureHeader header = 1;
+  bytes sign = 2;
+}
+
+message SignatureSimple {
+  string creator = 1;
+  bytes nonce = 2;
+  bytes sign = 3;
+}

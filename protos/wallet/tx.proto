@@ -1,0 +1,175 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan ColoredToken UTXO proto messages
+ *
+**/
+
+syntax = "proto3";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+package wallet;
+
+import "google/protobuf/timestamp.proto";
+import "common/timestampwrapper.proto";
+
+/*
+TTIssue         TransType = 0  //发行
+TTNormal        TransType = 1  //转账
+TTRollback      TransType = 2  //回滚
+TTTransferAsset TransType = 3  //转移资产
+TTRedeem        TransType = 6  //未到期贴现
+TTInterest      TransType = 7  //计息
+TTFee           TransType = 8  //手续费
+TTRevoke        TransType = 9  //到期回收（提现）
+TTReverse       TransType = 10 //平账
+TTPurchase      TransType = 11 // 申购
+TTSell          TransType = 12 // 卖出
+*/
+
+enum ColorType {
+  Undefined = 0;
+  CTOKEN = 1;
+  CASSET = 2;
+}
+
+enum TxType {
+  // Issue ColoredToken
+  ISSUE = 0;
+  // Transfer ColoredToken
+  NORMAL = 1;
+  // Redeem ColoredToken
+  // 贴现
+  REDEEM = 2;
+  // Revoke ColoredToken
+  // 回收
+  REVOKE = 3;
+  // ROLLBACK transaction
+  ROLLBACK = 4;
+  // interest transaction
+  INTEREST = 5;
+  // fee transaction
+  FEE = 6;
+  // Reverse a transaction
+  // 平账操作
+  REVERSE = 7;
+}
+
+
+// txin not specified who has this txin, because creator can use their txout only,
+// txin must be creator's previous txout
+message TxIN {
+  // previous output index
+  uint32 ix = 1;
+  bytes sourceHash = 2;
+  bytes script = 3;
+  uint32 sequence = 4;
+}
+
+// tx out
+message TxOUT {
+  // ColoredToken ID
+  string cTokenId = 1;
+  // ColorType
+  ColorType cType = 2;
+  // coin amount
+  int64 value = 3;
+  // who will receive this txout
+  string addr = 4;
+  // until xx timestamp, any one cant spend the txout
+  // -1 means no check
+  int64 until = 5;
+  // script
+  bytes script = 6;
+}
+
+// UTXO
+message UTXO {
+  // SourceTxDataHash the Bitcoin hash (double sha256) of
+  // the given transaction
+  // @inject_tag: gorm:"type:varchar(96);primary_key"
+  string sourceTxDataHash = 1;
+  // Ix index of output array in the transaction
+  // TODO: when using uint32 type and ix is 0 can not save to db
+  // so using string temporarily, will use uint32 type instead next version
+  // @inject_tag: gorm:"type:varchar(8);primary_key"
+  string ix = 2;
+  // ColoredToken ID
+  // @inject_tag: gorm:"type:varchar(96)"
+  string cTokenId = 3;
+  // ColorType
+  ColorType cType = 4;
+  // coin amount
+  int64 value = 5;
+  // who will receive this txout
+  // @inject_tag: gorm:"type:varchar(50);index"
+  string addr = 6;
+  // until xx timestamp, any one cant spend the txout
+  // -1 means no check
+  int64 until = 7;
+  // script
+  bytes script = 8;
+  // CreatedAt
+  // @inject_tag: gorm:"type:varchar(50)"
+  common.TimestampWrapper createdAt = 9;
+  // nanoseconds of timestamp
+  int32 createdAtNanos = 10;
+  // Founder who created this tx
+  // @inject_tag: gorm:"type:varchar(50);index"
+  string founder = 11; // who created this tx
+  TxType txType = 12;
+  // BcTxId blockchain transaction id
+  string bcTxId = 13;
+}
+
+// utxo tx
+message TX {
+  uint32 version = 1;
+  // @inject_tag: gorm:"type:varchar(50)"
+  common.TimestampWrapper timestamp = 2;
+  // nanoseconds of timestamp
+  int32 timestampNanos = 3;
+  repeated TxIN txin = 4;
+  repeated TxOUT txout = 5;
+  TxType txType = 6;
+  string founder = 7; // who created this tx
+}
+
+// Single color result
+message SingleColorResult {
+  int64 sumCurrentOutputs = 1;
+  int64 sumPriorOutputs = 2;
+}
+
+message QueryTxRequest {
+  string txHashHex = 1;
+}
+
+message QueryUTXORequest {
+  string addr = 1;
+  string cTokenId = 2;
+  ColorType cType = 3;
+  string fromAddr = 4;
+  google.protobuf.Timestamp beginAt = 5;
+  google.protobuf.Timestamp endAt = 6;
+}
+
+message QueryUTXOResponse {
+  repeated UTXO utxos = 1;
+}
+
+message TxScript {
+  uint32 version = 1;
+  bytes payload = 2;
+}
+
+message ProcessTxResponse {
+  string txID = 1;
+}

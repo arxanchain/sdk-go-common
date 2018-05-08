@@ -20,6 +20,7 @@ import (
 	"net/http"
 
 	"github.com/arxanchain/sdk-go-common/crypto/sign/ed25519"
+	"github.com/arxanchain/sdk-go-common/protos/wallet"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -482,12 +483,24 @@ type TransferCTokenBody struct {
 	Fee     *Fee           `json:"fee"`
 }
 
+// Transfer CToken to process Tx  Request Structure
+type TransferCTokenTxBody struct {
+	TxCTokenBody *TransferCTokenBody `json:"tx_ctoken_body"`
+	Tx           *wallet.TX          `json:"tx"`
+}
+
 // Transfer Asset Request Structure
 type TransferAssetBody struct {
 	From   string   `json:"from"`
 	To     string   `json:"to"`
 	Assets []string `json:"assets"`
 	Fee    *Fee     `json:"fee"`
+}
+
+// Transfer Asset to process Tx  Request Structure
+type TransferAssetTxBody struct {
+	TxAssetBody *TransferAssetBody `json:"tx_asset_body"`
+	Tx          *wallet.TX         `json:"tx"`
 }
 
 // Timestamp Structure
