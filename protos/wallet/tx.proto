@@ -178,6 +178,9 @@ message ProcessTxResponse {
 // PublicKey is which the utxo owned to(IPublicKey.GetRawData())
 // Signature is signed the PublicKey by founder's private key
 message UTXOSignature {
-  bytes publicKey = 1;
-  bytes signature = 2;
+  string creator = 1;
+  int64 created = 2;
+  string nonce = 3;
+  bytes signature = 4;
+  bytes publicKey = 5;
 }
