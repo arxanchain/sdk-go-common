@@ -173,3 +173,11 @@ message TxScript {
 message ProcessTxResponse {
   string txID = 1;
 }
+
+// UTXOSignature is used to save signature of UTXO
+// PublicKey is which the utxo owned to(IPublicKey.GetRawData())
+// Signature is signed the PublicKey by founder's private key
+message UTXOSignature {
+  bytes publicKey = 1;
+  bytes signature = 2;
+}

@@ -59,14 +59,6 @@ type SignedData struct {
 	Sign   []byte           `json:"sign,omitempty"`
 }
 
-// ScriptData is used to save signature for tx
-// PublicKey is which the utxo owned to(IPublicKey.GetRawData())
-// Signature is signed the PublicKey by input's private key
-type ScriptData struct {
-	PublicKey []byte
-	Signature []byte
-}
-
 // Verify signature
 func (sd *SignedData) Verify(ipk IPublicKey) error {
 	message, err := json.Marshal(sd.Header)

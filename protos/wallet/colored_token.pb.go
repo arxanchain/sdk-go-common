@@ -35,6 +35,7 @@ It has these top-level messages:
 	QueryUTXOResponse
 	TxScript
 	ProcessTxResponse
+	UTXOSignature
 	VerifiableClaim
 	VerifiableClaimBrief
 */
