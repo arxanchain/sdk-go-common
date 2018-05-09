@@ -18,7 +18,7 @@ package tomago
 
 //钱包的定义
 type Wallet struct {
-	ColoredCoins  map[string]*ColoredCoin  `json:"colored_coins"`  //钱包中所有染色币
+	ColoredCoins  map[string]*ColoredCoin  `json:"colored_coins"`  //钱包中所有Token
 	DigitalAssets map[string]*DigitalAsset `json:"digital_assets"` //钱包中的数字资产
 }
 
