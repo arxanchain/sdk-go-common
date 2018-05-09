@@ -486,7 +486,7 @@ type TransferCTokenBody struct {
 // Transfer CToken to process Tx  Request Structure
 type TransferCTokenTxBody struct {
 	TxCTokenBody *TransferCTokenBody `json:"tx_ctoken_body"`
-	Tx           *wallet.TX          `json:"tx"`
+	Txs          []*wallet.TX        `json:"txs"`
 }
 
 // Transfer Asset Request Structure
@@ -500,7 +500,7 @@ type TransferAssetBody struct {
 // Transfer Asset to process Tx  Request Structure
 type TransferAssetTxBody struct {
 	TxAssetBody *TransferAssetBody `json:"tx_asset_body"`
-	Tx          *wallet.TX         `json:"tx"`
+	Txs         []*wallet.TX       `json:"txs"`
 }
 
 // Timestamp Structure
