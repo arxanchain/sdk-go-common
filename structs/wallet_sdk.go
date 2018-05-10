@@ -483,10 +483,9 @@ type TransferCTokenBody struct {
 	Fee     *Fee           `json:"fee"`
 }
 
-// Transfer CToken to process Tx  Request Structure
-type TransferCTokenTxBody struct {
-	TxCTokenBody *TransferCTokenBody `json:"tx_ctoken_body"`
-	Txs          []*wallet.TX        `json:"txs"`
+// Transfer to process Tx Request Structure
+type ProcessTxBody struct {
+	Txs []*wallet.TX `json:"txs"`
 }
 
 // Transfer Asset Request Structure
@@ -497,14 +496,13 @@ type TransferAssetBody struct {
 	Fee    *Fee     `json:"fee"`
 }
 
-// Transfer Asset to process Tx  Request Structure
-type TransferAssetTxBody struct {
-	TxAssetBody *TransferAssetBody `json:"tx_asset_body"`
-	Txs         []*wallet.TX       `json:"txs"`
-}
-
 // Timestamp Structure
 type Timestamp struct {
 	Seconds int64 `json:"seconds"`
 	Nanos   int32 `json:"nanos"`
+}
+
+type IssueCTokenPrepareResponse struct {
+	TokenId string       `json:"token_id"`
+	Txs     []*wallet.TX `json:"txs"`
 }
