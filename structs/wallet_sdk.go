@@ -63,6 +63,15 @@ type WalletResponse struct {
 	TransactionIds []string   `json:"transaction_ids"`
 }
 
+// SNRequest struct for create SN
+type SNRequest struct {
+	Id          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Owner       string `json:"owner,omitempty"`
+	ActiveCount int    `json:"active_count,omitempty"`
+	ExpireTime  int64  `json:"expire_time,omitempty"`
+}
+
 type KeyPair struct {
 	PrivateKey string `json:"private_key"` //base64 encoded ed25519 private key
 	PublicKey  string `json:"public_key"`  //base64 encoded ed25519 public key
@@ -338,6 +347,12 @@ type POEPayload struct {
 	Created    int64      `json:"created"`
 	Updated    int64      `json:"updated"`
 	Status     DidStatus  `json:"status"`
+}
+
+// SNMetadata service number metadata struct definition
+type SNMetadata struct {
+	ActivedCount   int `json:"actived_count"`
+	MaxActiveCount int `json:"max_active_count"`
 }
 
 // OffchainMetadata offchain storage metadata

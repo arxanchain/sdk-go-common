@@ -114,6 +114,8 @@ const (
 	OffchainReadUploadFileFail ErrCodeType = 8008 //获取上传的文件失败
 	OffchainSaveFileFail       ErrCodeType = 8009 //保存文件失败
 	OffchainDIDTypeInvalid     ErrCodeType = 8010 //不正确的资产类型
+	OverMaxActivedCount        ErrCodeType = 8011 // SN超过最大激活次数
+	SNExpired                  ErrCodeType = 8012 // SN已过期
 )
 
 // chain-mgmt error code and message defined
