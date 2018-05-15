@@ -60,6 +60,10 @@ const (
 	NoSuchTypeOfUser         ErrCodeType = 4008 //无此类型用户
 	InvalidAccessOrSecret    ErrCodeType = 4009 //无效的用户名或密码
 	UserNotExist             ErrCodeType = 4010 //无此用户
+	NoSuchTypeOfACLGroup     ErrCodeType = 4011 //无此类型权限组
+	DeleteNotAllowed         ErrCodeType = 4012 //不允许删除
+	FredUploadIdentityFailed ErrCodeType = 4013 //上传实名认证失败
+
 )
 
 //tomago
