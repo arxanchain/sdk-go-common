@@ -1,0 +1,45 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan ColoredToken UTXO proto messages
+ *
+**/
+
+syntax = "proto3";
+
+import "wallet/pki.proto";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+package wallet;
+
+enum CTStatus {
+  INUSE = 0;
+  REVOKED = 1;
+  EXPIRED = 2;
+}
+
+message ColoredToken {
+  // ColoredToken ID
+  string id = 1;
+  // ColoredToken issued base on which ancestor
+  // this should be a didentity
+  string ancestor = 2;
+  // issue timestamp
+  int64 issueTime = 3;
+  // expire timestamp, -1 indicates no expire
+  int64 expireTime = 4;
+  // ColoredToken status
+  CTStatus status = 5;
+  // issuers didentity and signature map
+  map<string, Signature> issuers = 6;
+  // endorsers didentity and signature map
+  map<string, Signature> endorsers = 7;
+  // metadata
+  bytes metadata = 8;
+}

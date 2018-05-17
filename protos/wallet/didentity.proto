@@ -1,0 +1,100 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan decentralized identity proto messages
+ *
+**/
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+import "wallet/common.proto";
+import "wallet/pki.proto";
+import "wallet/verifiable_claim.proto";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+package wallet;
+
+// DidType decentralized identity types
+// Decentralized Identity
+// ├── Asset
+// └── Entity
+//    ├── Organization
+//    └── Person
+//        ├── Dependent
+//        └── Independent
+enum DidType {
+  ASSET = 0;
+  ENTITY = 1;
+  ORGANIZATION = 2;
+  PERSON = 3;
+  INDEPENDENT = 4;
+  DEPENDENT = 5;
+
+  SWCASH = 11;
+  SWFEE = 12;
+  SWLOAN = 13;
+  SWINTEREST = 14;
+}
+
+// DidControlType defines the control type of decentralized identity controllers
+// or, and, m of n
+enum DidControlType {
+  OR = 0;
+  AND = 1;
+  MOFN = 2;
+}
+
+// DidOwner defines owner information of decentralized identity
+message DidOwner {
+  string id = 1;
+  repeated string type = 2;
+  google.protobuf.Timestamp expires = 3;
+  PublicKey publicKey = 4;
+}
+
+// DidControl defines controllers information of decentralized identity
+message DidControl {
+  DidControlType type = 1;
+  int32 minimumSignatures = 2;
+  repeated string signers = 3;
+}
+
+// OffchainMetadata defines offchain metadata of decentralized identity
+message OffchainMetadata {
+  string filename = 1;
+  string endpoint = 2;
+  string storageType = 3;
+  string contentHash = 4;
+  int32 size = 5;
+}
+
+// DDO defines an object to describe the decentralized identity
+message DDO {
+  string context = 1;
+  string id = 2;
+  repeated DidType type = 3;
+  repeated DidOwner owners = 4;
+  string guardian = 5;
+  repeated DidControl controls = 6;
+  map<string, VerifiableClaimBrief> claims = 7;
+  map<string, string> services = 8;
+  string endpoint = 9;
+  Metadata metadata = 10;
+  google.protobuf.Timestamp created = 11;
+  google.protobuf.Timestamp updated = 12;
+  google.protobuf.Timestamp expires = 13;
+  repeated Signature signatures = 14;
+  Status status = 15;
+  string name = 16;
+  string parentId = 17;
+  OffchainMetadata offchainMetadata = 18;
+}

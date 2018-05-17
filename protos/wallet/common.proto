@@ -1,0 +1,29 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan ColoredToken UTXO proto messages
+ *
+**/
+
+syntax = "proto3";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+package wallet;
+
+enum Status {
+  INVALID = 0;
+  VALID = 1;
+}
+
+// Metadata defines on chain metadata of decentralized identity
+message Metadata {
+  string hash = 1;
+  bytes data = 2;
+}

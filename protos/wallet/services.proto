@@ -1,0 +1,27 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan ColoredToken TX Service
+ *
+**/
+
+syntax = "proto3";
+
+package wallet;
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+import "wallet/tx.proto";
+
+service TxSrvc {
+  // ProcessTx handles the UTXO transaction request, TxIN -> TxOUT
+  rpc ProcessTx(TX) returns (ProcessTxResponse) {}
+  rpc QueryTx(QueryTxRequest) returns (TX) {}
+  rpc QueryUTXO(QueryUTXORequest) returns (QueryUTXOResponse) {}
+}

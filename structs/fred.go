@@ -23,9 +23,11 @@ import (
 )
 
 const (
-	FredAPIParam_APIKey     = "api_key"
-	FredAPIParam_Type       = "type"
-	FredAPIParam_Identifier = "identifier"
+	FredAPIParam_APIKey      = "api_key"
+	FredAPIParam_Type        = "type"
+	FredAPIParam_Identifier  = "identifier"
+	FredAPIParam_ACLGroupID  = "id"
+	FredUploadFileFormHeader = "file"
 )
 
 type IFredClient interface {
@@ -110,15 +112,17 @@ type User struct {
 }
 
 type UserInfo struct {
-	Id         string `json:"id,omitempty"`
-	Access     string `json:"access,omitempty"`
-	Phone      string `json:"phone,omitempty"`
-	Email      string `json:"email,omitempty"`
-	Identifier string `json:"identifier,omitempty"`
-	Status     string `json:"status,omitempty"`
-	Roles      string `json:"roles,omitempty"`
-	Issued_at  int64  `json:"issued_at,omitempty"`
-	Channel_id string `json:"channel_id,omitempty"`
+	Id                 string `json:"id,omitempty"`
+	GroupID            string `json:"group_id,omitempty"`
+	Access             string `json:"access,omitempty"`
+	Phone              string `json:"phone,omitempty"`
+	Email              string `json:"email,omitempty"`
+	Identifier         string `json:"identifier,omitempty"`
+	Status             string `json:"status,omitempty"`
+	Roles              string `json:"roles,omitempty"`
+	VerificationStatus string `json:"verification_status"`
+	Issued_at          int64  `json:"issued_at,omitempty"`
+	Channel_id         string `json:"channel_id,omitempty"`
 }
 
 type LoginAccessSecret struct {
@@ -283,4 +287,38 @@ type ACLResponse struct {
 	Identifier string `json:"identifier,omitempty"`
 	Roles      string `json:"roles,omitempty"`
 	ChannelId  string `json:"channel_id,omitempty"`
+}
+
+// ACLGroups ...
+type ACLGroups struct {
+	Groups []ACLGroup `json:"groups,omitempty"`
+}
+
+// ACLGroup ...
+type ACLGroup struct {
+	ID          *uint  `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	CreatedAt   int64  `json:"created_at,omitempty"`
+	UpdateAt    int64  `json:"updated_at,omitempty"`
+}
+
+// ACLResourceRequest ...
+type ACLResourceRequest struct {
+	GroupID   uint   `json:"group_id,omitempty"`
+	Resources []uint `json:"resources,omitempty"`
+}
+
+// ACLGroupResource ...
+type ACLGroupResource struct {
+	Group     ACLGroup      `json:"group,omitempty"`
+	Resources []ACLResource `json:"resources,omitempty"`
+}
+
+// ACLResource ...
+type ACLResource struct {
+	ID      uint   `json:"id,omitempty"`
+	Service string `json:"service,omitempty"`
+	Path    string `json:"path,omitempty"`
+	Method  string `json:"method,moitempty"`
 }

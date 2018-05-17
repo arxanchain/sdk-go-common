@@ -30,12 +30,14 @@ const (
 	AuthModeHeader     = "Auth-Mode"
 	// defined a new auth mode to auth channel/chaincode, for we need auth token and channel/chaincode
 	AuthChannelModeHeader = "Auth-ChCC-Mode"
-	AuthEmailHeader       = "Auth-Email"
-	FileAuthTokenHeader   = "Auth-Token"
-	FabioRouteTagHeader   = "Host"
-	CallbackUrlHeader     = "Callback-Url"
-	RouteTagHeader        = "Route-Tag"
-	InvokeModeHeader      = "Bc-Invoke-Mode"
+	// defined a new auth mode to auth SN
+	AuthSNModeHeader    = "Auth-SN-Mode"
+	AuthEmailHeader     = "Auth-Email"
+	FileAuthTokenHeader = "Auth-Token"
+	FabioRouteTagHeader = "Host"
+	CallbackUrlHeader   = "Callback-Url"
+	RouteTagHeader      = "Route-Tag"
+	InvokeModeHeader    = "Bc-Invoke-Mode"
 )
 
 // User role Header value list
