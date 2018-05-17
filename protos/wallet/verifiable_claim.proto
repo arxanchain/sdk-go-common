@@ -1,0 +1,44 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2017 All Rights Reserved
+ *
+ * Contributors:
+ *    Bryan HUANG - Initial implementation
+ *
+ *
+ * Purpose: Arxan decentralized identity proto messages
+ *
+**/
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+import "wallet/common.proto";
+import "wallet/pki.proto";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+
+package wallet;
+
+message VerifiableClaim {
+  string id = 1;
+  Status status = 2;
+  string name = 3;
+  string type = 4;
+  Metadata metadata = 5;
+  string holder = 6;
+  string issuer = 7;
+  repeated Signature signatures = 8;
+  google.protobuf.Timestamp created = 9;
+  google.protobuf.Timestamp updated = 10;
+  google.protobuf.Timestamp expires = 11;
+}
+
+message VerifiableClaimBrief {
+  string id = 1;
+  Status status = 2;
+  string name = 3;
+  string type = 4;
+}

@@ -1,0 +1,25 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2016-2018 All Rights Reserved
+ *
+ * Contributors:
+ *    Wang Zhongzhi - Initial implementation
+ *
+ *
+ * Purpose: Wrapper for Timestamp messages
+ *
+**/
+
+syntax = "proto3";
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/common";
+
+package common;
+
+import "google/protobuf/timestamp.proto";
+
+// Time is wrapper for Timestamp
+message TimestampWrapper {
+    google.protobuf.Timestamp time = 1;
+}

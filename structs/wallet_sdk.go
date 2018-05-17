@@ -20,6 +20,7 @@ import (
 	"net/http"
 
 	"github.com/arxanchain/sdk-go-common/crypto/sign/ed25519"
+	"github.com/arxanchain/sdk-go-common/protos/wallet"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +61,15 @@ type WalletResponse struct {
 	Created        int64      `json:"created"`
 	TokenId        string     `json:"token_id"`
 	TransactionIds []string   `json:"transaction_ids"`
+}
+
+// SNRequest struct for create SN
+type SNRequest struct {
+	Id          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Owner       string `json:"owner,omitempty"`
+	ActiveCount int    `json:"active_count,omitempty"`
+	ExpireTime  int64  `json:"expire_time,omitempty"`
 }
 
 type KeyPair struct {
@@ -339,6 +349,12 @@ type POEPayload struct {
 	Status     DidStatus  `json:"status"`
 }
 
+// SNMetadata service number metadata struct definition
+type SNMetadata struct {
+	ActivedCount   int `json:"actived_count"`
+	MaxActiveCount int `json:"max_active_count"`
+}
+
 // OffchainMetadata offchain storage metadata
 type OffchainMetadata struct {
 	Filename    string `json:"filename"`
@@ -482,6 +498,11 @@ type TransferCTokenBody struct {
 	Fee     *Fee           `json:"fee"`
 }
 
+// Transfer to process Tx Request Structure
+type ProcessTxBody struct {
+	Txs []*wallet.TX `json:"txs"`
+}
+
 // Transfer Asset Request Structure
 type TransferAssetBody struct {
 	From   string   `json:"from"`
@@ -494,4 +515,9 @@ type TransferAssetBody struct {
 type Timestamp struct {
 	Seconds int64 `json:"seconds"`
 	Nanos   int32 `json:"nanos"`
+}
+
+type IssueCTokenPrepareResponse struct {
+	TokenId string       `json:"token_id"`
+	Txs     []*wallet.TX `json:"txs"`
 }

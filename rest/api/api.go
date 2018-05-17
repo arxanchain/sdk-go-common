@@ -90,6 +90,9 @@ type Config struct {
 	// ApiKey is the access key for ACL access api
 	ApiKey string
 
+	// EnterpriseSignParam is enterprise sign parameters
+	EnterpriseSignParam *structs.SignatureParam
+
 	// CallbackUrl is used to receive asynchronous event notification
 	// which will notify if the request succeeded or failed
 	CallbackUrl string
@@ -338,6 +341,14 @@ func NewClient(config *Config) (*Client, error) {
 	}
 
 	return &Client{config: config}, nil
+}
+
+// NewClient returns a new client
+func (c *Client) GetEnterpriseSignParam() (*structs.SignatureParam, error) {
+	if c.config.EnterpriseSignParam == nil {
+		return nil, fmt.Errorf("enterprise signature params is nil")
+	}
+	return c.config.EnterpriseSignParam, nil
 }
 
 // NewHttpClient returns an http client configured with the given Transport and TLS

@@ -35,6 +35,7 @@ const (
 	DTPerson       DidType = "Person"      //Individual
 	DTIndependent  DidType = "Independent" //Independent person
 	DTDependent    DidType = "Dependent"   //Dependent person
+	DTSerialNumber DidType = "SerialNumber"
 
 	// Sub wallet did type
 	DTCash     DidType = "cash"

@@ -60,6 +60,10 @@ const (
 	NoSuchTypeOfUser         ErrCodeType = 4008 //无此类型用户
 	InvalidAccessOrSecret    ErrCodeType = 4009 //无效的用户名或密码
 	UserNotExist             ErrCodeType = 4010 //无此用户
+	NoSuchTypeOfACLGroup     ErrCodeType = 4011 //无此类型权限组
+	DeleteNotAllowed         ErrCodeType = 4012 //不允许删除
+	FredUploadIdentityFailed ErrCodeType = 4013 //上传实名认证失败
+
 )
 
 //tomago
@@ -114,6 +118,8 @@ const (
 	OffchainReadUploadFileFail ErrCodeType = 8008 //获取上传的文件失败
 	OffchainSaveFileFail       ErrCodeType = 8009 //保存文件失败
 	OffchainDIDTypeInvalid     ErrCodeType = 8010 //不正确的资产类型
+	OverMaxActivedCount        ErrCodeType = 8011 // SN超过最大激活次数
+	SNExpired                  ErrCodeType = 8012 // SN已过期
 )
 
 // chain-mgmt error code and message defined
