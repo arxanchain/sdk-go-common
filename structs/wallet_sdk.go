@@ -173,6 +173,8 @@ type IWalletClient interface {
 	UploadPOEFile(header http.Header, poeID string, poeFile string) (*WalletResponse, error)
 
 	// IssueCToken is used to issue colored token.
+	// but only the security enhancement version of IssueCToken.
+	// With this API, you can add signatures to all UTXO records to ensure transaction security.
 	//
 	// The default invoking mode is asynchronous, it will return
 	// without waiting for blockchain transaction confirmation.
@@ -184,6 +186,8 @@ type IWalletClient interface {
 	IssueCToken(http.Header, *IssueBody, *SignatureParam) (*WalletResponse, error)
 
 	// IssueAsset is used to issue digital asset.
+	// but only the security enhancement version of IssueAsset.
+	// With this API, you can add signatures to all UTXO records to ensure transaction security.
 	//
 	// The default invoking mode is asynchronous, it will return
 	// without waiting for blockchain transaction confirmation.
@@ -195,6 +199,8 @@ type IWalletClient interface {
 	IssueAsset(http.Header, *IssueAssetBody, *SignatureParam) (*WalletResponse, error)
 
 	// TransferCToken is used to transfer colored tokens from one user to another.
+	// but only the security enhancement version of TransferCToken.
+	// With this API, you can add signatures to all UTXO records to ensure transaction security.
 	//
 	// The default invoking mode is asynchronous, it will return
 	// without waiting for blockchain transaction confirmation.
@@ -206,56 +212,6 @@ type IWalletClient interface {
 	TransferCToken(http.Header, *TransferCTokenBody, *SignatureParam) (*WalletResponse, error)
 
 	// TransferAsset is used to transfer assets from one user to another.
-	//
-	// The default invoking mode is asynchronous, it will return
-	// without waiting for blockchain transaction confirmation.
-	//
-	// If you want to switch to synchronous invoking mode, set
-	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
-	// it will not return until the blockchain transaction is confirmed.
-	//
-	TransferAsset(http.Header, *TransferAssetBody, *SignatureParam) (*WalletResponse, error)
-
-	// IssueCTokenEx is similar with IssueCToken in use
-	// but only the security enhancement version of IssueCToken.
-	// With this API, you can add signatures to all UTXO records to ensure transaction security.
-	//
-	// The default invoking mode is asynchronous, it will return
-	// without waiting for blockchain transaction confirmation.
-	//
-	// If you want to switch to synchronous invoking mode, set
-	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
-	// it will not return until the blockchain transaction is confirmed.
-	//
-	IssueCTokenEx(http.Header, *IssueBody, *SignatureParam) (*WalletResponse, error)
-
-	// IssueAssetEx is similar with IssueAsset in use
-	// but only the security enhancement version of IssueAsset.
-	// With this API, you can add signatures to all UTXO records to ensure transaction security.
-	//
-	// The default invoking mode is asynchronous, it will return
-	// without waiting for blockchain transaction confirmation.
-	//
-	// If you want to switch to synchronous invoking mode, set
-	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
-	// it will not return until the blockchain transaction is confirmed.
-	//
-	IssueAssetEx(http.Header, *IssueAssetBody, *SignatureParam) (*WalletResponse, error)
-
-	// TransferCTokenEx is similar with TransferCToken in use
-	// but only the security enhancement version of TransferCToken.
-	// With this API, you can add signatures to all UTXO records to ensure transaction security.
-	//
-	// The default invoking mode is asynchronous, it will return
-	// without waiting for blockchain transaction confirmation.
-	//
-	// If you want to switch to synchronous invoking mode, set
-	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
-	// it will not return until the blockchain transaction is confirmed.
-	//
-	TransferCTokenEx(http.Header, *TransferCTokenBody, *SignatureParam) (*WalletResponse, error)
-
-	// TransferAssetEx is similar with TransferAsset in use
 	// but only the security enhancement version of TransferAsset.
 	// With this API, you can add signatures to all UTXO records to ensure transaction security.
 	//
@@ -266,7 +222,7 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
-	TransferAssetEx(http.Header, *TransferAssetBody, *SignatureParam) (*WalletResponse, error)
+	TransferAsset(http.Header, *TransferAssetBody, *SignatureParam) (*WalletResponse, error)
 
 	// SendIssueCTokenProposal is used to send issue ctoken proposal to get wallet.Tx to be signed.
 	//
