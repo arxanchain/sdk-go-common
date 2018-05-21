@@ -144,4 +144,5 @@ const (
 const (
 	SDKServerResponseInvalid  ErrCodeType = 10000 // 服务端响应数据无效
 	SDKDecryptAndVerifyFailed ErrCodeType = 10001 // SDK解密验签失败
+	SDKInvalidBase64Data      ErrCodeType = 10002 // 私钥base64解码失败
 )
