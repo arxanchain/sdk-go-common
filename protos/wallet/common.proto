@@ -20,6 +20,7 @@ package wallet;
 enum Status {
   INVALID = 0;
   VALID = 1;
+  ISSUED = 2;
 }
 
 // Metadata defines on chain metadata of decentralized identity

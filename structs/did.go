@@ -50,4 +50,5 @@ type DidStatus string
 const (
 	DSValid   DidStatus = "Valid"
 	DSInvalid DidStatus = "Invalid"
+	DSIssued  DidStatus = "Issued"
 )

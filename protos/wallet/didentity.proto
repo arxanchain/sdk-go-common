@@ -38,6 +38,7 @@ enum DidType {
   PERSON = 3;
   INDEPENDENT = 4;
   DEPENDENT = 5;
+  SERIALNUMBER = 6;
 
   SWCASH = 11;
   SWFEE = 12;
