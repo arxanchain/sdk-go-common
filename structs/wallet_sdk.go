@@ -296,16 +296,17 @@ type POEBody struct {
 
 // POEPayload POE query payload structure definition
 type POEPayload struct {
-	Id         Identifier `json:"id"`
-	Name       string     `json:"name"`
-	ParentId   Identifier `json:"parent_id"`
-	Owner      Identifier `json:"owner"`
-	ExpireTime int64      `json:"expire_time"`
-	Hash       string     `json:"hash"`
-	Metadata   []byte     `json:"metadata"`
-	Created    int64      `json:"created"`
-	Updated    int64      `json:"updated"`
-	Status     DidStatus  `json:"status"`
+	Id               Identifier       `json:"id"`
+	Name             string           `json:"name"`
+	ParentId         Identifier       `json:"parent_id"`
+	Owner            Identifier       `json:"owner"`
+	ExpireTime       int64            `json:"expire_time"`
+	Hash             string           `json:"hash"`
+	Metadata         []byte           `json:"metadata"`
+	OffchainMetadata OffchainMetadata `json:"offchain_metadata"`
+	Created          int64            `json:"created"`
+	Updated          int64            `json:"updated"`
+	Status           DidStatus        `json:"status"`
 }
 
 // SNMetadata service number metadata struct definition
@@ -321,6 +322,7 @@ type OffchainMetadata struct {
 	StorageType string `json:"storageType"`
 	ContentHash string `json:"contentHash"`
 	Size        int    `json:"size"`
+	ReadOnly    bool   `json:"read_only"`
 }
 
 const (
@@ -328,6 +330,10 @@ const (
 	OffchainPOEID = "poe_id"
 	// OffchainPOEFile poe binary file when invoke upload file api formdata param
 	OffchainPOEFile = "poe_file"
+	// OffchainPOEFile poe file read/write attribute when upload file api formdata param
+	OffchainReadOnly = "read_only"
+	// DownloadUrl url link to download poe file related to POE instance
+	DownloadUrl = "url"
 )
 
 // signature const for the formdata
