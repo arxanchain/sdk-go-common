@@ -47,6 +47,8 @@ type IUserClient interface {
 	GetUserInfoWithAPIKey(string, http.Header) (*UserInfo, error)
 	// get user info with DID
 	GetUserInfoWithDID(string, http.Header) (*UserInfo, error)
+	// reset user password
+	ResetUserPassword(string, http.Header) error
 	// update user password
 	UpdateUserPassword(*UpdatePasswordRequest, http.Header) error
 	// revoke token
@@ -142,6 +144,7 @@ type UpdatePasswordRequest struct {
 
 type UpdatePasswordBody struct {
 	OriginalSecret string `json:"original_secret,omitempty"`
+	Identifier     string `json:"identifier,omitempty"`
 	NewSecret      string `json:"new_secret,omitempty"`
 	Access         string `json:"access,omitempty"`
 	Email          string `json:"email,omitempty"`
