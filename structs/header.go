@@ -47,6 +47,11 @@ const (
 	UserRoleDid        = "did"
 )
 
+// User GroupID value list
+const (
+	UserRoleGroupIDSuperAdmin uint = 1
+)
+
 // Blockchain Invoke Mode header value list
 const (
 	InvokeModeSync  = "sync"
