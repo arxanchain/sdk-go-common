@@ -48,7 +48,7 @@ type IUserClient interface {
 	// get user info with DID
 	GetUserInfoWithDID(string, http.Header) (*UserInfo, error)
 	// reset user password
-	ResetUserPassword(string, http.Header) error
+	ResetUserPassword(*UpdatePasswordRequest, http.Header) error
 	// update user password
 	UpdateUserPassword(*UpdatePasswordRequest, http.Header) error
 	// revoke token
