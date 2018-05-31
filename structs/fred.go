@@ -158,8 +158,8 @@ type RevokeRequest struct {
 }
 
 type ChannelIDAccess struct {
-	ChannelID  string `json:"channel_id,omitempty"`
-	Access     string `json:"access,omitempty"`
+	ChannelID string `json:"channel_id,omitempty"`
+	//Access     string `json:"access,omitempty"`
 	Identifier string `json:"identifier,omitempty"`
 }
 
@@ -238,6 +238,8 @@ type TokenInfo struct {
 	Email        string `json:"email,omitempty"`
 	Roles        string `json:"roles,omitempty"`
 	Identifier   string `json:"identifier,omitempty"`
+	GroupID      uint   `json:"group_id,omitempty"`
+	ChannelID    string `json:"channel_id,omitempty"`
 }
 
 type ResponseStruct struct {
