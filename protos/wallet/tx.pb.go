@@ -200,22 +200,22 @@ type UTXO struct {
 	// SourceTxDataHash the Bitcoin hash (double sha256) of
 	// the given transaction
 	// @inject_tag: gorm:"type:varchar(96);primary_key"
-	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty"`
+	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" gorm:"type:varchar(96);primary_key"`
 	// Ix index of output array in the transaction
 	// TODO: when using uint32 type and ix is 0 can not save to db
 	// so using string temporarily, will use uint32 type instead next version
 	// @inject_tag: gorm:"type:varchar(8);primary_key"
-	Ix string `protobuf:"bytes,2,opt,name=ix" json:"ix,omitempty"`
+	Ix string `protobuf:"bytes,2,opt,name=ix" json:"ix,omitempty" gorm:"type:varchar(8);primary_key"`
 	// ColoredToken ID
 	// @inject_tag: gorm:"type:varchar(96)"
-	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty"`
+	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" gorm:"type:varchar(96)"`
 	// ColorType
 	CType ColorType `protobuf:"varint,4,opt,name=cType,enum=wallet.ColorType" json:"cType,omitempty"`
 	// coin amount
 	Value int64 `protobuf:"varint,5,opt,name=value" json:"value,omitempty"`
 	// who will receive this txout
 	// @inject_tag: gorm:"type:varchar(50);index"
-	Addr string `protobuf:"bytes,6,opt,name=addr" json:"addr,omitempty"`
+	Addr string `protobuf:"bytes,6,opt,name=addr" json:"addr,omitempty" gorm:"type:varchar(50);index"`
 	// until xx timestamp, any one cant spend the txout
 	// -1 means no check
 	Until int64 `protobuf:"varint,7,opt,name=until" json:"until,omitempty"`
@@ -223,12 +223,12 @@ type UTXO struct {
 	Script []byte `protobuf:"bytes,8,opt,name=script,proto3" json:"script,omitempty"`
 	// CreatedAt
 	// @inject_tag: gorm:"type:varchar(50)"
-	CreatedAt *common.TimestampWrapper `protobuf:"bytes,9,opt,name=createdAt" json:"createdAt,omitempty"`
+	CreatedAt *common.TimestampWrapper `protobuf:"bytes,9,opt,name=createdAt" json:"createdAt,omitempty" gorm:"type:varchar(50)"`
 	// nanoseconds of timestamp
 	CreatedAtNanos int32 `protobuf:"varint,10,opt,name=createdAtNanos" json:"createdAtNanos,omitempty"`
 	// Founder who created this tx
 	// @inject_tag: gorm:"type:varchar(50);index"
-	Founder string `protobuf:"bytes,11,opt,name=founder" json:"founder,omitempty"`
+	Founder string `protobuf:"bytes,11,opt,name=founder" json:"founder,omitempty" gorm:"type:varchar(50);index"`
 	TxType  TxType `protobuf:"varint,12,opt,name=txType,enum=wallet.TxType" json:"txType,omitempty"`
 	// BcTxId blockchain transaction id
 	BcTxId string `protobuf:"bytes,13,opt,name=bcTxId" json:"bcTxId,omitempty"`
@@ -334,7 +334,7 @@ func (m *UTXO) GetBcTxId() string {
 type TX struct {
 	Version uint32 `protobuf:"varint,1,opt,name=version" json:"version,omitempty"`
 	// @inject_tag: gorm:"type:varchar(50)"
-	Timestamp *common.TimestampWrapper `protobuf:"bytes,2,opt,name=timestamp" json:"timestamp,omitempty"`
+	Timestamp *common.TimestampWrapper `protobuf:"bytes,2,opt,name=timestamp" json:"timestamp,omitempty" gorm:"type:varchar(50)"`
 	// nanoseconds of timestamp
 	TimestampNanos int32    `protobuf:"varint,3,opt,name=timestampNanos" json:"timestampNanos,omitempty"`
 	Txin           []*TxIN  `protobuf:"bytes,4,rep,name=txin" json:"txin,omitempty"`
