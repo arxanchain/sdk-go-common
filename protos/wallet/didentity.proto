@@ -75,6 +75,7 @@ message OffchainMetadata {
   string storageType = 3;
   string contentHash = 4;
   int32 size = 5;
+  bool readOnly = 6;
 }
 
 // DDO defines an object to describe the decentralized identity
