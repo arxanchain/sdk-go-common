@@ -35,7 +35,6 @@ func TestSetHeaders(t *testing.T) {
 
 	head := http.Header{}
 	head.Add("X-Auth-Token", "2k9AlO2IynLpsGTRHHVI3TTm/HCkjprGzwlUxbvXayTrj/Lyjwlsty3XzlKldiiGGxJjiSG+54f2CbYCvcLifA==")
-	head.Add("X-Auth-Token", "aaaa")
 
 	if head.Get("X-Auth-Token") != "2k9AlO2IynLpsGTRHHVI3TTm/HCkjprGzwlUxbvXayTrj/Lyjwlsty3XzlKldiiGGxJjiSG+54f2CbYCvcLifA==" {
 		t.Errorf("get headers is failed")
@@ -48,7 +47,7 @@ func TestSetHeaders(t *testing.T) {
 		t.Errorf("get headers is failed")
 	}
 
-	if r.header["X-Auth-Token"][1] != "aaaa" {
+	if r.header["X-Auth-Token"][0] != "2k9AlO2IynLpsGTRHHVI3TTm/HCkjprGzwlUxbvXayTrj/Lyjwlsty3XzlKldiiGGxJjiSG+54f2CbYCvcLifA==" {
 		t.Errorf("get headers is failed")
 	}
 }
@@ -80,7 +79,7 @@ func TestSetParams(t *testing.T) {
 	var r Request
 	v := url.Values{}
 
-	s := []string{"m1HMDTepp1510733539", "aaaa"}
+	s := []string{"m1HMDTepp1510733539"}
 	v["access"] = s
 
 	r.params = make(map[string][]string)
@@ -90,7 +89,7 @@ func TestSetParams(t *testing.T) {
 		t.Errorf("get params is failed")
 	}
 
-	if r.params["access"][1] != "aaaa" {
+	if r.params["access"][0] != "m1HMDTepp1510733539" {
 		t.Errorf("get params is failed")
 	}
 }

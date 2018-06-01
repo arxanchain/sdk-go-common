@@ -120,6 +120,9 @@ const (
 	OffchainDIDTypeInvalid     ErrCodeType = 8010 //不正确的资产类型
 	OverMaxActivedCount        ErrCodeType = 8011 // SN超过最大激活次数
 	SNExpired                  ErrCodeType = 8012 // SN已过期
+	OverMaxUploadSize          ErrCodeType = 8013 // 上传文件超过最大文件大小
+	OffchainReadOnly           ErrCodeType = 8014 // offchain metadata只允许读,不允许更新
+	OffchainContentExist       ErrCodeType = 8015 // offchain file content已经存在
 )
 
 // chain-mgmt error code and message defined

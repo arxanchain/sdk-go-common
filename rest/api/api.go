@@ -462,14 +462,14 @@ func (r *Request) SetBody(obj interface{}) error {
 func (r *Request) SetHeaders(headers http.Header) {
 	for k, list := range headers {
 		for _, v := range list {
-			r.header.Add(k, v)
+			r.header.Set(k, v)
 		}
 	}
 }
 
 // SetHeader is used to set one header KV pair
 func (r *Request) SetHeader(k, v string) {
-	r.header.Add(k, v)
+	r.header.Set(k, v)
 }
 
 // GetHeader is used to get one header value
@@ -481,14 +481,14 @@ func (r *Request) GetHeader(k string) string {
 func (r *Request) SetParams(params url.Values) {
 	for k, list := range params {
 		for _, v := range list {
-			r.params.Add(k, v)
+			r.params.Set(k, v)
 		}
 	}
 }
 
 // SetParam is used to set one query param
 func (r *Request) SetParam(k, v string) {
-	r.params.Add(k, v)
+	r.params.Set(k, v)
 }
 
 // GetParam is used to get one query param

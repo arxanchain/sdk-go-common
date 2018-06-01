@@ -47,6 +47,8 @@ type IUserClient interface {
 	GetUserInfoWithAPIKey(string, http.Header) (*UserInfo, error)
 	// get user info with DID
 	GetUserInfoWithDID(string, http.Header) (*UserInfo, error)
+	// reset user password
+	ResetUserPassword(*UpdatePasswordRequest, http.Header) error
 	// update user password
 	UpdateUserPassword(*UpdatePasswordRequest, http.Header) error
 	// revoke token
@@ -142,6 +144,7 @@ type UpdatePasswordRequest struct {
 
 type UpdatePasswordBody struct {
 	OriginalSecret string `json:"original_secret,omitempty"`
+	Identifier     string `json:"identifier,omitempty"`
 	NewSecret      string `json:"new_secret,omitempty"`
 	Access         string `json:"access,omitempty"`
 	Email          string `json:"email,omitempty"`
@@ -158,8 +161,8 @@ type RevokeRequest struct {
 }
 
 type ChannelIDAccess struct {
-	ChannelID  string `json:"channel_id,omitempty"`
-	Access     string `json:"access,omitempty"`
+	ChannelID string `json:"channel_id,omitempty"`
+	//Access     string `json:"access,omitempty"`
 	Identifier string `json:"identifier,omitempty"`
 }
 
@@ -238,6 +241,8 @@ type TokenInfo struct {
 	Email        string `json:"email,omitempty"`
 	Roles        string `json:"roles,omitempty"`
 	Identifier   string `json:"identifier,omitempty"`
+	GroupID      uint   `json:"group_id,omitempty"`
+	ChannelID    string `json:"channel_id,omitempty"`
 }
 
 type ResponseStruct struct {
