@@ -18,16 +18,17 @@ package structs
 
 // common http header define
 const (
-	UserIdHeader       = "User-Id"
-	UserRoleHeader     = "User-Role"
-	ChannelIdHeader    = "Channel-Id"
-	ChaincodeIdHeader  = "Chaincode-Id"
-	XAuthTokenHeader   = "X-Auth-Token"
-	ACLActionHeader    = "ACL-Action"
-	APIKeyHeader       = "API-Key"
-	EnrollmentIdHeader = "Enrollment-Id"
-	CryptoModeHeader   = "Crypto-Mode"
-	AuthModeHeader     = "Auth-Mode"
+	UserIdHeader        = "User-Id"
+	UserRoleHeader      = "User-Role"
+	ChannelIdHeader     = "Channel-Id"
+	ChaincodeIdHeader   = "Chaincode-Id"
+	XAuthTokenHeader    = "X-Auth-Token"
+	XSubjectTokenHeader = "X-Subject-Token"
+	ACLActionHeader     = "ACL-Action"
+	APIKeyHeader        = "API-Key"
+	EnrollmentIdHeader  = "Enrollment-Id"
+	CryptoModeHeader    = "Crypto-Mode"
+	AuthModeHeader      = "Auth-Mode"
 	// defined a new auth mode to auth channel/chaincode, for we need auth token and channel/chaincode
 	AuthChannelModeHeader = "Auth-ChCC-Mode"
 	// defined a new auth mode to auth SN
@@ -46,6 +47,11 @@ const (
 	UserRoleAdmin      = "admin"
 	UserRoleNormal     = "normal"
 	UserRoleDid        = "did"
+)
+
+// User GroupID value list
+const (
+	UserRoleGroupIDSuperAdmin uint = 1
 )
 
 // Blockchain Invoke Mode header value list
