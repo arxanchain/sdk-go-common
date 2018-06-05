@@ -34,6 +34,7 @@ type IFredClient interface {
 	GetUserClient() IUserClient
 	GetEdkeyClient() IEdkeyClient
 	GetCertsClient() ICertsClient
+	GetACLClient() IACLClient
 }
 
 type IUserClient interface {
@@ -63,6 +64,32 @@ type IUserClient interface {
 	Accesskey(*AccesskeyRequest, http.Header) (*AccesskeyResponse, error)
 	// validate acl
 	ACLVerification(http.Header) (*ACLResponse, error)
+	// update identity status
+	UpdateIdentityStatus(UserInfo, http.Header) error
+	// query identity status
+	QueryIdentityStatus(string, http.Header) (*UserInfo, error)
+	// upload identity file
+	UploadIdentity(string, string, http.Header) error
+}
+
+// IACLClient ...
+type IACLClient interface {
+	// create acl group
+	CreateACLGroup(*ACLGroup, http.Header) (*ACLGroup, error)
+	// update acl group
+	UpdateACLGroup(*ACLGroup, http.Header) (*ACLGroup, error)
+	// delete acl group
+	DeleteACLGroup(*ACLGroups, http.Header) (*ACLGroups, error)
+	// get acl groups
+	GetACLGroups(uint, uint, http.Header) (*ACLGroups, error)
+	// get acl group
+	GetACLGroup(uint, http.Header) (*ACLGroupResource, error)
+	// add acl resource
+	AddACLResource(*ACLResourceRequest, http.Header) (*ACLGroup, error)
+	// remove acl resource
+	RemoveACLResource(*ACLResourceRequest, http.Header) (*ACLGroup, error)
+	// get user acl
+	UserACL(uint, http.Header) (*ACLGroup, error)
 }
 
 type IEdkeyClient interface {
