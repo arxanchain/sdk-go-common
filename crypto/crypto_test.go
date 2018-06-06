@@ -20,18 +20,19 @@ import (
 	"testing"
 
 	"github.com/arxanchain/sdk-go-common/crypto/sign/ed25519"
-	"github.com/arxanchain/sdk-go-common/structs"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
+	"github.com/arxanchain/sdk-go-common/structs/wallet"
 )
 
 func TestVerifySignatureED25519(t *testing.T) {
-	sBody := &structs.SignatureBody{
+	sBody := &pki.SignatureBody{
 		Creator:        "did:ara:8uQhQMGzWxR8vw5P3UWH1j",
 		Created:        "ssss",
 		Nonce:          "nonce",
 		SignatureValue: "kG6hAnp12lherMdlIBmC9XTdMxkOKXvbhgogcX+bPuGLVWm2VrEj3nT+/CxkwmG21ze46XgMIkraNOHUpZUrAA==",
 	}
 
-	wr := &structs.WalletRequest{
+	wr := &wallet.WalletRequest{
 		Payload:   "{\"enrollment_id\":\"1f38a7a1-2c79-465e-a4c0-0038e25c7edg\",\"callback_url\":\"http://127.0.0.1\",\"from\":\"did:ara:8uQhQMGzWxR8vw5P3UWH1j\",\"to\":\"did:ara:21tDAKCERh95uGgKbJNHYp\",\"asset_id\":\"1f38a7a1-2c79-465e-a4c0-0038e25c7edg\",\"coins\":[{\"coin_id\":\"1f38a7a1-2c79-465e-a4c0-0038e25c7edg\",\"amount\":5}],\"fees\":{\"accounts\":[\"did:ara:8uQhQMGzWxR8vw5P3UWH1j\"],\"coins\":[{\"coin_id\":\"1f38a7a1-2c79-465e-a4c0-0038e25c7edg\",\"amount\":5}]}}",
 		Signature: sBody,
 	}

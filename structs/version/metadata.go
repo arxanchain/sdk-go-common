@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package structs
+package version
 
 import (
 	"fmt"
@@ -50,6 +50,6 @@ func DefaultVersion(progName string, buildNumber string) *Version {
 		BuildNumber: buildNumber,
 		Release:     2,
 		Fixpack:     0,
-		Hotfix:      0,
+		Hotfix:      1,
 	}
 }

@@ -33,6 +33,7 @@ import (
 
 	"github.com/arxanchain/sdk-go-common/crypto"
 	"github.com/arxanchain/sdk-go-common/structs"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
 	cleanhttp "github.com/hashicorp/go-cleanhttp"
 	rootcerts "github.com/hashicorp/go-rootcerts"
 )
@@ -91,7 +92,7 @@ type Config struct {
 	ApiKey string
 
 	// EnterpriseSignParam is enterprise sign parameters
-	EnterpriseSignParam *structs.SignatureParam
+	EnterpriseSignParam *pki.SignatureParam
 
 	// CallbackUrl is used to receive asynchronous event notification
 	// which will notify if the request succeeded or failed
@@ -344,7 +345,7 @@ func NewClient(config *Config) (*Client, error) {
 }
 
 // NewClient returns a new client
-func (c *Client) GetEnterpriseSignParam() (*structs.SignatureParam, error) {
+func (c *Client) GetEnterpriseSignParam() (*pki.SignatureParam, error) {
 	if c.config.EnterpriseSignParam == nil {
 		return nil, fmt.Errorf("enterprise signature params is nil")
 	}
