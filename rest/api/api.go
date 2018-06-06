@@ -462,13 +462,16 @@ func (r *Request) SetBody(obj interface{}) error {
 func (r *Request) SetHeaders(headers http.Header) {
 	for k, list := range headers {
 		for _, v := range list {
-			r.header.Set(k, v)
+			r.SetHeader(k, v)
 		}
 	}
 }
 
 // SetHeader is used to set one header KV pair
 func (r *Request) SetHeader(k, v string) {
+	if strings.ToLower(k) == "accept-encoding" {
+		return
+	}
 	r.header.Set(k, v)
 }
 
