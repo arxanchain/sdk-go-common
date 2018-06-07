@@ -23,7 +23,8 @@ import (
 
 	cpt "github.com/arxanchain/sdk-go-common/crypto"
 	"github.com/arxanchain/sdk-go-common/crypto/sign/ed25519"
-	"github.com/arxanchain/sdk-go-common/structs"
+	commdid "github.com/arxanchain/sdk-go-common/structs/did"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
 	"github.com/arxanchain/sdk-go-common/utils"
 )
 
@@ -67,10 +68,10 @@ func sign(cprivateKey, cnonce, cdid, cdata *C.char) *C.char {
 		return nil
 	}
 
-	sd := &structs.SignedData{
+	sd := &pki.SignedData{
 		Data: []byte(ddata),
-		Header: &structs.SignatureHeader{
-			Creator: structs.Identifier(id),
+		Header: &pki.SignatureHeader{
+			Creator: commdid.Identifier(id),
 			Nonce:   []byte(nonce),
 		},
 	}

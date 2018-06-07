@@ -21,7 +21,8 @@ import (
 	"fmt"
 
 	"github.com/arxanchain/sdk-go-common/crypto/sign/ed25519"
-	"github.com/arxanchain/sdk-go-common/structs"
+	commdid "github.com/arxanchain/sdk-go-common/structs/did"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
 	"github.com/arxanchain/sdk-go-common/utils"
 )
 
@@ -64,12 +65,12 @@ func main() {
 	if err != nil {
 		fmt.Printf("[ERROR]: DecodeBase64 failed: %s\n", err)
 	}
-	sh := &structs.SignatureHeader{
-		Creator: structs.Identifier(*id),
+	sh := &pki.SignatureHeader{
+		Creator: commdid.Identifier(*id),
 		Nonce:   []byte(*nonce),
 	}
 
-	sd := &structs.SignedData{
+	sd := &pki.SignedData{
 		Data:   []byte(ddata),
 		Header: sh,
 	}

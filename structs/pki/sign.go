@@ -13,34 +13,36 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package structs
+package pki
 
 import (
 	"encoding/json"
+
+	commdid "github.com/arxanchain/sdk-go-common/structs/did"
 )
 
 // SignatureParam is used to pass signature params to SDK
 type SignatureParam struct {
-	Creator    Identifier `json:"creator"`     // signature creator
-	Created    string     `json:"created"`     // signature created timestamp
-	Nonce      string     `json:"nonce"`       // signature random string
-	PrivateKey string     `json:"private_key"` // user ed25519 private key using for signing, base64 encoded
+	Creator    commdid.Identifier `json:"creator"`     // signature creator
+	Created    string             `json:"created"`     // signature created timestamp
+	Nonce      string             `json:"nonce"`       // signature random string
+	PrivateKey string             `json:"private_key"` // user ed25519 private key using for signing, base64 encoded
 }
 
 // SignatureBody is used to pass the signature value to SDK
 type SignatureBody struct {
-	Creator        Identifier `json:"creator"`         // signature creator
-	Created        string     `json:"created"`         // signature created timestamp
-	Nonce          string     `json:"nonce"`           // signature random string
-	SignatureValue string     `json:"signature_value"` // ed25519 signature value of the request payload, base64 encoded
+	Creator        commdid.Identifier `json:"creator"`         // signature creator
+	Created        string             `json:"created"`         // signature created timestamp
+	Nonce          string             `json:"nonce"`           // signature random string
+	SignatureValue string             `json:"signature_value"` // ed25519 signature value of the request payload, base64 encoded
 }
 
 // SignatureHeader ...
 type SignatureHeader struct {
-	SignType string     `json:"sign_type,omitempty"`
-	Creator  Identifier `json:"creator,omitempty"`
-	Created  int64      `json:"created,omitempty"`
-	Nonce    []byte     `json:"nonce,omitempty"`
+	SignType string             `json:"sign_type,omitempty"`
+	Creator  commdid.Identifier `json:"creator,omitempty"`
+	Created  int64              `json:"created,omitempty"`
+	Nonce    []byte             `json:"nonce,omitempty"`
 }
 
 // Signature include signature header and body
