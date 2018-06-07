@@ -19,7 +19,9 @@ package crypto
 import (
 	"encoding/json"
 
-	"github.com/arxanchain/sdk-go-common/structs"
+	commdid "github.com/arxanchain/sdk-go-common/structs/did"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
+	"github.com/arxanchain/sdk-go-common/structs/wallet"
 	"github.com/arxanchain/sdk-go-common/utils"
 )
 
@@ -220,9 +222,9 @@ func SignAndEncrypt(databytes []byte, enrollmentID string) (string, error) {
 }
 
 // VerifySignatureED25519 verify signature of the given data
-func VerifySignatureED25519(wr *structs.WalletRequest, ipk structs.IPublicKey) error {
-	var header = &structs.SignatureHeader{
-		Creator: structs.Identifier(wr.Signature.Creator),
+func VerifySignatureED25519(wr *wallet.WalletRequest, ipk pki.IPublicKey) error {
+	var header = &pki.SignatureHeader{
+		Creator: commdid.Identifier(wr.Signature.Creator),
 		Nonce:   []byte(wr.Signature.Nonce),
 	}
 
@@ -231,7 +233,7 @@ func VerifySignatureED25519(wr *structs.WalletRequest, ipk structs.IPublicKey) e
 		logger.Error(err)
 		return err
 	}
-	var sd = &structs.SignedData{
+	var sd = &pki.SignedData{
 		Data:   []byte(wr.Payload),
 		Header: header,
 		Sign:   signed,

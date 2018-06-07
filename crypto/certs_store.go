@@ -27,7 +27,7 @@ import (
 	"github.com/arxanchain/sdk-go-common/crypto/ecc/primitives"
 	"github.com/arxanchain/sdk-go-common/crypto/rsa"
 	"github.com/arxanchain/sdk-go-common/log"
-	"github.com/arxanchain/sdk-go-common/structs"
+	"github.com/arxanchain/sdk-go-common/structs/pki"
 )
 
 var (
@@ -47,7 +47,7 @@ type CertGroup struct {
 	EnrollmentID   string
 	PrivateKeyFile string
 	PeerCertFile   string
-	cryptoLib      structs.ICryptoLib
+	cryptoLib      pki.ICryptoLib
 }
 
 type CertsStore struct {
@@ -182,7 +182,7 @@ func (this *CertsStore) Reload() error {
 //	Encrypt(data []byte) ([]byte, error)
 //	Decrypt(ciphertext []byte) ([]byte, error)
 //
-func GetCryptoLib(name string) (cryptoLib structs.ICryptoLib, err error) {
+func GetCryptoLib(name string) (cryptoLib pki.ICryptoLib, err error) {
 	rwmutex.Lock()
 	defer rwmutex.Unlock()
 

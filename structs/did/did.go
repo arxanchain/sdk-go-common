@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package structs
+package did
 
 type (
 	// IDIdentity format "did:<provider short id>:id_string"
