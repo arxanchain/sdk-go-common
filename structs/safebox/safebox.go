@@ -16,6 +16,12 @@ limitations under the License.
 
 package safebox
 
+import (
+	"net/http"
+
+	commdid "github.com/arxanchain/sdk-go-common/structs/did"
+)
+
 // SaveKeyPairRequetBody define save KeyPair request body
 type SaveKeyPairRequetBody struct {
 	UserDid    string `json:"user_did"`
@@ -54,4 +60,43 @@ type UpdateSecurityCodeRequestBody struct {
 // CodeInfoReply ...
 type CodeInfoReply struct {
 	Code string `json:"code"`
+}
+
+// ISafeboxClient defines the behaviors implemented by safebox sdk
+type ISafeboxClient interface {
+	// TrusteeKeyPair is used to trutee keypair.
+	//
+	// API-Key must set to header.
+	TrusteeKeyPair(http.Header, *SaveKeyPairRequetBody) (*SaveKeyPairReply, error)
+
+	// QueryPrivateKey is used to query private key.
+	//
+	// API-Key must set to header.
+	QueryPrivateKey(http.Header, *OperateKeyInfo) (*PrivateKeyReply, error)
+
+	// QueryPublicKey is used to query public key.
+	//
+	// API-Key must set to header.
+	QueryPublicKey(http.Header, *OperateKeyInfo) (*PublicKeyReply, error)
+
+	// DeleteKeyPair is used to delete keypair.
+	//
+	// API-Key must set to header.
+	DeleteKeyPair(http.Header, *OperateKeyInfo) error
+
+	// UpdateAssistCode is used to update assist code.
+	//
+	// API-Key must set to header.
+	UpdateAssistCode(http.Header, *UpdateSecurityCodeRequestBody) error
+
+	// RecoverAssistCode is used to recover assist code when user has forgot.
+	//
+	// API-Key must set to header.
+	RecoverAssistCode(http.Header, commdid.Identifier) (*CodeInfoReply, error)
+}
+
+// OperateKeyInfo ...
+type OperateKeyInfo struct {
+	UserDid string `json:"user_did"`
+	Code    string `json:"code"`
 }
