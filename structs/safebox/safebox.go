@@ -44,12 +44,6 @@ type PublicKeyReply struct {
 	PublicKey string `json:"public_key"`
 }
 
-// DeleteKeyPairRequestBody ...
-type DeleteKeyPairRequestBody struct {
-	UserDid string `json:"user_did"`
-	Code    string `json:"code"`
-}
-
 // UpdateSecurityCodeRequestBody ...
 type UpdateSecurityCodeRequestBody struct {
 	UserDid      string `json:"user_did"`
