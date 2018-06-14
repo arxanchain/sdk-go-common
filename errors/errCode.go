@@ -149,3 +149,12 @@ const (
 	SDKDecryptAndVerifyFailed ErrCodeType = 10001 // SDK解密验签失败
 	SDKInvalidBase64Data      ErrCodeType = 10002 // 私钥base64解码失败
 )
+
+// safebox srvc error code
+const (
+	UserInfoIsExist         ErrCodeType = 11000 // 用户已经存在
+	UserInfoNotExit         ErrCodeType = 11001 // 用户信息不存在
+	SecurityCodeErr         ErrCodeType = 11002 // 安全码错误
+	OriginalSecurityCodeErr ErrCodeType = 11003 // 原始安全码错误
+	SecurityInvalidErr      ErrCodeType = 11004 // 安全码无效
+)
