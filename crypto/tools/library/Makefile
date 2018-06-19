@@ -21,7 +21,13 @@
 #   - gotools - installs go tools like golint
 #   - linter - runs all code checks
 
-EXT_LDFLAGS='-buildmode=c-shared'
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+	FLAGS=-ldflags -s -buildmode=c-shared
+else
+	FLAGS=-buildmode=c-shared
+endif
+
 
 all: utils
 
@@ -34,7 +40,7 @@ build:
 build/%:
 	@mkdir -p $(@D)
 	@echo "$@"
-	go build $(EXT_LDFLAGS) -o $@ "./utils.go"
+	go build $(FLAGS) -o $@ ./utils.go
 	@echo "Libraries available as $@"
 	@touch $@
 
