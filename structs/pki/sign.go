@@ -22,11 +22,14 @@ import (
 )
 
 // SignatureParam is used to pass signature params to SDK
+// If you had trusted key pair, you should set 'SecurityCode',
+// otherwish, you should set 'PrivateKey'.
 type SignatureParam struct {
-	Creator    commdid.Identifier `json:"creator"`     // signature creator
-	Created    string             `json:"created"`     // signature created timestamp
-	Nonce      string             `json:"nonce"`       // signature random string
-	PrivateKey string             `json:"private_key"` // user ed25519 private key using for signing, base64 encoded
+	Creator      commdid.Identifier `json:"creator"`       // signature creator
+	Created      string             `json:"created"`       // signature created timestamp
+	Nonce        string             `json:"nonce"`         // signature random string
+	PrivateKey   string             `json:"private_key"`   // user ed25519 private key using for signing, base64 encoded
+	SecurityCode string             `json:"security_code"` // user security code
 }
 
 // SignatureBody is used to pass the signature value to SDK

@@ -60,6 +60,7 @@ type WalletResponse struct {
 	Id             commdid.Identifier `json:"id"`
 	Endpoint       string             `json:"endpoint"`
 	KeyPair        *KeyPair           `json:"key_pair"`
+	SecurityCode   string             `json:"security_code"`
 	Created        int64              `json:"created"`
 	TokenId        string             `json:"token_id"`
 	TransactionIds []string           `json:"transaction_ids"`
@@ -119,6 +120,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will return the key pair.
+	// If you want to trust the key pair, it will return the security code.
+	//
 	Register(http.Header, *RegisterWalletBody) (*WalletResponse, error)
 
 	// RegisterSubWallet is used to register user subwallet.
@@ -129,6 +133,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will return the key pair.
+	// If you want to trust the key pair, it will return the security code.
 	//
 	RegisterSubWallet(http.Header, *RegisterSubWalletBody) (*WalletResponse, error)
 
@@ -149,6 +156,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
+	//
 	CreatePOE(http.Header, *POEBody, *pki.SignatureParam) (*WalletResponse, error)
 
 	// UpdatePOE is used to update POE digital asset.
@@ -159,6 +169,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
 	//
 	UpdatePOE(http.Header, *POEBody, *pki.SignatureParam) (*WalletResponse, error)
 
@@ -183,6 +196,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
+	//
 	IssueCToken(http.Header, *IssueBody, *pki.SignatureParam) (*WalletResponse, error)
 
 	// IssueAsset is used to issue digital asset.
@@ -193,6 +209,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
 	//
 	IssueAsset(http.Header, *IssueAssetBody, *pki.SignatureParam) (*WalletResponse, error)
 
@@ -205,6 +224,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
+	//
 	TransferCToken(http.Header, *TransferCTokenBody, *pki.SignatureParam) (*WalletResponse, error)
 
 	// TransferAsset is used to transfer assets from one user to another.
@@ -215,6 +237,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
 	//
 	TransferAsset(http.Header, *TransferAssetBody, *pki.SignatureParam) (*WalletResponse, error)
 
@@ -227,6 +252,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
+	//
 	SendIssueCTokenProposal(http.Header, *IssueBody, *pki.SignatureParam) (*IssueCTokenPrepareResponse, error)
 
 	// SendIssueAssetProposal is used to send issue asset proposal to get wallet.Tx to be signed.
@@ -237,6 +265,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
 	//
 	SendIssueAssetProposal(http.Header, *IssueAssetBody, *pki.SignatureParam) ([]*wallet.TX, error)
 
@@ -249,6 +280,9 @@ type IWalletClient interface {
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
 	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
+	//
 	SendTransferCTokenProposal(http.Header, *TransferCTokenBody, *pki.SignatureParam) ([]*wallet.TX, error)
 
 	// SendTransferAssetProposal is used to send transfer asset proposal to get wallet.Tx to be signed.
@@ -259,6 +293,9 @@ type IWalletClient interface {
 	// If you want to switch to synchronous invoking mode, set
 	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
 	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The default key pair trust mode does not trust, it will required key pair.
+	// If you had trust the key pair, it will required security code.
 	//
 	SendTransferAssetProposal(http.Header, *TransferAssetBody, *pki.SignatureParam) ([]*wallet.TX, error)
 
