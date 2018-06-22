@@ -252,6 +252,7 @@ type TokenDetail struct {
 	CredentialId string `json:"credential_id,omitempty"`
 	Roles        string `json:"roles,omitempty"`
 	Identifier   string `json:"identifier,omitempty"`
+	GroupID      uint   `json:"group_id,omitempty"`
 	ChannelId    string `json:"channel_id,omitempty"`
 }
 
