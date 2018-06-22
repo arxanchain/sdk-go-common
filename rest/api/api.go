@@ -106,6 +106,10 @@ type Config struct {
 
 	// CacheClient is used to cache auth token
 	CacheClient ICacheClient
+
+	// TrusteeKeyPairEnable is used to set the flag of trust key pair,
+	// if you want to trust, set the flag is true.
+	TrusteeKeyPairEnable bool
 }
 
 // TLSConfig is used to generate a TLSClientConfig that's useful for talking to
