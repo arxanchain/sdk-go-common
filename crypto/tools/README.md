@@ -5,28 +5,30 @@ Common tools to generate ECC encryption and ED25519 signatures tool adapted to y
 
 ### Build
 
-After successfully installed **sdk-go-common**, you should've configured your **GOPAH** environment variable, use the following command to build crypto-util and sign-util dynamic link library.
+After successfully installed **sdk-go-common**, you should've configured your **GOPAH** environment variable, use the following command to build dynamic link library.
 
 ```sh
 $ cd $GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools/library
 $ make
 ```
+
 The dynamic link libraries will be built in path `$GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools/library/build`
 
 ### Usage
 
-#### crypto-util
+#### encrypt
 
-Crypto-util is used to implement signing, encryption, decryption and verification process.
+Function encrypt is used to implement signing, encryption, decryption and verification process.
 
 ```python
 >>> import ctypes
->>> func = ctypes.CDLL("./crypto-util.so").encrypt
+>>> func = ctypes.CDLL("./utils.so").encrypt
 >>> func.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 >>> func.restype = ctypes.c_char_p
 >>> result = func("1", "alice", "/your/cert/path", "aGVsbG8gd29ybGQh")
 >>> print result
 ```
+
 Params(in sequence):
   -mode string
       1: sign and encrypt(default); 2: decrypt and verify
@@ -39,18 +41,19 @@ Params(in sequence):
 
 Returns: mode 1: base64 encoded cipher; mode 2: plain text
 
-#### sign-util
+#### sign
 
-Sign-util is used to implement ED25519 signing process.
+Function sign is used to implement ED25519 signing process.
 
 ```python
 >>> import ctypes
->>> func = ctypes.CDLL("./sign-util.so").sign
+>>> func = ctypes.CDLL("./utils.so").sign
 >>> func.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 >>> func.restype = ctypes.c_char_p
 >>> result = func("0lxEFzMQhn68vY2F0f+nOwP7kl5zjahjPcfyMAJVmzn0HNQssIIYh+c2CgCKEHeUvxqCu6W/sJKqKt2DLJnKpw==", "nonce", "123456", "SGVsbG8gd29ybGQh")
 >>> print result
 ```
+
 ./sign-util -help
 Params(in sequence):
   -key string
@@ -74,6 +77,7 @@ Use the following command to build crypto-util and sign-util executables.
 $ cd $GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools
 $ make
 ```
+
 The executables will be built in path `$GOPATH/src/github.com/arxanchain/sdk-go-common/crypto/tools/build/bin`
 
 ### Usage
@@ -101,6 +105,7 @@ $ ./crypto-util -mode 1 \
     -path '~/sdk-go-common/rest/api/client_certs/' \
     -data "aGVsbG8="
 ```
+
 Returns: mode 1: base64 encoded cipher; mode 2: plain text
 
 #### sign-util
@@ -124,4 +129,5 @@ $ ./sign-util -key '0lxEFzMQhn68vY2F0f+nOwP7kl5zjahjPcfyMAJVmzn0HNQssIIYh+c2CgCK
     -did '123456' \
     -data 'SGVsbG8gd29ybGQh'
 ```
+
 Returns: base64 encoded signed data
