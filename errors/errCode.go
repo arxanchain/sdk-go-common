@@ -63,7 +63,7 @@ const (
 	NoSuchTypeOfACLGroup     ErrCodeType = 4011 //无此类型权限组
 	DeleteNotAllowed         ErrCodeType = 4012 //不允许删除
 	FredUploadIdentityFailed ErrCodeType = 4013 //上传实名认证失败
-
+	AuthTokenInvalid         ErrCodeType = 4014 //认证Token无效
 )
 
 //tomago
