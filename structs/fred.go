@@ -88,8 +88,10 @@ type IACLClient interface {
 	AddACLResource(*ACLResourceRequest, http.Header) (*ACLGroup, error)
 	// remove acl resource
 	RemoveACLResource(*ACLResourceRequest, http.Header) (*ACLGroup, error)
-	// get user acl
-	UserACL(uint, http.Header) (*ACLGroup, error)
+	// get user acl group
+	GetUserACLGroup(uint, http.Header) (*ACLGroup, error)
+	// update user acl group
+	UpdateUserACLGroup(*UpdateUserGroupRequest, http.Header) (*UpdateUserGroupRequest, error)
 }
 
 type IEdkeyClient interface {
@@ -152,6 +154,7 @@ type UserInfo struct {
 	VerificationStatus string `json:"verification_status"`
 	Issued_at          int64  `json:"issued_at,omitempty"`
 	Channel_id         string `json:"channel_id,omitempty"`
+	UpdateAt           int64  `json:"update_at,omitempty"`
 }
 
 type LoginAccessSecret struct {
@@ -354,4 +357,9 @@ type ACLResource struct {
 	Service string `json:"service,omitempty"`
 	Path    string `json:"path,omitempty"`
 	Method  string `json:"method,moitempty"`
+}
+
+// UpdateUserGroupRequest ...
+type UpdateUserGroupRequest struct {
+	Users []UserInfo `json:"users,omitempty"`
 }
