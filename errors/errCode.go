@@ -143,6 +143,13 @@ const (
 	CCUpgradeNoResource   ErrCodeType = 9013 // 无更新的chaincode资源去更新
 )
 
+// payment-gateway error code and message defined
+const (
+	RechargeFailed ErrCodeType = 2000 // 充值失败
+	SendSMSFailed  ErrCodeType = 2001 // 发送短信验证码失败
+	BindCardFailed ErrCodeType = 2002 // 绑定银行卡失败
+)
+
 // SDK error code
 const (
 	SDKServerResponseInvalid  ErrCodeType = 10000 // 服务端响应数据无效

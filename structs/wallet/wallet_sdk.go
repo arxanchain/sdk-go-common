@@ -489,6 +489,7 @@ type IssueBody struct {
 	Issuer  string `json:"issuer"`
 	Owner   string `json:"owner"`
 	AssetId string `json:"asset_id"`
+	TokenId string `json:"token_id"`
 	Amount  int64  `json:"amount"`
 	Fee     *Fee   `json:"fee"`
 }
