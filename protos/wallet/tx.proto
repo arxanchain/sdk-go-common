@@ -142,6 +142,11 @@ message TX {
   string founder = 7; // who created this tx
 }
 
+// utxo txs
+message TXs {
+  repeated TX txs = 1;
+}
+
 // Single color result
 message SingleColorResult {
   int64 sumCurrentOutputs = 1;
