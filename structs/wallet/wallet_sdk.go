@@ -399,7 +399,7 @@ type UTXO struct {
 	// the given transaction
 	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
 	// Ix index of output array in the transaction
-	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	Ix string `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
 	// ColoredToken ID
 	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
 	// ColorType
@@ -417,7 +417,7 @@ type UTXO struct {
 	CreatedAt *Timestamp `protobuf:"bytes,8,opt,name=createdAt" json:"createdAt,omitempty"`
 	// Founder who created this tx
 	Founder string `protobuf:"bytes,9,opt,name=founder" json:"founder,omitempty" `
-	TxType  int32  `protobuf:"varint,10,opt,name=txType" json:"txType,omitempty"`
+	TxType  string `protobuf:"varint,10,opt,name=txType" json:"txType,omitempty"`
 	// BCTxID blockchain transaction id
 	BCTxID string `protobuf:"bytes,11,opt,name=bcTxID" json:"bcTxID,omitempty"`
 }
@@ -428,7 +428,7 @@ type SpentTxOUT struct {
 	// the given transaction
 	SourceTxDataHash string `protobuf:"bytes,1,opt,name=sourceTxDataHash" json:"sourceTxDataHash,omitempty" `
 	// Ix index of output array in the transaction
-	Ix uint32 `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
+	Ix string `protobuf:"varint,2,opt,name=ix" json:"ix,omitempty" `
 	// ColoredToken ID
 	CTokenId string `protobuf:"bytes,3,opt,name=cTokenId" json:"cTokenId,omitempty" `
 	// ColorType
@@ -450,7 +450,7 @@ type SpentTxOUT struct {
 	SpentAt *Timestamp `protobuf:"bytes,10,opt,name=spentAt" json:"spentAt,omitempty"`
 	// Founder who created this tx
 	Founder string `protobuf:"bytes,11,opt,name=founder" json:"founder,omitempty"`
-	TxType  int32  `protobuf:"varint,12,opt,name=txType" json:"txType,omitempty"`
+	TxType  string `protobuf:"varint,12,opt,name=txType" json:"txType,omitempty"`
 	// BCTxID blockchain transaction id
 	BCTxID string `protobuf:"bytes,13,opt,name=bcTxID" json:"bcTxID,omitempty"`
 }
