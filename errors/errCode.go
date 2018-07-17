@@ -123,6 +123,8 @@ const (
 	OverMaxUploadSize          ErrCodeType = 8013 // 上传文件超过最大文件大小
 	OffchainReadOnly           ErrCodeType = 8014 // offchain metadata只允许读,不允许更新
 	OffchainContentExist       ErrCodeType = 8015 // offchain file content已经存在
+	TransactionInvalid         ErrCodeType = 8016 // Blockchain transaction invalid
+	QueryTxStatusTimeout       ErrCodeType = 8017 // query transaction status timeout
 )
 
 // chain-mgmt error code and message defined
