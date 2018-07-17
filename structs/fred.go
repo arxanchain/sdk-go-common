@@ -30,6 +30,12 @@ const (
 	FredUploadFileFormHeader = "file"
 )
 
+const (
+	FredUserTypeEnterprise = 1 // 企业用户
+	FredUserTypePersonal   = 2 // 普通用户
+	FredUserTypeService    = 3 // 服务用户, 内部服务使用 不允许外部创建
+)
+
 type IFredClient interface {
 	GetUserClient() IUserClient
 	GetEdkeyClient() IEdkeyClient
