@@ -107,7 +107,7 @@ type DAppNum struct {
 	Num int64 `json:"num"` //DAPP的数量
 }
 
-//DAppIssuedToken define DApp Issued Token
+//DAppIssuedToken define DApp Issued Token struct
 type DAppIssuedToken struct {
 	IssuedAmount int64 `json:"issued_amount"` //发行的总量
 	RemainAmount int64 `json:"remain_amount"` //剩余的总量
@@ -120,4 +120,12 @@ type DAppList struct {
 	Name        string `json:"name"`        //DAPP的名称
 	Description string `json:"description"` //DAPP的描述
 	Logo        string `json:"logo"`        //DAPP的Logo路径
+}
+
+type Growths []*Growth
+
+//Growth define  Growth struct
+type Growth struct {
+	Datetime     string `json:"datetime"`      //日期
+	GrowthAmount int64  `json:"growth_amount"` //增长量
 }
