@@ -21,7 +21,7 @@ import "wallet/tx.proto";
 
 service TxSrvc {
   // ProcessTx handles the UTXO transaction request, TxIN -> TxOUT
-  rpc ProcessTx(TX) returns (ProcessTxResponse) {}
+  rpc ProcessTx(TXs) returns (ProcessTxResponse) {}
   rpc QueryTx(QueryTxRequest) returns (TX) {}
   rpc QueryUTXO(QueryUTXORequest) returns (QueryUTXOResponse) {}
 }
