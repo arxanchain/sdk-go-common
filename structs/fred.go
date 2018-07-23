@@ -76,6 +76,14 @@ type IUserClient interface {
 	QueryIdentityStatus(string, http.Header) (*UserInfo, error)
 	// upload identity file
 	UploadIdentity(string, string, http.Header) error
+	// query usertype users count. userType 1: Enterprise 2: Persional 0: Enterprise+Persional
+	QueryUsersCount(int, http.Header) (*UsersNumResponse, error)
+	// query dapp users count creted by did
+	QueryDappUsersCount(string, http.Header) (*DappUsersNumResponse, error)
+	// query userType dapp users list
+	QueryDappUsersList(userType, page, num int, head http.Header) ([]DappInfoResponse, error)
+	// query the last num days or months(depend on querytype) users growth
+	QueryUsersGrowth(queryType, num int, head http.Header) ([]UsersGrowthResponse, error)
 }
 
 // IACLClient ...
@@ -145,6 +153,7 @@ type User struct {
 	Email      string      `json:"email,omitempty"`
 	Secret     string      `json:"secret,omitempty"` // password
 	Identifier string      `json:"identifier,omitempty"`
+	UserType   uint        `json:"user_type,omitempty"`
 	Metadata   interface{} `json:"meta_data,omitempty"`
 }
 
@@ -368,4 +377,35 @@ type ACLResource struct {
 // UpdateUserGroupRequest ...
 type UpdateUserGroupRequest struct {
 	Users []UserInfo `json:"users,omitempty"`
+}
+
+// UsersNumResponse ...
+type UsersNumResponse struct {
+	UsersNum int `json:"users_num,omitempty"`
+}
+
+// DappUsersNumResponse ...
+type DappUsersNumResponse struct {
+	DappUsersNum int `json:"dapp_users_num,omitempty"`
+}
+
+// DappInfoResponse slice should be return when query users info list
+type DappInfoResponse struct {
+	Identifier         string `json:"id,omitempty"`
+	Access             string `json:"name,omitempty"`
+	Email              string `json:"email,omitempty"`
+	Phone              string `json:"phone,omitempty"`
+	GroupID            uint   `json:"group_id,omitempty"`
+	UserType           uint   `json:"user_type,omitempty"`
+	ChannelID          string `json:"channel_id,omitempty"`
+	Description        string `json:"description,omitempty"`
+	VerificationStatus string `json:"verification_status"`
+	MetaData           string `json:"meta_data,omitempty"`
+}
+
+// UsersGrowthResponse  slice should be return when query users growth
+type UsersGrowthResponse struct {
+	DateTime string `json:"datetime,omitempty"`
+	// the num of new users created during datetime
+	GrowthAmount int `json:"growth_amount,omitempty"`
 }
