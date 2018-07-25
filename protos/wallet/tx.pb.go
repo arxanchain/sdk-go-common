@@ -36,7 +36,7 @@ var ColorType_value = map[string]int32{
 func (x ColorType) String() string {
 	return proto.EnumName(ColorType_name, int32(x))
 }
-func (ColorType) EnumDescriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+func (ColorType) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 type TxType int32
 
@@ -86,7 +86,7 @@ var TxType_value = map[string]int32{
 func (x TxType) String() string {
 	return proto.EnumName(TxType_name, int32(x))
 }
-func (TxType) EnumDescriptor() ([]byte, []int) { return fileDescriptor5, []int{1} }
+func (TxType) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
 
 // txin not specified who has this txin, because creator can use their txout only,
 // txin must be creator's previous txout
@@ -101,7 +101,7 @@ type TxIN struct {
 func (m *TxIN) Reset()                    { *m = TxIN{} }
 func (m *TxIN) String() string            { return proto.CompactTextString(m) }
 func (*TxIN) ProtoMessage()               {}
-func (*TxIN) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+func (*TxIN) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 func (m *TxIN) GetIx() uint32 {
 	if m != nil {
@@ -151,7 +151,7 @@ type TxOUT struct {
 func (m *TxOUT) Reset()                    { *m = TxOUT{} }
 func (m *TxOUT) String() string            { return proto.CompactTextString(m) }
 func (*TxOUT) ProtoMessage()               {}
-func (*TxOUT) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{1} }
+func (*TxOUT) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
 
 func (m *TxOUT) GetCTokenId() string {
 	if m != nil {
@@ -237,7 +237,7 @@ type UTXO struct {
 func (m *UTXO) Reset()                    { *m = UTXO{} }
 func (m *UTXO) String() string            { return proto.CompactTextString(m) }
 func (*UTXO) ProtoMessage()               {}
-func (*UTXO) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{2} }
+func (*UTXO) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{2} }
 
 func (m *UTXO) GetSourceTxDataHash() string {
 	if m != nil {
@@ -346,7 +346,7 @@ type TX struct {
 func (m *TX) Reset()                    { *m = TX{} }
 func (m *TX) String() string            { return proto.CompactTextString(m) }
 func (*TX) ProtoMessage()               {}
-func (*TX) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{3} }
+func (*TX) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{3} }
 
 func (m *TX) GetVersion() uint32 {
 	if m != nil {
@@ -406,7 +406,7 @@ type SingleColorResult struct {
 func (m *SingleColorResult) Reset()                    { *m = SingleColorResult{} }
 func (m *SingleColorResult) String() string            { return proto.CompactTextString(m) }
 func (*SingleColorResult) ProtoMessage()               {}
-func (*SingleColorResult) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{4} }
+func (*SingleColorResult) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{4} }
 
 func (m *SingleColorResult) GetSumCurrentOutputs() int64 {
 	if m != nil {
@@ -429,7 +429,7 @@ type QueryTxRequest struct {
 func (m *QueryTxRequest) Reset()                    { *m = QueryTxRequest{} }
 func (m *QueryTxRequest) String() string            { return proto.CompactTextString(m) }
 func (*QueryTxRequest) ProtoMessage()               {}
-func (*QueryTxRequest) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{5} }
+func (*QueryTxRequest) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{5} }
 
 func (m *QueryTxRequest) GetTxHashHex() string {
 	if m != nil {
@@ -450,7 +450,7 @@ type QueryUTXORequest struct {
 func (m *QueryUTXORequest) Reset()                    { *m = QueryUTXORequest{} }
 func (m *QueryUTXORequest) String() string            { return proto.CompactTextString(m) }
 func (*QueryUTXORequest) ProtoMessage()               {}
-func (*QueryUTXORequest) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{6} }
+func (*QueryUTXORequest) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{6} }
 
 func (m *QueryUTXORequest) GetAddr() string {
 	if m != nil {
@@ -501,7 +501,7 @@ type QueryUTXOResponse struct {
 func (m *QueryUTXOResponse) Reset()                    { *m = QueryUTXOResponse{} }
 func (m *QueryUTXOResponse) String() string            { return proto.CompactTextString(m) }
 func (*QueryUTXOResponse) ProtoMessage()               {}
-func (*QueryUTXOResponse) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{7} }
+func (*QueryUTXOResponse) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{7} }
 
 func (m *QueryUTXOResponse) GetUtxos() []*UTXO {
 	if m != nil {
@@ -518,7 +518,7 @@ type TxScript struct {
 func (m *TxScript) Reset()                    { *m = TxScript{} }
 func (m *TxScript) String() string            { return proto.CompactTextString(m) }
 func (*TxScript) ProtoMessage()               {}
-func (*TxScript) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{8} }
+func (*TxScript) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{8} }
 
 func (m *TxScript) GetVersion() uint32 {
 	if m != nil {
@@ -541,7 +541,7 @@ type ProcessTxResponse struct {
 func (m *ProcessTxResponse) Reset()                    { *m = ProcessTxResponse{} }
 func (m *ProcessTxResponse) String() string            { return proto.CompactTextString(m) }
 func (*ProcessTxResponse) ProtoMessage()               {}
-func (*ProcessTxResponse) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{9} }
+func (*ProcessTxResponse) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{9} }
 
 func (m *ProcessTxResponse) GetTxID() string {
 	if m != nil {
@@ -564,7 +564,7 @@ type UTXOSignature struct {
 func (m *UTXOSignature) Reset()                    { *m = UTXOSignature{} }
 func (m *UTXOSignature) String() string            { return proto.CompactTextString(m) }
 func (*UTXOSignature) ProtoMessage()               {}
-func (*UTXOSignature) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{10} }
+func (*UTXOSignature) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{10} }
 
 func (m *UTXOSignature) GetCreator() string {
 	if m != nil {
@@ -617,9 +617,9 @@ func init() {
 	proto.RegisterEnum("wallet.TxType", TxType_name, TxType_value)
 }
 
-func init() { proto.RegisterFile("wallet/tx.proto", fileDescriptor5) }
+func init() { proto.RegisterFile("wallet/tx.proto", fileDescriptor6) }
 
-var fileDescriptor5 = []byte{
+var fileDescriptor6 = []byte{
 	// 931 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x55, 0xdd, 0x8e, 0xdb, 0x44,
 	0x14, 0xc6, 0x76, 0xec, 0x6c, 0x4e, 0x7e, 0xea, 0x8c, 0x10, 0xb2, 0x22, 0x7e, 0x22, 0x23, 0xb5,

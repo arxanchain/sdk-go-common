@@ -30,7 +30,7 @@ type VerifiableClaim struct {
 func (m *VerifiableClaim) Reset()                    { *m = VerifiableClaim{} }
 func (m *VerifiableClaim) String() string            { return proto.CompactTextString(m) }
 func (*VerifiableClaim) ProtoMessage()               {}
-func (*VerifiableClaim) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
+func (*VerifiableClaim) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{0} }
 
 func (m *VerifiableClaim) GetId() string {
 	if m != nil {
@@ -119,7 +119,7 @@ type VerifiableClaimBrief struct {
 func (m *VerifiableClaimBrief) Reset()                    { *m = VerifiableClaimBrief{} }
 func (m *VerifiableClaimBrief) String() string            { return proto.CompactTextString(m) }
 func (*VerifiableClaimBrief) ProtoMessage()               {}
-func (*VerifiableClaimBrief) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
+func (*VerifiableClaimBrief) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{1} }
 
 func (m *VerifiableClaimBrief) GetId() string {
 	if m != nil {
@@ -154,9 +154,9 @@ func init() {
 	proto.RegisterType((*VerifiableClaimBrief)(nil), "wallet.VerifiableClaimBrief")
 }
 
-func init() { proto.RegisterFile("wallet/verifiable_claim.proto", fileDescriptor6) }
+func init() { proto.RegisterFile("wallet/verifiable_claim.proto", fileDescriptor7) }
 
-var fileDescriptor6 = []byte{
+var fileDescriptor7 = []byte{
 	// 362 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x92, 0xc1, 0x6e, 0xe2, 0x30,
 	0x10, 0x86, 0x15, 0x60, 0x03, 0x18, 0x89, 0x65, 0xbd, 0xab, 0x95, 0x85, 0x54, 0x35, 0xe2, 0x50,

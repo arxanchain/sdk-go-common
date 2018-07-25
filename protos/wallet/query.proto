@@ -1,0 +1,27 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2018 All Rights Reserved
+ *
+ * Contributors:
+ *    chengqx - Initial implementation
+ *
+ *
+ * Purpose: Arxan assets growth proto messages
+ *
+**/
+
+syntax = "proto3";
+
+
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+package wallet;
+
+
+message AssetsGrowth {
+  // query datetime
+  string datetime = 1;
+  // growth amount
+  int64  growth_amount = 2;
+}
