@@ -27,6 +27,21 @@ It has these top-level messages:
 	Signature
 	SignatureSimple
 	AssetsGrowth
+	UsersGrowth
+	DAppAxtConsume
+	DAppAxtTotal
+	DAppIssuedToken
+	DAppIssuedTokens
+	DAppList
+	DAppNum
+	DAppTotal
+	DAppUsersList
+	DAppUsersTotal
+	HotAssets
+	HotTokens
+	TopAssetUsers
+	TopTokenUsers
+	Total
 	TxIN
 	TxOUT
 	UTXO
