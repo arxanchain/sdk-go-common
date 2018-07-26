@@ -46,6 +46,8 @@ type IFredClient interface {
 type IUserClient interface {
 	// register new user
 	RegisterUser(*RegisterRequest, http.Header) (*ResponseStruct, error)
+	// list all users info
+	AllUsersList(int, int, http.Header) (*CredentialsListResponse, error)
 	// revoke user
 	Revoke(*RevokeRequest, http.Header) error
 	// login
@@ -118,6 +120,8 @@ type IEdkeyClient interface {
 type ICertsClient interface {
 	// create cert
 	CreateCerts(*CertCreateReqBody, http.Header) (*CertCreateRespBody, error)
+	// list all certs info
+	AllCertsList(int, int, http.Header) (*CertListRespBody, error)
 	// disable cert
 	DisableCerts(*CertCreateReqBody, http.Header) (*CertCreateRespBody, error)
 	// recover cert
@@ -248,6 +252,22 @@ type CertCreateRespBody struct {
 	Certificate *CertCreateResp `json:"certificate,omitempty"`
 }
 
+// CertInfo
+type CertInfo struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	ApiKey      string `json:"api_key,omitempty"`
+	IssuedAt    int64  `json:"issued_at,omitempty"`
+	Hash        string `json:"hash,omitempty"`
+	Status      string `json:"status,omitempty"`
+}
+
+// CertListRespBody return all certs list
+type CertListRespBody struct {
+	Certificates []*CertInfo `json:"certificates,omitempty"`
+}
+
 // GetCertStutasResp is cert resp status
 type GetCertStatusResp struct {
 	Certificate GetCertStatusRespInner `json:"certificate,omitempty"`
@@ -301,6 +321,10 @@ type CredentialsStruct struct {
 	Channel_id  string      `json:"channel_id,omitempty"`
 	Issued_at   int64       `json:"issued_at,omitempty"`
 	Value       ValueStruct `json:"value,omitempty"`
+}
+
+type CredentialsListResponse struct {
+	Credentials []UserInfo `json:"credentials,omitempty"`
 }
 
 type ValueStruct struct {
@@ -392,7 +416,7 @@ type DappUsersNumResponse struct {
 // DappInfoResponse slice should be return when query users info list
 type DappInfoResponse struct {
 	Identifier         string `json:"id,omitempty"`
-	Access             string `json:"name,omitempty"`
+	Access             string `json:"access,omitempty"`
 	Email              string `json:"email,omitempty"`
 	Phone              string `json:"phone,omitempty"`
 	GroupID            uint   `json:"group_id,omitempty"`
