@@ -129,3 +129,14 @@ type Growth struct {
 	Datetime     string `json:"datetime"`      //日期
 	GrowthAmount int64  `json:"growth_amount"` //增长量
 }
+
+//ChainDappList
+type ChainDappList []*ChainDapp
+
+//ChainDapp define  ChainDapp struct
+type ChainDapp struct {
+	Name        string `json:"name"`        //应用链的名称
+	Version     string `json:"version"`     //版本
+	Description string `json:"description"` //DAPP的描述
+	Logo        string `json:"logo"`        //DAPP的Logo路径
+}
