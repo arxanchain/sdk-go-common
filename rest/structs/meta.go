@@ -47,6 +47,12 @@ const (
 	ProtocolVersionFieldName = "protocol"
 	APIMajorVersionFieldName = "api.major"
 	APIMinorVersionFieldName = "api.minor"
+
+	RESTGET    = "GET"
+	RESTPOST   = "POST"
+	RESTPUT    = "PUT"
+	RESTPATCH  = "PATCH"
+	RESTDELETE = "DELETE"
 )
 
 // RPCInfo is used to describe common information about query

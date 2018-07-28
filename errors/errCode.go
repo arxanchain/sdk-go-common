@@ -167,3 +167,8 @@ const (
 	OriginalSecurityCodeErr ErrCodeType = 11003 // 原始安全码错误
 	SecurityInvalidErr      ErrCodeType = 11004 // 安全码无效
 )
+
+// escrow srvc error code
+const (
+	CurrencyTypeError ErrCodeType = 12000 // currency类型错误
+)
