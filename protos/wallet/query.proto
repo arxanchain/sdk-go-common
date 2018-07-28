@@ -52,8 +52,8 @@ message DAppIssuedToken {
    int64  remain_amount = 2;
 }
 message DAppIssuedTokens {
-string payload = 1;
-DAppIssuedToken dait = 2;
+  //query dap
+  map<string,DAppIssuedToken> dAppIssuedTokens = 1;
 }
 
 message DAppList {
