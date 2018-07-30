@@ -123,6 +123,8 @@ const (
 	OverMaxUploadSize          ErrCodeType = 8013 // 上传文件超过最大文件大小
 	OffchainReadOnly           ErrCodeType = 8014 // offchain metadata只允许读,不允许更新
 	OffchainContentExist       ErrCodeType = 8015 // offchain file content已经存在
+	TransactionInvalid         ErrCodeType = 8016 // Blockchain transaction invalid
+	QueryTxStatusTimeout       ErrCodeType = 8017 // query transaction status timeout
 )
 
 // chain-mgmt error code and message defined
@@ -143,6 +145,13 @@ const (
 	CCUpgradeNoResource   ErrCodeType = 9013 // 无更新的chaincode资源去更新
 )
 
+// payment-gateway error code and message defined
+const (
+	RechargeFailed ErrCodeType = 2000 // 充值失败
+	SendSMSFailed  ErrCodeType = 2001 // 发送短信验证码失败
+	BindCardFailed ErrCodeType = 2002 // 绑定银行卡失败
+)
+
 // SDK error code
 const (
 	SDKServerResponseInvalid  ErrCodeType = 10000 // 服务端响应数据无效
@@ -157,4 +166,18 @@ const (
 	SecurityCodeErr         ErrCodeType = 11002 // 安全码错误
 	OriginalSecurityCodeErr ErrCodeType = 11003 // 原始安全码错误
 	SecurityInvalidErr      ErrCodeType = 11004 // 安全码无效
+)
+
+// escrow srvc error code
+const (
+	CurrencyTypeErr       ErrCodeType = 12000 // currency类型错误
+	AddressFormatErr      ErrCodeType = 12001 // currency地址格式错误
+	AddressExists         ErrCodeType = 12002 // currency地址已存在
+	AddressNotExist       ErrCodeType = 12003 // currency地址不存在
+	SMSCodeerror          ErrCodeType = 12004 // 短信验证码错误
+	DepositAmountErr      ErrCodeType = 12005 // 充值金额错误
+	WithdrawAmountErr     ErrCodeType = 12006 // 提现金额错误
+	WithdrawFeesAmountErr ErrCodeType = 12007 // 提现手续费错误
+	TradePwdErr           ErrCodeType = 12008 // 交易密码错误
+	EmailCodeErr          ErrCodeType = 12009 // 邮件验证码错误
 )
