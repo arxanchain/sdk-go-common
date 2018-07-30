@@ -170,5 +170,14 @@ const (
 
 // escrow srvc error code
 const (
-	CurrencyTypeError ErrCodeType = 12000 // currency类型错误
+	CurrencyTypeErr       ErrCodeType = 12000 // currency类型错误
+	AddressFormatErr      ErrCodeType = 12001 // currency地址格式错误
+	AddressExists         ErrCodeType = 12002 // currency地址已存在
+	AddressNotExist       ErrCodeType = 12003 // currency地址不存在
+	SMSCodeerror          ErrCodeType = 12004 // 短信验证码错误
+	DepositAmountErr      ErrCodeType = 12005 // 充值金额错误
+	WithdrawAmountErr     ErrCodeType = 12006 // 提现金额错误
+	WithdrawFeesAmountErr ErrCodeType = 12007 // 提现手续费错误
+	TradePwdErr           ErrCodeType = 12008 // 交易密码错误
+	EmailCodeErr          ErrCodeType = 12009 // 邮件验证码错误
 )
