@@ -17,6 +17,7 @@ limitations under the License.
 package wallet
 
 import (
+	pw "github.com/arxanchain/sdk-go-common/protos/wallet"
 	commdid "github.com/arxanchain/sdk-go-common/structs/did"
 )
 
@@ -55,6 +56,7 @@ type POEBody struct {
 	ExpireTime int64              `json:"expire_time,omitempty"`
 	Hash       string             `json:"hash,omitempty"`
 	Metadata   []byte             `json:"metadata,omitempty"`
+	Indexs     *IndexTags         `json:"indexs,omitempty"`
 }
 
 // POEPayload POE query payload structure definition
@@ -69,7 +71,7 @@ type POEPayload struct {
 	OffchainMetadata OffchainMetadata   `json:"offchain_metadata,omitempty"`
 	Created          int64              `json:"created,omitempty"`
 	Updated          int64              `json:"updated,omitempty"`
-	Status           commdid.DidStatus  `json:"status,omitempty"`
+	Status           pw.Status          `json:"status,omitempty"`
 }
 
 // OffchainMetadata offchain storage metadata
