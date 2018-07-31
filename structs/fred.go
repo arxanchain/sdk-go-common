@@ -82,8 +82,10 @@ type IUserClient interface {
 	QueryUsersCount(int, http.Header) (*UsersNumResponse, error)
 	// query dapp users count creted by did
 	QueryDappUsersCount(string, http.Header) (*DappUsersNumResponse, error)
-	// query userType dapp users list
-	QueryDappUsersList(userType, page, num int, head http.Header) ([]DappInfoResponse, error)
+	// query userType users list
+	QueryUsersList(userType, page, num int, head http.Header) ([]DappInfoResponse, error)
+	// query dapp users list created by did
+	QueryDappUsersList(did string, page, num int, head http.Header) ([]DappInfoResponse, error)
 	// query the last num days or months(depend on querytype) users growth
 	QueryUsersGrowth(queryType, num int, head http.Header) ([]UsersGrowthResponse, error)
 }
