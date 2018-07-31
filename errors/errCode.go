@@ -180,4 +180,5 @@ const (
 	WithdrawFeesAmountErr ErrCodeType = 12007 // 提现手续费错误
 	TradePwdErr           ErrCodeType = 12008 // 交易密码错误
 	EmailCodeErr          ErrCodeType = 12009 // 邮件验证码错误
+	CurrencyTypeExist     ErrCodeType = 12010 // currency已存在
 )
