@@ -232,4 +232,23 @@ type IWalletClient interface {
 	// out: query spending type transaction
 	//
 	QueryTransactionLogs(http.Header, commdid.Identifier, string) (TransactionLogs, error)
+
+	// IndexSet is used to create indexs for object-id
+	//
+	// The default invoking mode is asynchronous, it will return
+	// without waiting for blockchain transaction confirmation.
+	//
+	// If you want to switch to synchronous invoking mode, set
+	// 'BC-Invoke-Mode' header to 'sync' value. In synchronous mode,
+	// it will not return until the blockchain transaction is confirmed.
+	//
+	// The response result is the blockchain transaction id list
+	//
+	IndexSet(http.Header, *IndexSetPayload) ([]string, error)
+
+	// IndexGet is used to query object-id via indexs
+	//
+	// The response result is the query hit object-id list
+	//
+	IndexGet(http.Header, *IndexGetPayload) ([]string, error)
 }

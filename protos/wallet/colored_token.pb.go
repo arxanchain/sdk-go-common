@@ -46,6 +46,7 @@ It has these top-level messages:
 	TxOUT
 	UTXO
 	TX
+	TXs
 	SingleColorResult
 	QueryTxRequest
 	QueryUTXORequest
