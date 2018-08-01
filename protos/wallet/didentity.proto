@@ -25,12 +25,15 @@ package wallet;
 
 // DidType decentralized identity types
 // Decentralized Identity
-// ├── Asset
-// └── Entity
-//    ├── Organization
-//    └── Person
-//        ├── Dependent
-//        └── Independent
+// ├── Asset: 资产类型
+//    └── SerialNumber: 序列号资产类型
+// └── Entity: 账户类型
+//    ├── DApp: DAPP账户类型
+//    ├── ChainApp: 应用链账户类型
+//    ├── Organization: 组织账户类型
+//    └── Person: 个人账户类型
+//        ├── Dependent: 非独立个人账户类型
+//        └── Independent: 独立个人账户类型
 enum DidType {
   ASSET = 0;
   ENTITY = 1;
@@ -44,6 +47,9 @@ enum DidType {
   SWFEE = 12;
   SWLOAN = 13;
   SWINTEREST = 14;
+
+  DAPP = 21;
+  APPCHAIN = 22;
 }
 
 // DidControlType defines the control type of decentralized identity controllers

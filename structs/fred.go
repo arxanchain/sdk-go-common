@@ -31,9 +31,10 @@ const (
 )
 
 const (
-	FredUserTypeEnterprise = 1 // 企业用户
-	FredUserTypePersonal   = 2 // 普通用户
-	FredUserTypeService    = 3 // 服务用户, 内部服务使用 不允许外部创建
+	FredUserType_Service  = 1 // 系统服务用户, 内部使用 不允许外部创建
+	FredUserType_DApp     = 2 // DAPP用户, 用于企业开发DAPP使用
+	FredUserType_ChainApp = 3 // ChainAPP用户, 用于链群网关使用
+	FredUserType_Normal   = 4 // 普通用户，企业DAPP创建的普通用户
 )
 
 type IFredClient interface {
