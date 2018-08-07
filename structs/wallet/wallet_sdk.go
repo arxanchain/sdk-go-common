@@ -100,7 +100,7 @@ type IWalletClient interface {
 	//
 	// poeFile parameter is the path to file to be uploaded.
 	//
-	UploadPOEFile(header http.Header, poeID string, poeFile string, readOnly bool) (*WalletResponse, error)
+	UploadPOEFile(header http.Header, poeID string, poeFile string, readOnly bool) (*UploadResponse, error)
 
 	// IssueCToken is used to issue colored token.
 	//
