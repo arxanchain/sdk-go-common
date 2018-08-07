@@ -83,3 +83,10 @@ type OffchainMetadata struct {
 	Size        int    `json:"size,omitempty"`
 	ReadOnly    bool   `json:"read_only,omitempty"`
 }
+
+// UploadResponse Upload POE file response payload
+type UploadResponse struct {
+	Id               commdid.Identifier `json:"id,omitempty"`
+	OffchainMetadata *OffchainMetadata  `json:"offchain_metadata,omitempty"`
+	TransactionIds   []string           `json:"transaction_ids,omitempty"`
+}
