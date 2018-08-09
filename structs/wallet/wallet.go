@@ -74,23 +74,15 @@ type KeyPair struct {
 	PublicKey  string `json:"public_key,omitempty"`  //base64 encoded ed25519 public key
 }
 
-// TokenBalance ...
-type CTokenBalance struct {
+// Balance ...
+type Balance struct {
 	Id     string `json:"id,omitempty"`     //ctoken id
 	Amount int64  `json:"amount,omitempty"` //ctoken amount
 }
 
-// AssetBalance ...
-type AssetBalance struct {
-	Id     string    `json:"id,omitempty"`     //asset id
-	Amount int64     `json:"amount,omitempty"` //asset amount
-	Name   string    `json:"name,omitempty"`   //asset name
-	Status pw.Status `json:"status,omitempty"` //asset status
-}
-
 type WalletBalance struct {
-	ColoredTokens map[string]*CTokenBalance `json:"colored_tokens,omitempty"` //all the colored tokens in wallet
-	DigitalAssets map[string]*AssetBalance  `json:"digital_assets,omitempty"` //all the digital assets in wallet
+	ColoredTokens map[string]*Balance `json:"colored_tokens,omitempty"` //all the colored tokens in wallet
+	DigitalAssets map[string]*Balance `json:"digital_assets,omitempty"` //all the digital assets in wallet
 }
 
 type WalletInfo struct {
