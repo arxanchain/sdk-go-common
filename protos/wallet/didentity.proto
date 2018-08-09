@@ -29,7 +29,7 @@ package wallet;
 //    └── SerialNumber: 序列号资产类型
 // └── Entity: 账户类型
 //    ├── DApp: DAPP账户类型
-//    ├── ChainApp: 应用链账户类型
+//    ├── APPChain: 应用链账户类型
 //    ├── Organization: 组织账户类型
 //    └── Person: 个人账户类型
 //        ├── Dependent: 非独立个人账户类型
