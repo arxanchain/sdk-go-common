@@ -164,6 +164,8 @@ message QueryUTXORequest {
   string fromAddr = 4;
   google.protobuf.Timestamp beginAt = 5;
   google.protobuf.Timestamp endAt = 6;
+  int32 num = 7;
+  int32 page = 8;
 }
 
 message QueryUTXOResponse {
