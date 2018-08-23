@@ -94,22 +94,22 @@ message TxOUT {
 message UTXO {
   // SourceTxDataHash the Bitcoin hash (double sha256) of
   // the given transaction
-  // @inject_tag: gorm:"type:varchar(96);primary_key"
+  // @inject_tag: gorm:"type:varchar(128);primary_key"
   string sourceTxDataHash = 1;
   // Ix index of output array in the transaction
+  // @inject_tag: gorm:"type:varchar(8);primary_key"
   // TODO: when using uint32 type and ix is 0 can not save to db
   // so using string temporarily, will use uint32 type instead next version
-  // @inject_tag: gorm:"type:varchar(8);primary_key"
   string ix = 2;
   // ColoredToken ID
-  // @inject_tag: gorm:"type:varchar(96)"
+  // @inject_tag: gorm:"type:varchar(128)"
   string cTokenId = 3;
   // ColorType
   ColorType cType = 4;
   // coin amount
   int64 value = 5;
   // who will receive this txout
-  // @inject_tag: gorm:"type:varchar(50);index"
+  // @inject_tag: gorm:"type:varchar(64);index"
   string addr = 6;
   // until xx timestamp, any one cant spend the txout
   // -1 means no check
@@ -117,16 +117,24 @@ message UTXO {
   // script
   bytes script = 8;
   // CreatedAt
-  // @inject_tag: gorm:"type:varchar(50)"
+  // @inject_tag: gorm:"type:varchar(64)"
   common.TimestampWrapper createdAt = 9;
   // nanoseconds of timestamp
   int32 createdAtNanos = 10;
+  // SpentTxDataHash
+  // @inject_tag: gorm:"type:varchar(128)"
+  string spentTxDataHash = 11;
+  // SpentAt ...
+  // @inject_tag: gorm:"type:varchar(64)"
+  common.TimestampWrapper spentAt = 12;
+  // nanoseconds of timestamp
+  int32 spentAtNanos = 13;
   // Founder who created this tx
-  // @inject_tag: gorm:"type:varchar(50);index"
-  string founder = 11; // who created this tx
-  TxType txType = 12;
+  // @inject_tag: gorm:"type:varchar(64);index"
+  string founder = 14;
+  TxType txType = 15;
   // BcTxId blockchain transaction id
-  string bcTxId = 13;
+  string bcTxId = 16;
 }
 
 // utxo tx
