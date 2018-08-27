@@ -231,7 +231,7 @@ type IWalletClient interface {
 	// in: query income type transaction
 	// out: query spending type transaction
 	//
-	QueryTransactionLogs(http.Header, commdid.Identifier, string) (TransactionLogs, error)
+	QueryTransactionLogs(http.Header, commdid.Identifier, string) ([]*wallet.UTXO, error)
 
 	// IndexSet is used to create indexs for object-id
 	//
