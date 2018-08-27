@@ -16,6 +16,7 @@ It is generated from these files:
 It has these top-level messages:
 	ColoredToken
 	Metadata
+	UniformPayload
 	DidOwner
 	DidControl
 	OffchainMetadata
