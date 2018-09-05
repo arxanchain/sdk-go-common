@@ -37,6 +37,9 @@ crypto-util: build/bin/crypto-util
 .PHONY: sign-util
 sign-util: build/bin/sign-util
 
+.PHONY: verify-util
+sign-util: build/bin/verify-util
+
 build/bin:
 	mkdir -p $@
 
@@ -49,4 +52,3 @@ build/bin/%:
 
 .PHONY: clean
 	-@rm -rf build ||:
-

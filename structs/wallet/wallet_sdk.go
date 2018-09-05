@@ -230,8 +230,19 @@ type IWalletClient interface {
 	// txType:
 	// in: query income type transaction
 	// out: query spending type transaction
+	// num, page: count, page of logs that to be returned
 	//
-	QueryTransactionLogs(http.Header, commdid.Identifier, string) (TransactionLogs, error)
+	QueryTransactionLogs(http.Header, commdid.Identifier, string, int32, int32) ([]*wallet.UTXO, error)
+
+	// QueryTransactionUTXO is used to query transaction utxo logs.
+	// num, page: count, page of logs that to be returned
+	//
+	QueryTransactionUTXO(http.Header, commdid.Identifier, int32, int32) ([]*wallet.UTXO, error)
+
+	// QueryTransactionUTXO is used to query transaction stxo logs.
+	// num, page: count, page of logs that to be returned
+	//
+	QueryTransactionSTXO(http.Header, commdid.Identifier, int32, int32) ([]*wallet.UTXO, error)
 
 	// IndexSet is used to create indexs for object-id
 	//
