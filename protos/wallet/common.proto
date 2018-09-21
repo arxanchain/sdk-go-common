@@ -28,3 +28,22 @@ message Metadata {
   string hash = 1;
   bytes data = 2;
 }
+
+// Marmot transaction type
+enum TransactionType {
+	CreateTx = 0;
+	CreateDID = 1;
+	UpdateDID = 2;
+	CreateVC = 3;
+	UpdateVC = 4;
+	CreateCToken = 5;
+	UpdateCToken = 6;
+	CreateIndex = 7;
+}
+
+message UniformPayload {
+  int32 version = 1;
+  TransactionType type = 2;
+  string founder = 3;
+  bytes payload = 4;
+}
