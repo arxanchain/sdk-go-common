@@ -184,4 +184,5 @@ const (
 	SignRawTransactionFailed ErrCodeType = 12011 // 交易签名失败
 	GenerateAddressFailed    ErrCodeType = 12012 // 生成地址失败
 	StorageKeysotreFailed    ErrCodeType = 12013 // key存储keystore失败
+	InsufficientBalance      ErrCodeType = 12014 // 余额不足
 )
