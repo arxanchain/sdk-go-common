@@ -170,7 +170,7 @@ type IWalletClient interface {
 	// The default key pair trust mode does not trust, it will required key pair.
 	// If you had trust the key pair, it will required security code.
 	//
-	SendIssueCTokenProposal(http.Header, *IssueBody, *pki.SignatureParam) (*IssueCTokenPrepareResponse, error)
+	SendIssueCTokenProposal(http.Header, *IssueBody) (*IssueCTokenPrepareResponse, error)
 
 	// SendIssueAssetProposal is used to send issue asset proposal to get wallet.Tx to be signed.
 	//
@@ -184,7 +184,7 @@ type IWalletClient interface {
 	// The default key pair trust mode does not trust, it will required key pair.
 	// If you had trust the key pair, it will required security code.
 	//
-	SendIssueAssetProposal(http.Header, *IssueAssetBody, *pki.SignatureParam) ([]*wallet.TX, error)
+	SendIssueAssetProposal(http.Header, *IssueAssetBody) ([]*wallet.TX, error)
 
 	// SendTransferCTokenProposal is used to send transfer colored tokens proposal to get wallet.Tx to be signed.
 	//
@@ -198,7 +198,7 @@ type IWalletClient interface {
 	// The default key pair trust mode does not trust, it will required key pair.
 	// If you had trust the key pair, it will required security code.
 	//
-	SendTransferCTokenProposal(http.Header, *TransferCTokenBody, *pki.SignatureParam) ([]*wallet.TX, error)
+	SendTransferCTokenProposal(http.Header, *TransferCTokenBody) ([]*wallet.TX, error)
 
 	// SendTransferAssetProposal is used to send transfer asset proposal to get wallet.Tx to be signed.
 	//
@@ -212,7 +212,7 @@ type IWalletClient interface {
 	// The default key pair trust mode does not trust, it will required key pair.
 	// If you had trust the key pair, it will required security code.
 	//
-	SendTransferAssetProposal(http.Header, *TransferAssetBody, *pki.SignatureParam) ([]*wallet.TX, error)
+	SendTransferAssetProposal(http.Header, *TransferAssetBody) ([]*wallet.TX, error)
 
 	// ProcessTx is used to transfer formally with signature TX .
 	//
