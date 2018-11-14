@@ -99,9 +99,9 @@ func NewHTTPServer(listen string, tls *TLSConfig) (*HTTPServer, error) {
 
 	// Create the server
 	srv := &HTTPServer{
-		mux:      mux,
-		listener: ln,
-		addr:     ln.Addr().String(),
+		mux:                    mux,
+		listener:               ln,
+		addr:                   ln.Addr().String(),
 		HTTPAPIResponseHeaders: make(map[string]string),
 	}
 
