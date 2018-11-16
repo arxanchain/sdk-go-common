@@ -28,6 +28,8 @@ const (
 	FredAPIParam_Identifier  = "identifier"
 	FredAPIParam_ACLGroupID  = "id"
 	FredUploadFileFormHeader = "file"
+	FredAPIParam_Page        = "page"
+	FredAPIParam_Num         = "num"
 )
 
 const (
@@ -42,6 +44,7 @@ type IFredClient interface {
 	GetEdkeyClient() IEdkeyClient
 	GetCertsClient() ICertsClient
 	GetACLClient() IACLClient
+	GetSubwalletClient() ISubwalletClient
 }
 
 type IUserClient interface {
@@ -127,6 +130,14 @@ type ICertsClient interface {
 type IOauth2Client interface {
 	// validate oauth2 token
 	ValidateOauth2Token(*Oauth2AccessToken) (bool, error)
+}
+
+// ISubwalletClient is DApp function
+type ISubwalletClient interface {
+	RegisterSubwallet(*SubwalletRegisterRequest, http.Header) error
+	UpdateDApp(*DAppUpdateRequest, http.Header) error
+	DAppList(identifier, page, num string, header http.Header) (*DAppListResp, error)
+	DAppinfo(identifier string, header http.Header) (*DAppListResp, error)
 }
 
 type RegisterRequest struct {
@@ -307,6 +318,7 @@ type AccesskeyRequest struct {
 
 type AccesskeyRequestInner struct {
 	Description string `json:"description,omitempty"`
+	Identifier  string `json:"identifier,omitempty"`
 }
 
 type AccesskeyResponse struct {
@@ -369,4 +381,35 @@ type ACLResource struct {
 // UpdateUserGroupRequest ...
 type UpdateUserGroupRequest struct {
 	Users []UserInfo `json:"users,omitempty"`
+}
+
+// SubwalletRegisterRequest ...
+type SubwalletRegisterRequest struct {
+	Identifier      string `json:"identifier,omitempty"`
+	ParentIdentifer string `json:"parent_identifier, omitempty"`
+	Type            int32  `json:"type,omitempty"`
+}
+
+// DAppUpdateRequest ...
+type DAppUpdateRequest struct {
+	Identifier  string `json:"identifier,omitempty"`
+	Name        string `json:"name,omitepmty"`
+	Type        int    `json:"type,omitempty"`
+	Description string `json:"description,omitempty"`
+	IconFile    []byte `json:"icon,omitempty"`
+	IconName    string `json:"icon_name" gorm:"type:varchar(32)"`
+}
+
+// DAppListResp ...
+type DAppListResp struct {
+	ID               int64  `json:"id,omitempty" gorm:"primary_key;AUTO_INCREMENT"`
+	Name             string `json:"name.omitempty" gorm:"type:varchar(32)"`
+	ApiKey           string `json:"api_key,omitempty" gorm:"type:varchar(128)"`
+	Identifier       string `json:"identifier,omitempty" gorm:"type:varchar(128);"`
+	ParentIdentifier string `json:"parent_identifier,omitempty" gorm:"type:varchar(128)"`
+	Type             int    `json:"type,omitempty"` //包括去中心化交易所，游戏，其他等
+	Description      string `json:"description,omitempty" gorm:"type:varchar(128)"`
+	IconFile         []byte `json:"icon_file" gorm:"type:bytea"`
+	IconName         string `json:"icon_name" gorm:"type:varchar(32)"`
+	IssuedAt         int64  `json:"issued_at,omitempty"`
 }
