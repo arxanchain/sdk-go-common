@@ -262,4 +262,12 @@ type IWalletClient interface {
 	// The response result is the query hit object-id list
 	//
 	IndexGet(http.Header, *IndexGetPayload) ([]string, error)
+
+	// SignTx is used to sign multiple UTXOs
+	//
+	// using the given private key in signParams
+	// param: transactions to be signed
+	// param: private key userd for signature
+	// return: err not nil if failed
+	SignTx(*wallet.TX, *pki.SignatureParam) error
 }
