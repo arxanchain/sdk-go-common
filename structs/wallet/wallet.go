@@ -43,7 +43,7 @@ type RegisterWalletBody struct {
 // Register subwallet request structure
 type RegisterSubWalletBody struct {
 	Id        commdid.Identifier `json:"id,omitempty"`         //main wallet id
-	Type      pw.DidType         `json:"type,omitempty"`       //Subwallet Type: 4: Independent type; 5: Dependent type; 11: Cash type; 12: Fee type; 13: Loan type; 14: Interest type
+	Type      pw.DidType         `json:"type,omitempty"`       //Subwallet Type: 4: Independent type; 5: Dependent type; 11: Cash type; 12: Fee type; 13: Loan type; 14: Interest type; 21: DAPP type
 	Symbol    string             `json:"symbol,omitempty"`     //Subwallet symbol
 	Metadata  []byte             `json:"metadata,omitempty"`   //Subwallet metadata
 	Indexs    *IndexTags         `json:"indexs,omitempty"`     //Register user indexs
