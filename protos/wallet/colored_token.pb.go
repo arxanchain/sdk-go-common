@@ -9,6 +9,7 @@ It is generated from these files:
 	wallet/common.proto
 	wallet/didentity.proto
 	wallet/pki.proto
+	wallet/query.proto
 	wallet/services.proto
 	wallet/tx.proto
 	wallet/verifiable_claim.proto
@@ -26,6 +27,22 @@ It has these top-level messages:
 	SignatureHeader
 	Signature
 	SignatureSimple
+	AssetsGrowth
+	UsersGrowth
+	DAppAxtConsume
+	DAppAxtTotal
+	DAppIssuedToken
+	DAppIssuedTokens
+	DAppList
+	DAppNum
+	DAppTotal
+	DAppUsersList
+	DAppUsersTotal
+	HotAssets
+	HotTokens
+	TopAssetUsers
+	TopTokenUsers
+	Total
 	TxIN
 	TxOUT
 	UTXO
