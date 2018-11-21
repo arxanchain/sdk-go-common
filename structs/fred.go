@@ -156,6 +156,7 @@ type User struct {
 	Phone      string      `json:"phone,omitempty"`
 	Email      string      `json:"email,omitempty"`
 	Secret     string      `json:"secret,omitempty"` // password
+	UserType   uint        `json:user_type,omitempty"`
 	Identifier string      `json:"identifier,omitempty"`
 	Metadata   interface{} `json:"meta_data,omitempty"`
 }
