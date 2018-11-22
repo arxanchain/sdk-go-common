@@ -264,3 +264,23 @@ func StringSliceHasI(haystack []string, needle string) bool {
 	}
 	return false
 }
+
+//RemoveDuplicate remove duplicates for haystack(isSensitive true for case-sensitive, false for case-insensitive)
+func RemoveStringSliceDuplicate(haystack []string, isSensitive bool) []string {
+	result := []string{}
+
+	for i := 0; i < len(haystack); i++ {
+		// get exists for a previous haystack of the same value.
+		var exists bool
+		if isSensitive {
+			exists = StringSliceHas(result, haystack[i])
+		} else {
+			exists = StringSliceHasI(result, haystack[i])
+		}
+		// If no previous element exists, append this one.
+		if !exists {
+			result = append(result, haystack[i])
+		}
+	}
+	return result
+}

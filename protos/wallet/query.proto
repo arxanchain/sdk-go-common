@@ -1,0 +1,144 @@
+/**
+ * Licensed Materials - Property of Arxan Fintech
+ *
+ * (C) Copyright Arxan Fintech. 2018 All Rights Reserved
+ *
+ * Contributors:
+ *    chengqx - Initial implementation
+ *
+ *
+ * Purpose: Arxan assets growth proto messages
+ *
+**/
+
+syntax = "proto3";
+
+
+
+option go_package = "github.com/arxanchain/sdk-go-common/protos/wallet";
+package wallet;
+
+
+message AssetsGrowth {
+  // query datetime
+  string datetime = 1;
+  // growth amount
+  int64  growth_amount = 2;
+}
+message UsersGrowth {
+  // query datetime
+  string datetime = 1;
+  // query growth_amount
+  int64  growth_amount = 2;
+}
+message DAppAxtConsume {
+  // query datetime
+  string  datetime = 1;
+  // query consume_amount
+  int64  consume_amount = 2;
+}
+message DAppAxtTotal {
+  // query assign_amount
+  int64 assign_amount = 1;
+  // query remain_amount
+  int64  remain_amount = 2;
+}
+
+
+message DAppIssuedToken {
+  // query issued_amount
+   int64 issued_amount = 1;
+  // query remain_amount
+   int64  remain_amount = 2;
+}
+message DAppIssuedTokens {
+  //query dap
+  map<string,DAppIssuedToken> dAppIssuedTokens = 1;
+}
+
+message DAppList {
+  // query name
+  string name = 1;
+  // query description
+  string  description = 2;
+  // query logo
+  string  logo = 3;
+}
+message DAppNum {
+  // query num
+int64 num = 1;
+}
+message DAppTotal {
+  // query total_assets
+  int64 total_assets = 1;
+  // query total_tokens
+  int64  total_tokens = 2;
+  // query total_txs
+  int64  total_txs = 3;
+  // query total_income_txs
+  int64 total_income_txs = 4;
+  // query total_spending_txs
+  int64  total_spending_txs = 5;
+  // query total_axt_consumed_txs
+  int64  total_axt_consumed_txs = 6;
+  // query total_income_assets
+  int64 total_income_assets = 7;
+  // query total_spending_assets
+  int64  total_spending_assets = 8;
+  // query total_income_tokens
+  int64  total_income_tokens = 9;
+  // query total_spending_tokens
+  int64  total_spending_tokens = 10;
+}
+message DAppUsersList {
+  // query id
+  int64 id = 1;
+  // query name
+  string  name = 2;
+  //query email
+  string email = 3;
+  //query phone
+  string phone = 4;
+}
+message DAppUsersTotal {
+  // query total_users
+  int64 total_users = 1;
+}
+message HotAssets {
+  // query asset_id
+  string asset_id = 1;
+  // query txs_num
+  int64  txs_num = 2;
+}
+message HotTokens {
+  // query token_id
+  string token_id = 1;
+  // query txs_num
+  int64  txs_num = 2;
+}
+message TopAssetUsers {
+  // query user_id
+  string user_id = 1;
+  // query assets_num
+  int64  assets_num = 2;
+}
+
+
+
+message TopTokenUsers {
+  // query user_id
+  string user_id = 1;
+  // query tokens_num
+  int64  tokens_num = 2;
+}
+
+message Total {
+  // query id
+  int64 total_dapps = 1;
+  // query total_users
+  int64  total_users = 2;
+  //query total_assets
+  int64 total_assets = 3;
+  //query total_tokens
+  int64 total_tokens = 4;
+}
