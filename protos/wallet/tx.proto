@@ -121,20 +121,21 @@ message UTXO {
   common.TimestampWrapper createdAt = 9;
   // nanoseconds of timestamp
   int32 createdAtNanos = 10;
-  // SpentTxDataHash
-  // @inject_tag: gorm:"type:varchar(128)"
-  string spentTxDataHash = 11;
-  // SpentAt ...
-  // @inject_tag: gorm:"type:varchar(64)"
-  common.TimestampWrapper spentAt = 12;
-  // nanoseconds of timestamp
-  int32 spentAtNanos = 13;
   // Founder who created this tx
   // @inject_tag: gorm:"type:varchar(64);index"
-  string founder = 14;
-  TxType txType = 15;
+  string founder = 11;
+  TxType txType = 12;
   // BcTxId blockchain transaction id
-  string bcTxId = 16;
+  string bcTxId = 13;
+  // SpentTxDataHash
+  // @inject_tag: gorm:"type:varchar(128)"
+  string spentTxDataHash = 14;
+  // SpentAt ...
+  // @inject_tag: gorm:"type:varchar(64)"
+  common.TimestampWrapper spentAt = 15;
+  // nanoseconds of timestamp
+  int32 spentAtNanos = 16;
+
 }
 
 // utxo tx
