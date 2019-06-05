@@ -152,6 +152,11 @@ type GenericResponse struct {
 type VersionResponse struct {
 	Build   string
 	Version string
+	GitCommit string
+	GitBranch string
+	BuildTime string
+	GoVersion string
+	Platform string
 	QueryMeta
 }
 

@@ -43,6 +43,16 @@ func (v *Version) FullVersion() string {
 		fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH))
 }
 
+// Go version
+func (v *Version) GoVersion() string {
+	return fmt.Sprintf(runtime.Version())
+}
+
+// Get Platform
+func (v *Version) Platform() string {
+	return fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH)
+}
+
 // DefaultVersion ...
 func DefaultVersion(progName string, buildNumber string) *Version {
 	return &Version{
