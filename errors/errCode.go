@@ -23,19 +23,20 @@ const SuccCode ErrCodeType = 0
 
 // common error code and message defined
 const (
-	InvalidParamsErrCode    ErrCodeType = 1000 //参数无效
-	MissingParamsErrCode    ErrCodeType = 1001 //缺少参数
-	DatabaseOperationFailed ErrCodeType = 1002 //数据库操作失败
-	ParseRequestParamsError ErrCodeType = 1003 //解析请求体失败
-	SerializeDataFail       ErrCodeType = 1004 //序列化数据失败
-	DeserializeDataFail     ErrCodeType = 1005 //反序列化(解析)数据失败
-	GetServerContextFail    ErrCodeType = 1006 //获取服务的上下文失败
-	DatabaseUnavailable     ErrCodeType = 1007 //数据库不可用
-	DatabaseDisabled        ErrCodeType = 1008 //数据库已禁用
+	InvalidParamsErrCode    ErrCodeType = 1000 // 参数无效
+	MissingParamsErrCode    ErrCodeType = 1001 // 缺少参数
+	DatabaseOperationFailed ErrCodeType = 1002 // 数据库操作失败
+	ParseRequestParamsError ErrCodeType = 1003 // 解析请求体失败
+	SerializeDataFail       ErrCodeType = 1004 // 序列化数据失败
+	DeserializeDataFail     ErrCodeType = 1005 // 反序列化(解析)数据失败
+	GetServerContextFail    ErrCodeType = 1006 // 获取服务的上下文失败
+	DatabaseUnavailable     ErrCodeType = 1007 // 数据库不可用
+	DatabaseDisabled        ErrCodeType = 1008 // 数据库已禁用
 	PermissionDenied        ErrCodeType = 1009 // 没有权限
-	ED25519SignFail         ErrCodeType = 1010 //ED25519签名失败
-	ED25519VerifyFail       ErrCodeType = 1011 //ED25519验签失败
-	InternalServerFailure   ErrCodeType = 1012 //服务内部错误
+	ED25519SignFail         ErrCodeType = 1010 // ED25519签名失败
+	ED25519VerifyFail       ErrCodeType = 1011 // ED25519验签失败
+	InternalServerFailure   ErrCodeType = 1012 // 服务内部错误
+	LegalFailure            ErrCodeType = 1013 // 法律原因失败
 )
 
 // ccsandbox
@@ -166,6 +167,16 @@ const (
 	SecurityCodeErr         ErrCodeType = 11002 // 安全码错误
 	OriginalSecurityCodeErr ErrCodeType = 11003 // 原始安全码错误
 	SecurityInvalidErr      ErrCodeType = 11004 // 安全码无效
+	AssetNotExist           ErrCodeType = 11005 // 资产不存在
+	AssetNotBelongUser      ErrCodeType = 11006 // 资产不属于用户
+	AssetBelongUser         ErrCodeType = 11007 // 资产属于用户
+	AssetClaimed            ErrCodeType = 11008 // 资产已被认领
+	AuthorizeApplying       ErrCodeType = 11009 // 授权正在处理中，不允许发起新的授权申请
+	AuthorizeExpired        ErrCodeType = 11010 // 授权过期
+	AuthorizeApplyNotExist  ErrCodeType = 11011 // 授权申请不存在
+	AuthorizeReplyed        ErrCodeType = 11012 // 授权申请已回应
+	AssetEndored            ErrCodeType = 11013 // 已对资产作背书
+	AssetUnendored          ErrCodeType = 11014 // 未对资产作背书
 )
 
 // escrow srvc error code
